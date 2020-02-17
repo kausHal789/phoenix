@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\AudioFileFormat;
+use App\Rules\ImageFileFormat;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,14 +29,12 @@ class StoreSongPost extends FormRequest
    */
   public function rules()
   {
-    // $imageType = ['png', 'jpeg', 'jpg'];
-    // dd($this->file('image'));
     return [
       'title' => 'bail|required|string|min:5',
       'writer' => 'bail|required|string|min:5',
       'producer' => 'bail|required|string|min:5',
       'audio' => ['bail', 'required', new AudioFileFormat],
-      'image' => 'bail|required|image',
+      'image' => ['bail', 'required', 'image', new ImageFileFormat],
       'source' => 'bail|required|string|min:5',
       'category' => 'bail|required',
       'description' => 'bail|required|string|min:5'

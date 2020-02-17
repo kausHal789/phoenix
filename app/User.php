@@ -64,4 +64,8 @@ class User extends Authenticatable
         return $this->hasMany(Song::class);
     }
 
+    public function album() {
+        return $this->hasMany(Album::class)->orderBy('created_at', 'DESC');
+    }
+
 }

@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Artist;
+use App\User;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('artist');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -82,5 +89,15 @@ class ArtistController extends Controller
     public function destroy(Artist $artist)
     {
         //
+    }
+
+    public function dashboard() {
+        $artist = User::findOrFail(auth()->user()->id);
+
+        $artistProfile = $artist->profile;
+
+        $artistAlbums = $artist->album;
+
+        return view('artist.dashboard', compact('artistProfile', 'artistAlbums'));
     }
 }

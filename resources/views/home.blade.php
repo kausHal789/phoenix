@@ -14,6 +14,21 @@
                         </div>
                     @endif
 
+                     {{-- <div class="row position-relative">
+
+      <img src="{{ asset('img/2.jpg') }}" alt="Cover" class="img-fluid rounded position-absolute">
+      <div class="container">
+        <div class="row">
+          {{ __('Artist') }}
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <img src="{{ asset('img/1.jpg') }}" alt="Avtar" class="m-3 img-thumbnail img-fluid rounded w-25 h-auto position-absolute">
+          </div>
+        </div>
+        
+      </div>
+  </div> --}}
                     You are logged in!
                 </div>
             </div>

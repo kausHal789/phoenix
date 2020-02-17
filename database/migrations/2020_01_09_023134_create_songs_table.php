@@ -27,7 +27,7 @@ class CreateSongsTable extends Migration
       $table->string('song_url');
       $table->string('duration');
       // How many time played.
-      $table->integer('played')->nullable();
+      $table->integer('played_count')->nullable();
 
       $table->timestamps();
       $table->softDeletes();

@@ -7,6 +7,9 @@ use App\Song;
 use App\SongCategory;
 use FFMpeg\FFMpeg;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 class SongController extends Controller
 {
@@ -15,6 +18,13 @@ class SongController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
+  public function __construct()
+  {
+    $this->ffmpegPath = realpath('C:/FFmpeg/bin/ffmpeg.exe');
+    $this->ffprobePath = realpath("C:/FFmpeg/bin/ffprobe.exe");
+  }
+
   public function index()
   {
     //
@@ -28,7 +38,7 @@ class SongController extends Controller
   public function create()
   {
     $categories = SongCategory::select('id', 'name')->get();
-    return \view('song.create',compact('categories'));
+    return \view('song.create', compact('categories'));
   }
 
   /**
@@ -37,21 +47,62 @@ class SongController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
+
+  // use Filesystems;
+
   public function store(StoreSongPost $request)
   {
     // Validation done in StoreSongPost. 
 
-    $validatedData = $request->validated();
-    dd($validatedData);
+    $audioPath = $request['audio']->store('audio', 'public');
+    $audioPath = public_path("storage/$audioPath");
+    $finalPath = storage_path() . '/app/public/audio/' . time() . uniqid() . '.mp3';
+
+    $cmd = "$this->ffmpegPath -i $audioPath $finalPath 2>&1";
+
+    exec($cmd, $outputLog, $returnCode);
+    if ($returnCode != 0) {
+      foreach ($outputLog as $line) {
+        echo $line . "<br>";
+      }
+      // dd('not done');
+      return false;
+    }
+    unlink($audioPath);
+    // It was also right
+    // Storage::delete($audioPath);
+
+    $data = explode('/', $finalPath);
+    $audioFinalPath = $data[3] . '/' . $data[4];
 
     $FFMpeg = FFMpeg::create([
       'ffmpeg.binaries'  => 'C:/FFmpeg/bin/ffmpeg.exe',
       'ffprobe.binaries' => 'C:/FFmpeg/bin/ffprobe.exe'
     ]);
-
     $ffprobe = $FFMpeg->getFFProbe();
 
-    $this->setDuration($ffprobe->format($request->file('audio'))->get('duration'));
+    $duration = $this->setDuration($ffprobe->format($request->file('audio'))->get('duration'));
+
+    if($request['image']) {
+      $imagePath = $request['image']->store('image', 'public');
+      $image = Image::make(public_path("storage/$imagePath"))->resize(1000, 1000);
+      $image->save();
+    }
+
+    auth()->user()->song()->create([
+      'title' => $request['title'],
+      'source' => $request['source'],
+      'writer' => $request['writer'],
+      'producer' => $request['producer'],
+      'description' => $request['description'],
+      'category_id' => $request['category'],
+      'image_url' => $imagePath,
+      'song_url' => $audioFinalPath,
+      'duration' => $duration,
+    ]);
+
+    // redirect
+    dd('oksy');
   }
 
   /**
@@ -110,6 +161,6 @@ class SongController extends Controller
     $sec = ($sec < 10) ? "0" . $sec : $sec;
 
     $duration = $hour . $min . $sec;
-    dd($duration);
+    return $duration;
   }
 }

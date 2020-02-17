@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,13 +29,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/artist/song', 'SongController@create')->middleware('artist')->name('song.create');
 Route::post('/artist/song', 'SongController@store')->middleware('artist')->name('song.store');
 
-Route::get('/artist/dashboard', function () {
-    return view('artist.dashboard');
-})->middleware('artist')->name('song.dashboard');
+
+Route::get('/artist/dashboard', 'ArtistController@dashboard')->name('artist.dashboard');
+Route::post('/artist/album', 'AlbumController@store')->name('album.store');
+Route::delete('/artist/album', 'AlbumController@delete')->name('album.delete');
 
 
 Route::get('/test', function () {
-    return view('tests');
+
+    auth()->user()->album()->create([
+        'name' => 'name',
+        'img_url' => "imagePath"
+    ]);
+
+    // return view('tests');
 });
 
 
