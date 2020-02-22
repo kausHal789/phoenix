@@ -16,15 +16,15 @@ class CreateSongsTable extends Migration
     Schema::create('songs', function (Blueprint $table) {
       $table->bigIncrements('id');
 
-      $table->unsignedBigInteger('user_id')->index();
+      $table->unsignedBigInteger('album_id')->index();
       $table->string('title');
       $table->string('source');
       $table->string('writer');
       $table->string('producer');
       $table->text('description')->nullable();
       $table->unsignedBigInteger('category_id')->index();
-      $table->string('image_url');
-      $table->string('song_url');
+      // $table->text('image_url');
+      $table->text('song_url');
       $table->string('duration');
       // How many time played.
       $table->integer('played_count')->nullable();

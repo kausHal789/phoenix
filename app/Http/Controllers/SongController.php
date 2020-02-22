@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Album;
 use App\Http\Requests\StoreSongPost;
 use App\Song;
 use App\SongCategory;
@@ -35,10 +36,12 @@ class SongController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function create()
+  public function create($album_id)
   {
+    $album = Album::findOrFail($album_id);
     $categories = SongCategory::select('id', 'name')->get();
-    return \view('song.create', compact('categories'));
+    $isSongUploadPage = true;
+    return view('song.create', compact('categories', 'album', 'isSongUploadPage'));
   }
 
   /**
@@ -53,6 +56,10 @@ class SongController extends Controller
   public function store(StoreSongPost $request)
   {
     // Validation done in StoreSongPost. 
+    // dd($request);
+    $album_id = request()->album_id;
+    $album = Album::findOrFail($album_id);
+    // dd($album);
 
     $audioPath = $request['audio']->store('audio', 'public');
     $audioPath = public_path("storage/$audioPath");
@@ -89,7 +96,7 @@ class SongController extends Controller
       $image->save();
     }
 
-    auth()->user()->song()->create([
+    $album->song()->create([
       'title' => $request['title'],
       'source' => $request['source'],
       'writer' => $request['writer'],
@@ -102,7 +109,7 @@ class SongController extends Controller
     ]);
 
     // redirect
-    dd('oksy');
+    return redirect("/artist/song/$album_id");
   }
 
   /**

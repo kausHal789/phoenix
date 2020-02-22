@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 require('./artist-action');
+require('./file-preview');
 
 window.Vue = require('vue');
 

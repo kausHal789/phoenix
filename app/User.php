@@ -61,7 +61,7 @@ class User extends Authenticatable
     }
 
     public function song() {
-        return $this->hasMany(Song::class);
+        return $this->hasManyThrough('App\Song', 'App\Album');
     }
 
     public function album() {

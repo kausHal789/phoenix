@@ -1,5 +1,6 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,800,900&display=swap');
 
 // Variables
 @import 'variables';
@@ -7,9 +8,11 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-// body {
-//   min-width: 45rem;
-// }
+body {
+  min-width: 45rem;
+  color: #ffffff;
+}
+
 
 // *{
 //   color: #ffffff;

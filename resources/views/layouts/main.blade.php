@@ -21,6 +21,8 @@
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/playing-bar.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
 
 
   @yield('head-section')
@@ -28,17 +30,17 @@
 </head>
 <body>
   <div id="app">
-    <div class="topSection">
+    {{-- <div id="topSection">
       <nav class="navBar ">
         <a href='#' class="logo pb-3">
-          <img src="{{ asset('storage/icons/logo.png') }}" alt="">
+          <img src="/storage/icons/logo.png" alt="">
         </a>
 
         <div class="group">
           <div class="navItem p-1 font-weight-bold h5 d-block">
             <a href="#" class="navItemLink">
               <span>Search</span>
-              <img src="./assets/img/icons/search.png" alt="Search" class="img-fluid icon float-right">
+              <img src="/storage/icons/search.png" alt="Search" class="img-fluid icon float-right">
             </a>
           </div>
         </div>
@@ -59,6 +61,40 @@
       </nav>
       <main class="py-4">
           @yield('content')
+      </main>
+    </div> --}}
+    <div id="topSection">
+      <div id="navBarContainer">
+        <nav class="navBar ">
+          <a href='#' class="logo pb-3 text-center">
+            <img src="/storage/icons/logo.png" alt="" class="">
+            {{-- <span class="h2" style="text-decoration:none">{{ env('APP_NAME') }}</span> --}}
+          </a>
+          <div class="group">
+            <div class="navItem p-1 font-weight-bold h5 d-block">
+              <a href="#" class="navItemLink">
+                <span>Search</span>
+                <img src="/storage/icons/search.png" alt="Search" class="img-fluid icon float-right">
+              </a>
+            </div>
+          </div>          
+          <div class="group">
+            <div class="navItem p-1 font-weight-bold h5 d-block">
+              <a href="#" class="navItemLink">Browse</a>
+            </div>
+            
+            <div class="navItem p-1 font-weight-bold h5 d-block">
+              <a href="#" class="navItemLink">Your Music</a>
+            </div>
+            
+            <div class="navItem p-1 font-weight-bold h5 d-block">
+              <a href="#" class="navItemLink">Temp</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <main id="mainViewContainer">
+        @yield('content')
       </main>
     </div>
     <div class="bottomSection">

@@ -11,7 +11,11 @@ class Song extends Model
 
     protected $fillable = ['title', 'source', 'writer', 'producer', 'category_id', 'image_url', 'song_url', 'duration', 'description', 'played_count'];
     
-    public function user() {
-        return $this->belongsTo(User::class);
+    // public function user() {
+    //     return $this->belongsTo(User::class);
+    // }
+
+    public function album() {
+        return $this->belongsTo(Album::class);
     }
 }

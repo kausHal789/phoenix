@@ -40,7 +40,7 @@
             <div class="row">
               <div class="col">
                 <p style="font-size: 10px;margin-bottom: 0;height: 10px;">TOTAL LISTENERS</p>
-                <p style="height: 10px;margin-bottom: 0;font-size: 14px;">100,000</p>
+                <p style="height: 10px;margin-bottom: 0;font-size: 14px;">0</p>
               </div>
             </div>
           </div>
@@ -52,62 +52,35 @@
 <section style="margin-top: 10rem;">
   <div class="container">
     <div class="row">
-      <div class="col">
+      <div class="col-8">
+        <div class="h1 ml-3">ALBUMS</div>
+      </div>
+      <div class="col-4">
         <button class="btn btn-outline-primary btn-block btn-sm text-truncate border rounded float-none float-sm-none add-another-btn font-weight-bold" 
-          type="button" id="addAlbumBtn" data-toggle="modal" data-target="#addAlbumModal">
-          ALBUMS
+          type="button" id="addAlbumBtn" title="ADD  ALBUM" data-toggle="modal" data-target="#addAlbumModal">
+          ADD NEW ALBUMS
           <i class="fas fa-plus-circle float-right edit-icon" data-toggle="modal" data-target="#addAlbumModal" style="padding-top: 3px;" title="ADD ALBUM"></i>
         </button>
       </div>
-    </div> 
-  
-  {{-- </div> --}}
+    </div>
 
     <div class="mt-5" id="albums">
 
       @foreach ($artistAlbums as $album)
-      @include('includes.album')   
+      @include('includes.album', ['$album', $album])   
       @endforeach
       
     </div>
   </div>
 </section>
-<div class="modal fade" role="dialog" tabindex="-1" id="addAlbumModal">
-  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-      <div class="modal-content text-black font-weight-bold">
-          <div class="modal-header" style="height: 40px;padding-top: 5px;padding-bottom: 0px;">
-              <h4 class="modal-title" style="color:black">ADD NEW ALBUM</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddAlbumModel">
-                <span aria-hidden="true">×</span>
-              </button>
-          </div>
-          <div class="modal-body" style="height: auto;padding-top: 0px;padding-bottom: 10px;">
 
-            <div class="alert mt-3" id="message" style="display: none"></div>
 
-            <form id="addNewAlbum" enctype="multipart/form-data" method="POST">
-              {{ csrf_field() }}
-              <div class="form-group">
-                <label class="col-form-label" for="album_image">Album Image</label>
-                <input type="file" id="album_image" class="form-control-file" name="album_image" placeholder="Album Image">
-              </div>
-              <div class="form-group">
-                <label class="col-form-label" for="album_name">Album Name</label>
-                <input type="text" id="album_name" class="form-control" name="album_name" placeholder="Album Name">
-              </div>
-              <hr>
-              <div class="form-row">
-                <button class="btn btn-success btn-sm btn-block border rounded" type="submit" id="addAlbumButton">Save & Continue</button>
-              </div>
-            </form>  
-          </div>
-          {{-- <div class="modal-footer" style="padding-top: 5px;padding-bottom: 5px;height: 45px;">
-            <button class="btn btn-light btn-sm border rounded" type="button" data-dismiss="modal">Close</button>
-            <button class="btn btn-success btn-sm border rounded" type="submit" id="addAlbumButton" data-dismiss="modal">Save</button>
-          </div> --}}
-      </div>
-  </div>
-</div>
+{{-- <button data-toggle="modal" data-target="#editAlbumModal">Click</button> --}}
+{{-- Add album modal --}}
+{{-- @includeIf('includes.modal.add-album') --}}
+{{-- Delete album modal --}}
+@includeIf('includes.modal.delete-album')
+
 
 @endsection
 
@@ -116,16 +89,77 @@
 <script src="{{ asset('js/artist-board.min.js') }}"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script> --}}
 
+{{-- <script src="{{ asset('js/jquery.form.min.js') }}"></script> --}}
+
+
 <script>
 $(document).ready(function() {
-    // $('.album').hover(
-    //   function () {
-    //     $('.edit-delete-album').css('display', 'block');
-    // },
-    //   function () {
-    //     $('.edit-delete-album').css('display', 'none');
+
+  // $(document).on('click', '.album_edit_btn', function () {
+  //   // $("#addAlbumBtn").click();
+  //   alert('click');
+  // });
+    
+    // $(document).on('click', '#addSongBtn', function () {
+    //   $.ajax({
+    //     url: "/artist/song",
+    //     method: "GET", 
+    //     cache: false,
+    //     // dataType: "JSON",
+    //     success: function(_data) {
+    //       // console.log('Success', _data);
+
+    //       $("#addSongForm").html(_data);
+    //     },
+    //     error: function(req) {
+    //       console.log('Error', req);
+    //     }
+    //   });
     // });
+
+
+
+    
+
+
+
+
+
+
+
+  // $(document).on('click', '#addSong', function () {
+  //     console.log('enter');
+  //     // $.ajax({
+  //     //   url: "/artist/test", 
+  //     //   method: "GET", 
+  //     //   cache: false,
+  //     //   success: function (_data) {
+  //     //     alert(_data);
+  //     //   },
+  //     // });
+  //   });
 });
+
+
+// $.ajax({
+//       url: "/artist/album",
+//       method: "POST",
+//       data: new FormData(this),
+//       dataType: "JSON",
+//       contentType: false,
+//       cache: false,
+//       processData: false,
+//       success: function (_data) {
+//         // console.log(_data);
+//         if(_data.status === 500) {
+//           $('#message').addClass('alert-danger');
+//           $('#message').css('display', 'block');
+//           $('#message').text(_data.message[0]);
+//         } else if(_data.status === 202) {
+//           $('#closeAddAlbumModel').click();
+//           $(_data.ele).prependTo('#albums');
+//         }
+//       }
 </script>
 
 @endsection

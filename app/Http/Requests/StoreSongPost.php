@@ -36,7 +36,7 @@ class StoreSongPost extends FormRequest
       'audio' => ['bail', 'required', new AudioFileFormat],
       'image' => ['bail', 'required', 'image', new ImageFileFormat],
       'source' => 'bail|required|string|min:5',
-      'category' => 'bail|required',
+      'category' => 'bail|required|numeric',
       'description' => 'bail|required|string|min:5'
     ];
   }

@@ -2,6 +2,9 @@ $(document).ready(function () {
   $('#image').change(function () {
     preview(this, '#image_preview');
   });
+  $(document).on('change', '#album_image', function () {
+    preview(this, '#album_image_preview');
+  });
   $('#audio').change(function () {
     preview(this, '#audio_preview');
     // var render = new FileReader();
