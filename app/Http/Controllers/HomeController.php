@@ -25,7 +25,17 @@ class HomeController extends Controller
     public function index()
     {
         $albums = Album::latest()->limit(10)->get();
-        // dd($albums);
-        return view('index', compact('albums'));
+        $notificationsCount = auth()->user()->unreadNotifications->count();
+        $notifications = auth()->user()->notifications;
+        // ->where('type', '=', 'App\Notifications\FollowNotification')
+        // ->where('type', '=', 'App\Notifications\DedicateSong')
+        // foreach ($notifications as $notification) {
+            // dd($notification->data);
+            // foreach ($notification->data as $key => $value) {
+            //     echo $key ."=" . $value . "<br>";
+            // } 
+        // }
+        // dd($notifications);
+        return view('index', compact('albums', 'notificationsCount', 'notifications'));
     }
 }

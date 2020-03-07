@@ -4,27 +4,12 @@ $(document).ready(function() {
     return $('meta[name=csrf-token]').attr("content");
   }
 
-  // Edit and Delete button are hovered
-  $(document).on('mouseenter', '.edit', function () {
-      $(this).find('img').attr('src', '/storage/icons/edit_filled.png');
-    }).on('mouseleave', '.edit', function () {
-      $(this).find('img').attr('src', '/storage/icons/edit.png');
-    } 
-  );
-  $(document).on('mouseenter', '.delete_button', function () {
-      $(this).find('img').attr('src', '/storage/icons/remove_filled.png');
-    }).on('mouseleave', '.delete_button', function () {
-      $(this).find('img').attr('src', '/storage/icons/remove.png');
-    } 
-  );
-
-
   $(document).on('submit', '#editAlbumForm', function() {
     const album_id = $(this).find('#album_id').val();
     const album_name = $(this).find('#album_name').val();
     // console.log(album_id);
     $.ajax({
-      url: "/artist/album/" + album_id,
+      url: "/album/" + album_id,
       method: "POST",
       dataType: "JSON",
       data: new FormData(this),
@@ -55,7 +40,7 @@ $(document).ready(function() {
     const id = $(this).attr('id');
     const album_id = id.split('-', 1);
     $.ajax({
-      url: "/artist/album/" + album_id + "/edit",
+      url: "/album/" + album_id + "/edit",
       method: 'GET',
       dataType: "JSON",
       cache: false,
@@ -71,7 +56,6 @@ $(document).ready(function() {
       }
     });
   });
-
 
   // Add data in delete album modal on button click
   $(document).on('click', '.album_delete_btn', function() {
@@ -99,7 +83,7 @@ $(document).ready(function() {
       }
       // This is run only in dashboard page
       $.ajax({
-        url: "/artist/album/" + album_id, 
+        url: "/album/" + album_id, 
         method: "DELETE",
         cache: false,
         dataType: "JSON",
@@ -134,12 +118,11 @@ $(document).ready(function() {
     }
   });
 
-
   // Add new album
   $(document).on('submit', '#addNewAlbumForm', function (event) {
     event.preventDefault();
     $.ajax({
-      url: "/artist/album",
+      url: "/album",
       method: "POST",
       data: new FormData(this),
       dataType: "JSON",
@@ -163,7 +146,7 @@ $(document).ready(function() {
     // $('#addAlbumModal').modal('dispose');
     // alert('click');
     $.ajax({
-      url: "/artist/album/",
+      url: "/album/create",
       method: 'GET',
       dataType: "JSON",
       cache: false,
@@ -189,5 +172,38 @@ $(document).ready(function() {
     $(this).remove();
   });
   
+
+
+  
+  // Song
+  //  
+  $(document).on('click', '.delete_song_button', function () {
+    let id = $(this).attr('id');
+    const song_id = id.split('-', 1);
+    $('.deleteSongButton').attr('id', song_id);
+  });
+
+
+  // DELETE Song
+  $(document).on('click', '.deleteSongButton', function() {
+    var song_id = $(this).attr('id');
+
+    $.ajax({
+      url: "/song/" + song_id,
+      method: "DELETE",
+      data: {
+        _token: getCSRFToken()
+      },
+      dataType: "JSON",  
+      cache: false,
+      success: function(_data) {
+        console.log(_data);
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    })
+
+  });
  
 });

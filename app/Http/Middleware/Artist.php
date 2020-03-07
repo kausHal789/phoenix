@@ -23,6 +23,7 @@ class Artist
         } else {
             return redirect('/login');
         }
-        return redirect('/');
+        // Change according to your home page whatever it is
+        return redirect('/home');
     }
 }

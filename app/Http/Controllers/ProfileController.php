@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Album;
+use App\Playlist;
 use App\Profile;
+use App\Rules\ImageFileFormat;
+use Intervention\Image\Facades\Image;
+use App\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
+use Validator;
 
 class ProfileController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,9 +57,31 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
+    public function show($user_id)
     {
-        //
+        $user = User::findOrFail($user_id);
+        
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+
+        $followersCount = Cache::remember('count.follower.' . $user->id, now()->addSecond(30), function () use($user) {
+            return $user->profile->followers->count();
+        });
+
+        $followingCount = Cache::remember('count.following.' . $user->id, now()->addSecond(30), function () use($user) {
+            return $user->following->count();
+        });
+
+        $userType = ($user->role_id === 2) ? 'ARTIST' : 'USER';
+        $albums = $user->album;
+        $latestRealeasAlbums = Album::where('user_id', $user_id)->latest()->limit(2)->get();
+        $songs = $user->song()->orderBy('listener', 'DESC')->limit(5)->get();
+
+        $collectionType = null;
+        return response()->json([
+            'result' => true,
+            'status' => 200,
+            'data' => '' . view('profile.show', compact('user', 'albums', 'latestRealeasAlbums', 'songs', 'userType', 'collectionType', 'follows', 'followingCount', 'followersCount')) . ''
+        ]);
     }
 
     /**
@@ -55,9 +90,15 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $profile)
-    {
-        //
+    public function edit($profile_id)
+    {   
+        $user= User::findOrFail($profile_id);
+        // $profile = $user->profile;
+        return response()->json([
+            'result' => true,
+            'status' => 200,
+            'data' => '' . view('profile.edit', compact('user')) . ''
+        ]);
     }
 
     /**
@@ -67,9 +108,46 @@ class ProfileController extends Controller
      * @param  \App\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
+    public function update(Request $request, $user_id)
     {
-        //
+        
+        $validatedData = Validator::make($request->all(), [
+            'name' => ['required', 'string'],
+            'profileImage' => [new ImageFileFormat, 'max:2048'], // Make image optional
+            'coverImage' => [new ImageFileFormat, 'max:2048']
+        ]);
+        
+        if(!$validatedData->passes()) {
+            return response()->json([
+                'result' => false,
+                'status' => 400,
+                'message' => $validatedData->errors()->all(),
+            ]);
+        }
+
+        $user = User::findOrFail($user_id);
+        $user->profile->name = request()->name;
+        
+        if($request->profileImage) {
+            $ProfilePath = $request['profileImage']->store('image', 'public');
+            $image = Image::make(public_path("storage/$ProfilePath"))->resize(150, 150);
+            $image->save();
+            $user->profile->image = $ProfilePath;
+        }
+        if($request->coverImage) {
+            $coverPath = $request['coverImage']->store('image', 'public');
+            $image = Image::make(public_path("storage/$coverPath"))->resize(1200, 250);
+            $image->save();
+            $user->profile->cover_image = $coverPath;
+        }
+
+        $user->save();
+
+        return response()->json([
+            'result' => true,
+            'status' => 202,
+            'asdhas' => $user->profile
+        ]);
     }
 
     /**

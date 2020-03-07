@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Album;
+use App\Song;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class SearchController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function getSeachPage() {
+        return response()->json([
+            'result' => true,
+            'status' => 200,
+            'data' => '' . view('includes.search') . ''
+        ]);
+    }
+
+    public function seachResult() {
+        $term = request()->term;
+        if($term == null) {
+            return response()->json([
+                'result' => true,
+                'status' => 200,
+                'data' => '<div class=\'h1 m-5\'>You want to search empty data</div>'
+            ]);    
+        }
+        // Auth
+        $songs = Song::where('title', 'like', '%' . $term .'%')->get();
+        $albums =Album::where('name', 'like', '%' . $term .'%')->get();
+        // $artists = User::->except(Auth::id())->where('role_id', 2)->where('username', 'like', '%' . $term .'%')->get();
+        $artists = User::where('role_id', 2)->where('id', '!=', auth()->id())->where('username', 'like', '%' . $term .'%')->get();
+        $peoples = User::where('role_id', 3)->where('id', '!=', auth()->id())->where('username', 'like', '%' . $term .'%')->get();
+        return response()->json([
+            'result' => true,
+            'status' => 200,
+            'data' => '' . view('includes.search-result', compact('songs', 'albums', 'artists', 'peoples')) . ''
+        ]);
+    }
+
+}

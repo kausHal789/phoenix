@@ -47,9 +47,12 @@ class User extends Authenticatable
             $user->profile()->create([
                 'name' => $user->username
             ]);
+            
+            // Send welcome Email from here
+            $user->notify(new \App\Notifications\WelcomeNotification($user));;
         });
 
-        // Send welcome Email from here
+        
     }
 
     public function profile() {
@@ -66,6 +69,14 @@ class User extends Authenticatable
 
     public function album() {
         return $this->hasMany(Album::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function playlist() {
+        return $this->hasMany(Playlist::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function following() {
+        return $this->belongsToMany(Profile::class)->withTimestamps();
     }
 
 }

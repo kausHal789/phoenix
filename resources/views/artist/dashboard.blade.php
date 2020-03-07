@@ -57,9 +57,9 @@
       </div>
       <div class="col-4">
         <button class="btn btn-outline-primary btn-block btn-sm text-truncate border rounded float-none float-sm-none add-another-btn font-weight-bold" 
-          type="button" id="addAlbumBtn" title="ADD  ALBUM" data-toggle="modal" data-target="#addAlbumModal">
-          ADD NEW ALBUMS
-          <i class="fas fa-plus-circle float-right edit-icon" data-toggle="modal" data-target="#addAlbumModal" style="padding-top: 3px;" title="ADD ALBUM"></i>
+          type="button" id="addAlbumBtn" title="CREATE ALBUM" data-toggle="modal" data-target="#addAlbumModal">
+          CREATE ALBUM
+          <i class="fas fa-plus-circle float-right edit-icon" data-toggle="modal" data-target="#addAlbumModal" style="padding-top: 3px;" title="CREATE ALBUM"></i>
         </button>
       </div>
     </div>
@@ -79,7 +79,7 @@
 {{-- Add album modal --}}
 {{-- @includeIf('includes.modal.add-album') --}}
 {{-- Delete album modal --}}
-@includeIf('includes.modal.delete-album')
+@includeIf('album.delete')
 
 
 @endsection

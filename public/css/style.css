@@ -2,11 +2,13 @@
   /* Because nav bar width is 250px */
   margin-left: 250px;
   /* Now playingbar */
-  padding-bottom: 100px;
+  /* padding-bottom: 100px; */
   width: calc(100% - 250px);
+  /* min-height: 70rem; */
+  margin-bottom: 10rem;
 }
 
-#mainConent {
+#mainContent {
   padding: 0 20px;
 }
 
@@ -25,12 +27,18 @@
 }
 
 .gridViewInfo {
-  font-weight: 300;
+  font-weight: 400;
   text-align: center;
   padding: 10px 0;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.albumName:hover{
+  /* font-weight: 400; */
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 #topSection {
@@ -64,17 +72,14 @@
 }
 
 .group .navItem {
-  letter-spacing: 1px;
-}
-
-.navItemLink,
-.navItemLink span {
+  letter-spacing: 1.5px;
   text-decoration: none;
   color: #a0a0a0;
+  cursor: pointer;
 }
 
-.navItemLink:hover, 
-.navItemLink span:hover {
+.navItem:hover{ 
+/* .navItem span:hover { */
   color: #ffffff;
 }
 
@@ -82,3 +87,124 @@
     max-width: 25px;
 }
 
+.text-ellipsis{
+  text-overflow: ellipsis;
+}
+
+.trackRow{
+  height: 50px;
+  padding: 5px 0;
+}
+
+.trackRow:hover {
+  background-color: #282828;
+  box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.trackRow img {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.trackRow:hover img {
+  visibility: visible;
+}
+
+.trackRow:hover .counter {
+  /* visibility: hidden; */
+  display: none;
+}
+
+.trackPlayButton {
+  cursor: pointer;
+}
+
+.artistName {
+  cursor: pointer;
+  /* color: #6c757d; */
+  color: rgba(255, 255, 255, 0.5);
+}
+.artistName:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+.playlistName:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.smallAlbum:hover {
+  background-color: #282828;
+  box-shadow:0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.sarchBar {
+  background-color:#242424;
+  padding: 20px 28px;
+  box-shadow:0 1rem 3rem rgba(0,0,0,.175)!important;
+}
+
+.searchInput {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 60px;
+  letter-spacing: 2px;
+}
+
+.searchInput-sm {
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: 1px;
+  width: 100%;
+}
+
+.optionMenu {
+  position: fixed;
+  background-color: #242424;
+  width: 200px;
+  z-index: 1000;
+  display: none;
+}
+
+.optionMenu .item {
+  /* color: rgba(147, 147, 147, 0.8); */
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.optionMenu a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.dropdown-item:hover{
+  background-color: #242424;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.updateProfileInput{
+  background-color: #1f1f1f;
+  border: none;
+  color: #ffffff;
+  padding: 0 20px;
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 1px;
+  height: 40px;
+  width: 100%;
+}
+
+.notification {
+  background-color: #1f1f1f;
+  color: #ffffff;
+  font-size: smaller;
+  /* background-color: transparent; */
+  /* opacity: 0.3; */
+}

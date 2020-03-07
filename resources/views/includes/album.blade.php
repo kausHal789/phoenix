@@ -34,7 +34,7 @@
         <div  class="m-5 h1">
           @can('view', App\Artist::class)
           @if (isset($isSongUploadPage))
-            <form action="/artist/album" method="POST" id="deleteAlbumForm">
+            <form action="/artist/dashboard" method="POST" id="deleteAlbumForm">
               @method("DELETE")
               @csrf
               <input type="hidden" name="album_id" value="{{ $album->id }}">
@@ -50,23 +50,12 @@
       </div>
     </div>
   </div>
-  @if (count($album->song) !== 0)
+  @if (count($album->songs) !== 0)
     @includeIf('includes.songs-header')
     @php($cnt = 0)
-    @foreach ($album->song as $song)
+    @foreach ($album->songs as $song)
       @php($cnt++)
       @includeIf('includes.song', ['song' => $song, 'cnt' => $cnt])
     @endforeach
   @endif
 </div>
-
-{{-- Don't delete it --}}
-
-{{-- <div class="col-2">
-  <div class="gridViewItem mb-4 position-relative album">
-    <img src="/storage/{{ $album->img_url }}" alt="album image" 
-    class="w-100 h-100 img-fluid rounded">
-    <div class="gridViewInfo">{{ $album->name }}</div>
-  </div>
-  
-</div> --}}

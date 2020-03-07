@@ -132,7 +132,7 @@
                 @enderror
               </div>
             </div>
-            <div class="col-6 mb-3">
+            {{-- <div class="col-6 mb-3">
               <label for="image">{{ __('Image')}}</label>
               <div> 
                 <input type="file" 
@@ -150,18 +150,18 @@
                 </span>
                 @enderror
               </div>
-            </div>
+            </div> --}}
           </div>
           <div class="form-row">
             <div class="col-6 mb-3">
               <audio controls id="audio_preview" style="display:none; max-width"></audio>
             </div>
-            <div class="col-6 mb-3">
+            {{-- <div class="col-6 mb-3">
               <img id="image_preview" class="w-75 h-100" style="display:none; max-height:100px">
-            </div>
+            </div> --}}
           </div>
         </div>
-        <div class="col-4 mb-3">
+        {{-- <div class="col-4 mb-3">
           <div class="col-12 mb-3">
             <label for="description">{{ __('Description')}}</label>
             <div>
@@ -182,41 +182,24 @@
               @enderror
             </div>
           </div>
-        </div>
+        </div> --}}
       </div>
         
-      <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#uploadSpinnerModal">Submit</button>
+      <button class="btn btn-primary" type="submit" >Submit</button>
+
+      {{-- data-toggle="modal" data-target="#uploadSpinnerModal" --}}
   </form>
   </div>
 
-    {{-- <div class="audio-container">
-      <div class="audio-column add-bottom">
-          <div id="mainwrap">
-              <div id="nowPlay">
-                  <span id="npAction">Paused...</span><span id="npTitle"></span>
-              </div>
-              <div id="audiowrap">
-                  <div id="audio0">
-                      <audio id="audio1" preload controls></audio>
-                  </div>
-                  <div id="tracks" class="pt-2 ">
-                    <a id="btnPrev">&vltri;</a><a id="btnNext">&vrtri;</a>
-                  </div>
-              </div>
-              <div id="plwrap">
-                  <ul id="plList"></ul>
-              </div>
-          </div>
-      </div> --}}
-     
   </div>
   
 
 </div>
 
 {{-- Delete album modal --}}
-@includeIf('includes.modal.delete-album')
-@includeIf('includes.modal.uploading-spinner')
+@includeIf('album.delete')
+@includeIf('song.delete')
+@includeIf('includes.uploading-spinner')
 
 @endsection
 

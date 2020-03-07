@@ -8,6 +8,7 @@ use App\Song;
 use App\SongCategory;
 use FFMpeg\FFMpeg;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -28,7 +29,14 @@ class SongController extends Controller
 
   public function index()
   {
-    //
+    $song = Song::inRandomOrder()->limit(1)->get();
+    return response()->json([
+      'result' => true,
+      'status' => 200,
+      'data' => [
+        'new_track_id' => $song[0]->id
+      ]
+    ]);
   }
 
   /**
@@ -56,7 +64,7 @@ class SongController extends Controller
   public function store(StoreSongPost $request)
   {
     // Validation done in StoreSongPost. 
-    // dd($request);
+    // dd($request->file());
     $album_id = request()->album_id;
     $album = Album::findOrFail($album_id);
     // dd($album);
@@ -90,20 +98,18 @@ class SongController extends Controller
 
     $duration = $this->setDuration($ffprobe->format($request->file('audio'))->get('duration'));
 
-    if($request['image']) {
-      $imagePath = $request['image']->store('image', 'public');
-      $image = Image::make(public_path("storage/$imagePath"))->resize(1000, 1000);
-      $image->save();
-    }
+    // if($request['image']) {
+    //   $imagePath = $request['image']->store('image', 'public');
+    //   $image = Image::make(public_path("storage/$imagePath"))->resize(1000, 1000);
+    //   $image->save();
+    // }
 
-    $album->song()->create([
+    $album->songs()->create([
       'title' => $request['title'],
       'source' => $request['source'],
       'writer' => $request['writer'],
       'producer' => $request['producer'],
-      'description' => $request['description'],
       'category_id' => $request['category'],
-      'image_url' => $imagePath,
       'song_url' => $audioFinalPath,
       'duration' => $duration,
     ]);
@@ -152,9 +158,39 @@ class SongController extends Controller
    * @param  \App\Song  $song
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Song $song)
-  {
-    //
+  public function destroy($song_id)
+  { 
+    $result = Song::findOrFail($song_id)->delete();
+    return response()->json([
+      'result' => $result,
+      'status' => 200,
+      'data' => ''
+    ]);
+  }
+
+  public function showJSON($song_id) {
+    $song = Song::findOrFail($song_id);
+
+    if($song->album->user->id !== Auth()->id()) {
+      $song->listener += 1;
+      $song->save();
+    }
+
+    return response()->json([
+      'result' => true,
+      'status' => 200,
+      'data' => [
+        'track' => [
+          'track_title' => $song->title,
+          'track_duration' => $song->duration,
+          'track_song_url' => $song->song_url,
+          'track_listener' => $song->listener
+        ],
+        'track_album_img' => $song->album->img_url,
+        'track_artist_name' => $song->album->user->profile->name,
+        'track_artist_id' => $song->album->user->id
+      ]
+    ]);
   }
 
   private function setDuration($duration)

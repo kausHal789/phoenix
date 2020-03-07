@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Album;
 use App\Rules\ImageFileFormat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Intervention\Image\Facades\Image;
 use Validator;
 
@@ -13,7 +14,7 @@ class AlbumController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('artist');
+        // $this->middleware('artist');
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +23,13 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        
+        $albums = Album::latest()->limit(10)->get();
+        return response()->json([
+            'result' => true,
+            'status' => 200,
+            'data' => '' . view('album.index', compact('albums')) . ''
+        ]);
     }
 
     /**
@@ -35,7 +42,7 @@ class AlbumController extends Controller
         return response()->json([
             'result' => true,
             'status' => 202,
-            'modal' => "". view('includes.modal.add-edit-album') . ""
+            'modal' => "". view('album.add-edit') . ""
         ]);
     }
 
@@ -56,7 +63,7 @@ class AlbumController extends Controller
             return response()->json([
                 'message' => $validatedData->errors()->all(),
                 'result' => 'fail',
-                'status' => 500
+                'status' => 400
             ]);
         }
 
@@ -71,17 +78,10 @@ class AlbumController extends Controller
         ]);
 
         if($data) {
-        //    $ele = "<div class='col-3'>
-        //         <div class='gridViewItem mb-4'>
-        //             <img src='/storage/$data->img_url' alt='album image' class='w-100 h-100 img-fluid'>
-        //             <div class='gridViewInfo'>$data->name</div>
-        //         </div>
-        //     </div>";
             $album = $data;
             $ele = "".view('includes.album', compact('album'))."";
             
             return response()->json([
-                // 'data' => $data,
                 'result' => 'success',
                 'status' => 202, 
                 'ele' => $ele
@@ -90,7 +90,7 @@ class AlbumController extends Controller
             return response()->json([
                 'message' => 'Server Problem',
                 'result' => 'fail',
-                'status' => 400
+                'status' => 500
             ]);    
         }
 
@@ -102,9 +102,15 @@ class AlbumController extends Controller
      * @param  \App\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function show(Album $album)
-    {
-        //
+    public function show($album_id)
+    {   
+        $album = Album::findOrFail($album_id);
+        $collectionType = 'ALBUM';
+        return response()->json([
+            'result' => true,
+            'status' => 200,
+            'data' => "" . view('album.show', compact('album', 'collectionType')) . ""
+        ]);
     }
 
     /**
@@ -120,7 +126,7 @@ class AlbumController extends Controller
         return response()->json([
             'result' => true,
             'status' => 202,
-            'modal' => "". view('includes.modal.add-edit-album', compact('isAlbumEdit', 'album')) . ""
+            'modal' => "". view('album.add-edit', compact('isAlbumEdit', 'album')) . ""
         ]);
     }
 
@@ -172,6 +178,7 @@ class AlbumController extends Controller
      */
     public function destroy($album_id) {
         $album = Album::findOrFail($album_id);
+        $album->songs()->delete();
         
         if($result = $album->delete()) {
             if(!request()->isDashboard) {
@@ -190,5 +197,16 @@ class AlbumController extends Controller
                 'status' => 500
             ]);
         }
+    }
+
+    public function albumJSON($album_id) {
+        $album = Album::findOrFail($album_id);
+        return response()->json([
+            'result' => true,
+            'status' => 200,
+            'data' => [
+                'songs' => $album->songs
+            ]
+        ]);
     }
 }

@@ -21,13 +21,13 @@ class CreateSongsTable extends Migration
       $table->string('source');
       $table->string('writer');
       $table->string('producer');
-      $table->text('description')->nullable();
+      // $table->text('description')->nullable();
       $table->unsignedBigInteger('category_id')->index();
       // $table->text('image_url');
       $table->text('song_url');
       $table->string('duration');
       // How many time played.
-      $table->integer('played_count')->nullable();
+      $table->integer('listener')->default(0);
 
       $table->timestamps();
       $table->softDeletes();

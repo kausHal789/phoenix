@@ -3,7 +3,7 @@
       <div class="modal-content text-black-50 font-weight-bold">
           <div class="modal-header" style="height: 40px;padding-top: 5px;padding-bottom: 0px;">
               <h4 class="modal-title" style="color:black">
-                @if (isset($isAlbumEdit)) EDIT ALBUM <span class="text-black-50">{{ $album->name }}</span> @else ADD NEW ALBUM @endif
+                @if (isset($isAlbumEdit)) EDIT ALBUM <span class="text-black-50">{{ $album->name }}</span> @else CREATE ALBUM @endif
               </h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddEditAlbumModel">
                 <span aria-hidden="true">×</span>
@@ -14,7 +14,7 @@
               <div class="alert mt-3 text-center ml-2 mr-2" id="message" style="display: none"></div>
             </div>
             <div class="row p-2">
-              <div class="col-6 border border-dark">
+              <div class="col-6">
                 <img id="album_image_preview" @if (isset($isAlbumEdit))src="/storage/{{ $album->img_url }}"@endif class="w-100 h-100 img-fluid" alt="">
               </div>
               <div class="col-6">

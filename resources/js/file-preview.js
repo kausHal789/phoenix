@@ -5,14 +5,18 @@ $(document).ready(function () {
   $(document).on('change', '#album_image', function () {
     preview(this, '#album_image_preview');
   });
+  $(document).on('change', '#playlist_image', function () {
+    preview(this, '#playlist_image_preview');
+  });
+  $(document).on('change', '#profileImage', function () {
+    preview(this, '#profile_image_preview');
+  });
+  $(document).on('change', '#coverImage', function () {
+    preview(this, '#cover_image_preview');
+  });
+
   $('#audio').change(function () {
     preview(this, '#audio_preview');
-    // var render = new FileReader();
-    // render.onload = function (e) {
-    //   $('#audio_preview').css('display', 'inline');
-    //   $('#audio_preview').attr('src', e.target.result);
-    // };
-    // render.readAsDataURL(this.files[0]);
   });
 
   function preview(original, preview) {
