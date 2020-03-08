@@ -30,57 +30,71 @@
       <div class="row text-capitalize font-weight-bold">
         <div class="col-4">Follower <span class="follower">{{ $followersCount }}</span></div>
         <div class="col-4">Following <span class="following">{{ $followingCount }}</span></div>
-        <div class="col-4 totalSongs">Total Songs {{ $user->song()->count() }}</div>
+        @if ($userType !== "USER")
+          <div class="col-4 totalSongs">Total Songs {{ $user->song()->count() }}</div>
+        @endif
       </div>
     </div>
   </div>
 
-  @if (isset($latestRealeasAlbums))
-  <div class="row m-2">
-    <div class="col">
-      <div class="row mt-2 mb-2">
-        <div class="h3 text-capitalize">Latest Realease</div>
-      </div>
-      <div class="row">
-        @foreach ($latestRealeasAlbums as $album)
-          @include('includes.small-album-thumbnail', ['album' => $album])
-        @endforeach
-      </div>
-    </div>
-  </div>
-  @endif
+  @if ($userType !== "USER")
 
-  @if (isset($songs))
-  <div class="row m-2">
-    <div class="col">
-      <div class="row mt-2 mb-2">
-        <div class="h3 text-capitalize">Popular Songs</div>
-      </div>
-      <div class="row">
-        <div class="col">
-          @include('includes.track-row-header')
-          @php($cnt = 1)
-          @foreach ($songs as $song)
-            @include('includes.track-row', ['song' => $song, 'cnt' => $cnt++])
+    @if (isset($latestRealeasAlbums))
+    <div class="row m-2">
+      <div class="col">
+        <div class="row mt-2 mb-2">
+          <div class="h3 text-capitalize">Latest Realease</div>
+        </div>
+        <div class="row">
+          @foreach ($latestRealeasAlbums as $album)
+            @include('includes.small-album-thumbnail', ['album' => $album])
           @endforeach
         </div>
       </div>
     </div>
-  </div>
-  @endif
+    @endif
 
-  @if (isset($albums))
-  <div class="row m-2">
-    <div class="col">
-      <div class="row mt-2 mb-2">
-        <div class="h3 text-capitalize">Albums</div>
-      </div>
-      <div class="row">
-        @foreach ($albums as $album)
-          @include('includes.album-thumbnail', ['album' => $album])
-        @endforeach
+    @if (isset($songs))
+    <div class="row m-2">
+      <div class="col">
+        <div class="row mt-2 mb-2">
+          <div class="h3 text-capitalize">Popular Songs</div>
+        </div>
+        <div class="row">
+          <div class="col">
+            @include('includes.track-row-header')
+            @php($cnt = 1)
+            @foreach ($songs as $song)
+              @include('includes.track-row', ['song' => $song, 'cnt' => $cnt++])
+            @endforeach
+          </div>
+        </div>
       </div>
     </div>
+    @endif
+
+    @if (isset($albums))
+    <div class="row m-2">
+      <div class="col">
+        <div class="row mt-2 mb-2">
+          <div class="h3 text-capitalize">Albums</div>
+        </div>
+        <div class="row">
+          @foreach ($albums as $album)
+            @include('includes.album-thumbnail', ['album' => $album])
+          @endforeach
+        </div>
+      </div>
+    </div>
+    @endif
+      
+  @endif
+
+  @if (isset($playlists))
+  <div class="row m-2" id="playlists">
+    @foreach ($playlists as $playlist)
+      @include('includes.playlist-thumbnail', ['playlist' => $playlist])
+    @endforeach
   </div>
   @endif
 

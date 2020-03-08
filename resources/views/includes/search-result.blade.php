@@ -41,6 +41,9 @@
       </div>
       <div class="row">
         <div class="col">
+          @if (count($songs) > 0)
+            @include('includes.track-row-header')
+          @endif
           @php($cnt = 1)
           @forelse ($songs as $song)
             @include('includes.track-row', ['song' => $song, 'cnt' => $cnt++])

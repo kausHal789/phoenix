@@ -9,7 +9,7 @@ class Song extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'source', 'writer', 'producer', 'category_id', 'image_url', 'song_url', 'duration', 'description', 'played_count'];
+    protected $fillable = ['title', 'source', 'writer', 'producer', 'category_id', 'song_url', 'duration', 'listener'];
 
     public function album() {
         return $this->belongsTo(Album::class);

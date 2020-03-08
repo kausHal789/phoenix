@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  // Hide notification area
+  // Hide collapse  area
   $('.collapse').collapse('hide');
   // Get albums
   $(document).on('click', '#homeNavItem', function () {
@@ -20,12 +20,24 @@ $(document).ready(function () {
     // console.log(user_id);
     // alert('click');
   });  
-  
+
   // Notification
-  // NOT in use
-  // $(document).on('click', '#notificationItem', function () {
-  //   $('.collapse.notificationCollapse').collapse('toggle');
-  // });  
+  $(document).on('click', '#notificationItem', function () {
+    $('.notificationCount').hide();
+    $.ajax({
+      url: '/notification/markAsRead',
+      method: 'GET',
+      cache: false,
+      dataType: 'JSON',
+      // success: function(_data) {
+      //   console.log(_data);
+      // },
+      // error: function(err) {
+      //   console.log(err);
+      // }
+    })
+  });  
+  
   
   // Get Album Page
   $(document).on('click', '.albumName', function() {
@@ -194,7 +206,7 @@ $(document).ready(function () {
       method: "GET",
       cache: false,
       success: function(_data) {
-        console.log(_data);
+        // console.log(_data);
         if(_data.status === 200) {
           // $('#' + song_id).remove();
           alert('Remove, Successfully');
@@ -521,7 +533,7 @@ $(document).ready(function () {
 
   // Save Profile
   $(document).on('submit', '#updateProfile', function() {
-    alert('click');
+    // alert('click');
     var user_id = $(this).find('#user_id').val();
     $.ajax({
       url: "/profile/" + user_id,
@@ -646,9 +658,9 @@ function searchForData(_url, _data) {
     cache: false,
     dataType: "JSON",
     success: function(_data) {
-      console.log(_data);
+      // console.log(_data);
       if(_data.status === 200) {
-        console.log('success');
+        // console.log('success');
         $('#searchResult').html(_data.data);
       }
     },

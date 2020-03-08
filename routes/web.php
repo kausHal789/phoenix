@@ -21,21 +21,19 @@ Auth::routes();
 
 Route::get('/song', 'SongController@index')->middleware('auth')->name('song.index');
 Route::get('/artist/song/{album_id}', 'SongController@create')->middleware('artist')->name('song.create');
-Route::post('/artist/song', 'SongController@store')->middleware('artist')->name('song.store');
+Route::post('/song', 'SongController@store')->middleware('artist')->name('song.store');
+Route::get('/song/{song_id}', 'SongController@edit')->middleware('artist')->name('song.edit');
+Route::patch('/song/{song_id}', 'SongController@update')->middleware('artist')->name('song.update');
 Route::delete('/song/{song_id}', 'SongController@destroy')->middleware('artist')->name('song.delete');
+// Song JSON
 Route::get('/songJSON/{song_id}', 'SongController@showJSON')->middleware('auth')->name('songJSON.show');
 
 
-// This is now work now beacuse i delete artist controller
-Route::get('/artist/dashboard', function() {
-    $artist = App\User::findOrFail(auth()->user()->id);
-
-    $artistProfile = $artist->profile;
-
-    $artistAlbums = $artist->album;
-
-    return view('artist.dashboard', compact('artistProfile', 'artistAlbums'));
-})->middleware('artist')->name('artist.dashboard');
+// Artist
+Route::get('/artist/home', 'ArtistController@home')->name('artist.home');
+Route::get('/artist/audience', 'ArtistController@audience')->name('artist.audience');
+Route::get('/artist/albums', 'ArtistController@albums')->name('artist.albums');
+Route::get('/artist/songs', 'ArtistController@songs')->name('artist.songs');
 
 // Album
 // middleware added in controller(artist)
@@ -81,15 +79,20 @@ Route::get('/search/result', 'SearchController@seachResult');
 Route::get('/dadicate/search', 'DedicateController@dedicateSearch')->middleware('auth');
 Route::post('/dadicate', 'DedicateController@dedicate')->middleware('auth');
 
-// Setting
-Route::get('/setting', function ($id) {
-    
-});
+// Mark Notification as read
+Route::get('/notification/markAsRead', 'HomeController@notificationMarkAsRead')->name('notification.read');
 
 
 // Unuse 
 
-Route::get('/test/{user_id}', function ($user_id) {
+Route::get('/test', function () {
+
+    if(auth() === true) {
+        dd(auth());
+    } else {
+        dd('sdjh');
+    }
+
 
     $user = App\User::find($user_id);
     $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
@@ -137,7 +140,6 @@ Route::get('/test/{user_id}', function ($user_id) {
 
     //     $categories = SongCategory::select('id', 'name')->get();
 
-//     return view('includes/create-edit-song', compact('categories'));
     
     
     return response()->json([

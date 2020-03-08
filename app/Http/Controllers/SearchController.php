@@ -38,10 +38,11 @@ class SearchController extends Controller
         // $artists = User::->except(Auth::id())->where('role_id', 2)->where('username', 'like', '%' . $term .'%')->get();
         $artists = User::where('role_id', 2)->where('id', '!=', auth()->id())->where('username', 'like', '%' . $term .'%')->get();
         $peoples = User::where('role_id', 3)->where('id', '!=', auth()->id())->where('username', 'like', '%' . $term .'%')->get();
+        $collectionType = 'SEARCHDATA';
         return response()->json([
             'result' => true,
             'status' => 200,
-            'data' => '' . view('includes.search-result', compact('songs', 'albums', 'artists', 'peoples')) . ''
+            'data' => '' . view('includes.search-result', compact('songs', 'albums', 'artists', 'peoples', 'collectionType')) . ''
         ]);
     }
 

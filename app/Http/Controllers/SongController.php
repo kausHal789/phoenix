@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Album;
 use App\Http\Requests\StoreSongPost;
+use App\Rules\AudioFileFormat;
 use App\Song;
 use App\SongCategory;
 use FFMpeg\FFMpeg;
@@ -135,9 +136,13 @@ class SongController extends Controller
    * @param  \App\Song  $song
    * @return \Illuminate\Http\Response
    */
-  public function edit(Song $song)
+  public function edit($song_id)
   {
-    //
+    $song = Song::findOrFail($song_id);
+    $isEditSong = true;
+    $categories = SongCategory::select('id', 'name')->get();
+    // dd($song);
+    return view('song.create', compact('song', 'isEditSong', 'categories'));
   }
 
   /**
@@ -147,9 +152,27 @@ class SongController extends Controller
    * @param  \App\Song  $song
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Song $song)
+  public function update(Request $request, $song_id)
   {
-    //
+    request()->validate([
+      'title' => 'bail|required|string|min:5',
+      'writer' => 'bail|required|string|min:5',
+      'producer' => 'bail|required|string|min:5',
+      'source' => 'bail|required|string|min:5',
+      'category' => 'bail|required|numeric',
+    ]);
+
+    $song = Song::findOrFail($song_id);
+
+    $song->update([
+      'title' => request()->title,
+      'writer' => request()->writer,
+      'producer' => request()->producer,
+      'source' => request()->source,
+      'category' => request()->category,
+    ]);
+
+    return redirect('/artist/dashboard');
   }
 
   /**
@@ -161,11 +184,7 @@ class SongController extends Controller
   public function destroy($song_id)
   { 
     $result = Song::findOrFail($song_id)->delete();
-    return response()->json([
-      'result' => $result,
-      'status' => 200,
-      'data' => ''
-    ]);
+    return redirect('/artist/dashboard');
   }
 
   public function showJSON($song_id) {

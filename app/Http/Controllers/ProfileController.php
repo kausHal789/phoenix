@@ -75,12 +75,13 @@ class ProfileController extends Controller
         $albums = $user->album;
         $latestRealeasAlbums = Album::where('user_id', $user_id)->latest()->limit(2)->get();
         $songs = $user->song()->orderBy('listener', 'DESC')->limit(5)->get();
+        $playlists = $user->playlist;
 
         $collectionType = null;
         return response()->json([
             'result' => true,
             'status' => 200,
-            'data' => '' . view('profile.show', compact('user', 'albums', 'latestRealeasAlbums', 'songs', 'userType', 'collectionType', 'follows', 'followingCount', 'followersCount')) . ''
+            'data' => '' . view('profile.show', compact('user', 'albums', 'latestRealeasAlbums', 'songs', 'playlists', 'userType', 'collectionType', 'follows', 'followingCount', 'followersCount')) . ''
         ]);
     }
 
@@ -125,28 +126,27 @@ class ProfileController extends Controller
             ]);
         }
 
-        $user = User::findOrFail($user_id);
-        $user->profile->name = request()->name;
+        $userProfile = Profile::findOrFail($user_id);
+        $userProfile->name = request()->name;
         
         if($request->profileImage) {
             $ProfilePath = $request['profileImage']->store('image', 'public');
             $image = Image::make(public_path("storage/$ProfilePath"))->resize(150, 150);
             $image->save();
-            $user->profile->image = $ProfilePath;
+            $userProfile->image = $ProfilePath;
         }
         if($request->coverImage) {
             $coverPath = $request['coverImage']->store('image', 'public');
-            $image = Image::make(public_path("storage/$coverPath"))->resize(1200, 250);
+            $image = Image::make(public_path("storage/$coverPath"))->resize(1500, 300);
             $image->save();
-            $user->profile->cover_image = $coverPath;
+            $userProfile->cover_image = $coverPath;
         }
 
-        $user->save();
+        $userProfile->save();
 
         return response()->json([
             'result' => true,
             'status' => 202,
-            'asdhas' => $user->profile
         ]);
     }
 

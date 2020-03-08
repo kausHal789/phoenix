@@ -19,10 +19,9 @@
       @if (!isset($isSongUploadPage))
         <div class="row">
           <a href="/artist/song/{{ $album->id }}">
-          <button class="btn btn-sm rounded add-song-btn font-weight-bold" 
+          <button class="btn btn-sm btn-outline-secondary rounded add-song-btn font-weight-bold" 
             type="button" id="addSongBtn" title="ADD SONG" data-toggle="modal" data-target="#addSongModal">
-            ADD NEW SONG TO THIS ALBUM
-            <i class="fas fa-plus-circle float-right add-icon" data-toggle="modal" data-target="#addSongModal" style="padding-top: 5px;" title="ADD SONG"></i>
+            ADD SONG INTO THIS ALBUM
           </button>
           </a>
         </div>
@@ -54,8 +53,8 @@
     @includeIf('includes.songs-header')
     @php($cnt = 0)
     @foreach ($album->songs as $song)
-      @php($cnt++)
-      @includeIf('includes.song', ['song' => $song, 'cnt' => $cnt])
+      {{-- @php($cnt++) --}}
+      @includeIf('includes.song', ['song' => $song, 'cnt' => $cnt++])
     @endforeach
   @endif
 </div>

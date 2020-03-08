@@ -38,4 +38,12 @@ class HomeController extends Controller
         // dd($notifications);
         return view('index', compact('albums', 'notificationsCount', 'notifications'));
     }
+
+    public function notificationMarkAsRead() {
+        $notifications = auth()->user()->notifications;
+        foreach ($notifications as $notification) {
+            $notification->markAsRead();
+        }
+
+    }
 }

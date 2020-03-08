@@ -31,39 +31,6 @@
 </head>
 <body>
   <div id="app">
-    {{-- <div id="topSection">
-      <nav class="navBar ">
-        <a href='#' class="logo pb-3">
-          <img src="/storage/icons/logo.png" alt="">
-        </a>
-
-        <div class="group">
-          <div class="navItem p-1 font-weight-bold h5 d-block">
-            <a href="#" class="navItemLink">
-              <span>Search</span>
-              <img src="/storage/icons/search.png" alt="Search" class="img-fluid icon float-right">
-            </a>
-          </div>
-        </div>
-        
-        <div class="group">
-          <div class="navItem p-1 font-weight-bold h5 d-block">
-            <a href="#" class="navItemLink">Browse</a>
-          </div>
-          
-          <div class="navItem p-1 font-weight-bold h5 d-block">
-            <a href="#" class="navItemLink">Your Music</a>
-          </div>
-          
-          <div class="navItem p-1 font-weight-bold h5 d-block">
-            <a href="#" class="navItemLink">Temp</a>
-          </div>
-        </div>
-      </nav>
-      <main class="py-4">
-          @yield('content')
-      </main>
-    </div> --}}
     <div id="topSection">
       <div id="navBarContainer">
         <nav class="navBar ">
@@ -89,7 +56,7 @@
           
           <div class="group" id="profileAccordion">
             <div class="navItem p-1 font-weight-bold d-flex h6 d-block" id="profileItem">
-                <div class="navItemLink pl-3" 
+                <div id="{{ auth()->id() }}-user" class="navItemLink pl-3 artistName" 
                 data-toggle="collapse" 
                 data-target="#profileCollapse" 
                 aria-expanded="true"
@@ -125,8 +92,8 @@
                 data-toggle="collapse" 
                 data-target="#notificationCollapse" 
                 aria-expanded="true"
-                aria-controls="notificationCollapse">
-                Notifications <span class="badge badge-pill badge-light notificationCount">{{ $notificationsCount }}</span>
+                aria-controls="notificationCollapse">                
+                Notifications @if ($notificationsCount !== 0) <span class="badge badge-pill badge-light notificationCount">{{ $notificationsCount }}</span> @endif
               </div>
             </div>
             <div id="notificationCollapse" class="collapse notificationCollapse show" aria-labelledby="notificationItem" data-parent="#accordion">
