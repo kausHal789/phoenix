@@ -27,6 +27,12 @@
       background-color: #f8fafc;
       color: #212529;
     }
+  </style>
+
+  @guest
+  
+  @else  
+  <style>
     #navBarContainer {
       background-color: #000000;
       color: #f8fafc;
@@ -54,6 +60,15 @@
       cursor: pointer;
       color: #f8fafc;
     }
+    .card-common {
+      box-shadow: 1px 2px 5px #999;
+      transition: all .4s;
+    }
+
+    .card-common:hover {
+      box-shadow: 2px 3px 15px #999;
+      transform: translateY(-1px);
+    }
 
     main {
       margin-left: 250px;
@@ -61,11 +76,12 @@
       margin-bottom: 10rem;
     }
   </style>
+  @endguest
 
 </head>
 <body>
   <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
           {{ config('app.name', 'Laravel') }}
@@ -120,7 +136,7 @@
           </ul>
         </div>
       </div>
-    </nav>
+    </nav> --}}
 
     @guest
       {{-- Show add here --}}
@@ -132,11 +148,11 @@
         </a>
 
         <div class="row align-item-start font-weight-bold">
-          <div class="col-6">
+          <div class="col-5 shadow-lg">
             <img src="{{ auth()->user()->profile->profileImage() }}" class="w-100 h-auto rounded-circle" alt="">
           </div>
           <div class="col-6">
-            <span class="h3 text-capitalize m-1">{{ auth()->user()->profile->name }}</span>
+            <span class="h3 text-capitalize mt-1">{{ auth()->user()->profile->name }}</span>
           </div>
         </div>
 
@@ -149,9 +165,23 @@
             <div class="mt-1 mb-1"><a href="{{ route('artist.home') }}" class="navItem">Home</a></div>
             <div class="mt-1 mb-1"><a href="{{ route('artist.audience') }}" class="navItem">Audience</a></div>
             <div class="mt-1 mb-1"><a href="{{ route('artist.albums') }}" class="navItem">Albums</a></div>
-            <div class="mt-1 mb-1 navItem"><a href="{{ route('artist.songs') }}" class="navItem">Songs</a></div>
+            <div class="mt-1 mb-1"><a href="{{ route('artist.songs') }}" class="navItem">Songs</a></div>
+            <div class="mt-1 mt-5 border-top">
+              <a class="navItem p-5 align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+              <span class="mr-0">{{ __('Logout') }}</span>
+              <span><img src="/storage/icons/log_out.png" style="max-width:20px" alt=""></span>
+            </a>
+            </div>
+            
+            
           </div>
         </div>
+
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
       </nav>
     </div>
     @endguest

@@ -12,7 +12,7 @@
   <div class="row m-5">
     <div class="col-6">
       <div class="tab-pane fade show active" id="listener" role="tabpanel" aria-labelledby="listener-tab">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
+        <div class="card card-common border-success mb-3" style="max-width: 18rem;">
           <div class="card-body text-success">
             <h5 class="card-title h1 text-center">Total Listener</h5>
             <p class="text-dark h4 text-center">{{ $totalListeners }}</p>
@@ -22,7 +22,7 @@
     </div>
     <div class="col-6">
       <div class="tab-pane fade show active" id="listener" role="tabpanel" aria-labelledby="listener-tab">
-        <div class="card border-success mb-3" style="max-width: 18rem;">
+        <div class="card card-common border-success mb-3" style="max-width: 18rem;">
           <div class="card-body text-success">
             <h5 class="card-title h1 text-center">Followers</h5>
             <div class="text-dark h4 text-center">{{ $followersCount }}</div>

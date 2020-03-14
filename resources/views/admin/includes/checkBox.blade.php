@@ -1,0 +1,1 @@
+<input type="checkbox" id="{{ $collection->id }}-{{$collectionType}}" @if (!$collection->deleted_at) checked @endif data-toggle="toggle" data-size="small" data-onstyle="success" data-offstyle="danger">

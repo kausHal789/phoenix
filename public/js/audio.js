@@ -102,7 +102,7 @@ function nextTrack() {
 
   if(currentlyPlayingListIndex === currentlyPlayingList.length -1 || currentlyPlayingList.length === 0) {
     // If the track is last of index then set track to 0
-    currentlyPlayingListIndex = 0;
+    // currentlyPlayingListIndex = 0;
     // Or get new songs from database
     // Here we get rendom song_id from database
     getNewTrackIdFromDataBase();

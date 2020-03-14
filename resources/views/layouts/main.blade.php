@@ -71,7 +71,7 @@
                   <span class="font-weight-bold text-ellipsis text-capitalize ml-2">Settings</span>
                 </div>
 
-                <a class="col p-1 text-white-50" href="{{ route('logout') }}" style="text-decoration:none"
+                <a class="col p-1 logOutNavItem text-white-50" href="{{ route('logout') }}" style="text-decoration:none"
                   onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                   

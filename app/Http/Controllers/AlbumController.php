@@ -105,6 +105,11 @@ class AlbumController extends Controller
     public function show($album_id)
     {   
         $album = Album::findOrFail($album_id);
+        // return response()->json([
+        //     'result' => true,
+        //     'status' => 200,
+        //     'data' => $album
+        // ]);
         $collectionType = 'ALBUM';
         return response()->json([
             'result' => true,

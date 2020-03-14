@@ -583,6 +583,7 @@ function getRoutePage(_url) {
     dataType: "JSON",
     cache: false,
     success: function (_data) {
+      console.log(_data);
       if(_data.status === 200) {
         $("#mainContent").html(_data.data);
       }
@@ -595,13 +596,13 @@ function getRoutePage(_url) {
 
 function getTrackFromDataBase(song_id) {
   // The ajax call will be here
-  // console.log(song_id);
+  console.log(song_id);
   $.ajax({  
     url: "/songJSON/" + song_id,
     method: "GET",
     cache: false,
     success: function(_data) {
-      // console.log(_data);
+      console.log(_data);
       if(_data.status === 200) {
         $('.trackInfo .trackName').text(_data.data.track.track_title);
         $('.trackInfo .artistName').text(_data.data.track_artist_name);
