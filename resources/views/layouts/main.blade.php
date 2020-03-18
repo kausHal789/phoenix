@@ -66,12 +66,12 @@
             </div>
             <div id="profileCollapse" class="collapse show" aria-labelledby="profileItem" data-parent="#profileAccordion">
 
-                <div class="col p-1 align-items-center text-white-50 settingsNavItem" id="{{ auth()->id() }}-user" style="cursor: pointer;">
+                <div class="col p-3 align-items-center text-white-50 settingsNavItem" id="{{ auth()->id() }}-user" style="cursor: pointer;">
                   <img src="/storage/icons/settings.png" alt="setting" style="max-width:20px">
                   <span class="font-weight-bold text-ellipsis text-capitalize ml-2">Settings</span>
                 </div>
 
-                <a class="col p-1 logOutNavItem text-white-50" href="{{ route('logout') }}" style="text-decoration:none"
+                <a class="col p-3 logOutNavItem text-white-50" href="{{ route('logout') }}" style="text-decoration:none"
                   onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                   
@@ -119,6 +119,11 @@
           <div class="group">
             <div class="navItem p-1 font-weight-bold d-flex h6 d-block" id="yourPlaylistItem">
               <div class="navItemLink pl-3">Your Playlist</div>
+            </div>
+          </div>
+          <div class="group">
+            <div class="navItem p-1 font-weight-bold d-flex h6 d-block">
+              <div class="navItemLink pl-3"><a href="{{ route('primium.show') }}" target="_blank" style="color:#a0a0a0">Your Primium</a></div>
             </div>
           </div>
         </nav>

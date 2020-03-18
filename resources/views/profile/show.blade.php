@@ -88,15 +88,24 @@
     </div>
     @endif
       
+  @else
+
+    @if (isset($playlists))
+    <div class="row m-2" id="playlists">
+      <div class="col">
+        <div class="row mt-2 mb-2">
+          <div class="h3 text-capitalize">Playlist</div>
+        </div>
+        @foreach ($playlists as $playlist)
+          @include('includes.playlist-thumbnail', ['playlist' => $playlist])
+        @endforeach
+      </div>
+    
+    </div>
+    @endif
+
   @endif
 
-  @if (isset($playlists))
-  <div class="row m-2" id="playlists">
-    @foreach ($playlists as $playlist)
-      @include('includes.playlist-thumbnail', ['playlist' => $playlist])
-    @endforeach
-  </div>
-  @endif
 
 </div>
 

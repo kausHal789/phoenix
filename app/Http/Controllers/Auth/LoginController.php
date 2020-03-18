@@ -32,6 +32,35 @@ class LoginController extends Controller
 
     protected function authenticated(\Illuminate\Http\Request $request, $user)
     {
+
+        // Check user has a subscription or not
+        if(Auth::check()) {
+            $subscriptions = $user->subscriptions()->get();
+            foreach ($subscriptions as $subscription) {
+                
+                if($subscription->stripe_plan == "Day") {
+                    if($subscription->created_at->addDay(1)->timestamp <= now()->timestamp) {
+                        $subscription->markAsCancelled();
+                        $subscription->save();
+                    }
+                }
+                if($subscription->stripe_plan == "Month") {
+                    if($subscription->created_at->addMonth(1)->timestamp <= now()->timestamp) {
+                        $subscription->markAsCancelled();
+                        $subscription->save();
+                    }
+                }
+                if($subscription->stripe_plan == "Year") {
+                    if($subscription->created_at->addYear(1)->timestamp <= now()->timestamp) {
+                        $subscription->markAsCancelled();
+                        $subscription->save();
+                    }
+                }
+
+            }
+            // dd('now');
+        }
+        
         if(Auth::check()) {
             if($user->role_id === 1) {
                 return redirect()->route('admin.home');

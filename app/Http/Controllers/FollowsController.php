@@ -17,14 +17,19 @@ class FollowsController extends Controller
         $user = User::findOrFail($user_id);
         $result = auth()->user()->following()->toggle($user->profile);
 
-        if(count($result['attached']) > 0) {
-            $user->notify(new FollowNotification(auth()->user()));
-        }
+        // if(count($result['attached']) > 0) {
+        //     $user->notify(new FollowNotification(auth()->user()));
+        // }
 
         return response()->json([
             'result' => true,
             'status' => 200,
             'data' => count($result['attached'])
         ]);
+    }
+
+    public function notification($user_id) {
+        $user = User::findOrFail($user_id);
+        $user->notify(new FollowNotification(auth()->user()));
     }
 }

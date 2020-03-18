@@ -17,12 +17,15 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+
+    $role_id = random_int(2, 3);
+
     return [
         'username' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'role_id' => 3,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'role_id' => $role_id,
+        'password' => '$2y$10$R9V2LUblXkSbXKPREQGs7etE7elESIA8/j9P0F8ZhDT2wnUPXwuYW', // password 12345678
         'remember_token' => Str::random(10),
     ];
 });

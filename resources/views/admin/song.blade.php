@@ -1,13 +1,24 @@
 @extends('layouts.admin')
 
+
+@section('head-section')
+  
+@endsection
+
+@section('searchBar')
+@include('admin.includes.searchBox', ['collection' => $songs, 'collectionType' => 'song'])
+@endsection
+
+
+
+
 @section('content')
 <div class="container m-5">
 
-  <div class="row mt-3 mb-3">
-    <div class="col">
-      <div class="h1 font-weight-bold">Tracks</div>
-    </div>
+  <div class="row" style="display:none" id="searchTitle">
+    <div class="col h4 font-weight-bold">Searching...</div>
   </div>
+  <div class="row m-5" id="searchData"></div>
 
   <div class="row h4 font-weight-bold">
     <div class="col-1">#</div>
@@ -15,7 +26,7 @@
     <div class="col-2 text-center">Duration</div>
     <div class="col-2 text-center">Listener</div>
     <div class="col-2">Realease</div>
-    <div class="col-1 text-center">Active/Deactive</div>
+    {{-- <div class="col-1 text-center">Active/Deactive</div> --}}
   </div>
 
   @php($cnt = 1)

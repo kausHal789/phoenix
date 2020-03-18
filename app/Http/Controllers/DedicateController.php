@@ -41,7 +41,7 @@ class DedicateController extends Controller
                 'data' => '<div class=\'h1 m-5\'>Empty data are not searchable</div>'
             ]);    
         }
-        $usersProfiles = Profile::where('id', '!=', auth()->id())->where('name', 'like', '%' . $term .'%')->get();
+        $usersProfiles = Profile::where('id', '!=', 1)->where('id', '!=', auth()->id())->where('name', 'like', '%' . $term .'%')->get();
     
         return response()->json([
             'result' => true,

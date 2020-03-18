@@ -14,29 +14,64 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
+Route::get('/home', 'HomeController@home')->name('home')->middleware('auth', 'verified');
+Route::get('/', 'HomeController@index')->name('index');
+
+
+
+Route::post('/feedback', 'FeedbackController@store')->name('feedback');
+Route::post('/subscription', 'SubscribeController@store')->name('subscription');
 
 // Admin (admin)
 Route::get('/home/admin', 'AdminController@home')->name('admin.home');
+
 Route::get('/user/admin', 'AdminController@user')->name('admin.user');
 Route::get('/user/activate/{user_id}/admin', 'AdminController@userActivate')->name('admin.activate.user');
 Route::get('/user/deactivate/{user_id}/admin', 'AdminController@userDeactivate')->name('admin.deactivate.user');
+Route::get('/user/search/admin', 'AdminController@usersearch')->name('admin.user.search');
+
 Route::get('/album/admin', 'AdminController@album')->name('admin.album');
 Route::get('/album/activate/{album_id}/admin', 'AdminController@albumActivate')->name('admin.activate.album');
 Route::get('/album/deactivate/{album_id}/admin', 'AdminController@albumDeactivate')->name('admin.deactivate.album');
+Route::get('/album/search/admin', 'AdminController@albumsearch')->name('admin.album.search');
+
 Route::get('/playlist/admin', 'AdminController@playlist')->name('admin.playlist');
 Route::get('/playlist/activate/{playlist_id}/admin', 'AdminController@playlistActivate')->name('admin.activate.playlist');
 Route::get('/playlist/deactivate/{playlist_id}/admin', 'AdminController@playlistDeactivate')->name('admin.deactivate.playlist');
+Route::get('/playlist/search/admin', 'AdminController@playlistsearch')->name('admin.playlist.search');
+
 Route::get('/song/admin', 'AdminController@song')->name('admin.song');
 Route::get('/song/activate/{song_id}/admin', 'AdminController@songActivate')->name('admin.activate.song');
 Route::get('/song/deactivate/{song_id}/admin', 'AdminController@songDeactivate')->name('admin.deactivate.song');
+Route::get('/song/search/admin', 'AdminController@songsearch')->name('admin.song.search');
+
 Route::get('/categories/admin', 'AdminController@categories')->name('admin.song.categories');
+Route::post('/category/store/admin', 'AdminController@categorystore')->name('admin.song.categories.store');
+Route::get('/category/{category_id}/admin', 'AdminController@categorydelete')->name('admin.song.categories.delete');
+
+Route::get('/subscription/admin', 'AdminController@subscription')->name('admin.subscription');
+Route::get('/subscription/{subscription_id}/admin', 'AdminController@subscriptiondelete')->name('admin.subscription.delete');
+
+Route::get('/feedback/admin', 'AdminController@feedback')->name('admin.feedback');
+
+Route::get('/payment/admin', 'AdminController@payment')->name('admin.payment');
+// advertisement
+Route::get('/advertisement', 'AdvertisementController@index')->name('admin.advertisement');
+Route::post('/advertisement', 'AdvertisementController@store')->name('advertisement.store');
+Route::get('/advertisement/{id}', 'AdvertisementController@edit')->name('advertisement.edit');
+Route::patch('/advertisement/{id}', 'AdvertisementController@update')->name('advertisement.update');
+Route::delete('/advertisement/{id}', 'AdvertisementController@destroy')->name('advertisement.delete');
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Primium (auth)
+Route::get('/primium', 'PrimiumController@show')->name('primium.show')->middleware('verified');
+Route::get('/primium/create', 'PrimiumController@create')->name('primium.create');
+Route::post('/primium/payment', 'PrimiumController@payment')->name('primium.payment');
 
 
+// Song (artist)
 Route::get('/song', 'SongController@index')->middleware('auth')->name('song.index');
 Route::get('/artist/song/{album_id}', 'SongController@create')->middleware('artist')->name('song.create');
 Route::post('/song', 'SongController@store')->middleware('artist')->name('song.store');
@@ -85,6 +120,7 @@ Route::get('/playlist/{playlist_id}/song/{song_id}/detach', 'PlaylistController@
 // Follow the user
 // Middleware auth applied
 Route::post('/follow/{user}', 'FollowsController@store')->name('follow-unfollow');
+Route::post('/follownotification/{user}', 'FollowsController@notification')->name('follow.notification');
 
 // Profile
 Route::get('/profile/{user_id}', 'ProfileController@show')->name('profile.show');
@@ -106,6 +142,61 @@ Route::get('/notification/markAsRead', 'HomeController@notificationMarkAsRead')-
 // Unuse 
 
 Route::get('/test', function () {
+
+    dd('ok');
+    dd(Carbon::hasFormat(now(), 'y-m-d h:i:s'));
+    dd(Carbon::today('2020-03-18 02:24:21')->addDay(10)->diffForHumans());
+
+    // dd(auth()->user()->subscribed('download'));
+    // dd(auth()->user()->subscription('download')->stripe_plan);
+    // dd(auth()->user()->subscription('download')->created_at->addMonth(1)->timestamp);
+    dd(auth()->user()->subscriptions()->get());
+
+    $arrayName = ['primary', 'secondary'];
+
+    // dd(random_int(   ))
+
+
+    // App\User::withTrashed()->where('id', '=', 5)->restore();
+    $user = App\User::withTrashed()->where('id', '=', 2)->get();
+    // App\Profile::withTrashed()->where('user_id', '=', $user->id)->restore();
+
+    // // dd($user->id);
+
+    // // attach
+    // App\Album::withTrashed()->where('user_id', '=', $user->id)->restore();
+    // App\Playlist::withTrashed()->where('user_id', '=', $user->id)->restore();
+
+    // foreach ($user->album as $album) {
+    //     App\Song::withTrashed()->where('album_id', '=', $album->id)->restore();
+    // }
+    dd($user->deleted_at);
+
+
+
+    // detach
+    // foreach ($user->song as $song) {
+    //     $song->delete();
+    // }
+    // foreach ($user->album as $album) {
+    //     $album->delete();
+    // }
+    // foreach ($user->playlist as $playlist) {
+    //     $playlist->delete();
+    // }
+    // $user->profile->delete();
+    // $user->delete();
+    dd('okay');
+
+
+    $profiles = App\User::withTrashed()
+            ->join('profiles', 'users.id', '=', 'profiles.user_id')
+            ->where('users.id', '!=', auth()->id())
+            ->where('users.role_id', '!=', 1)
+            ->where('profiles.name', 'like', '%' . 'test' . '%')
+            ->get();
+
+            dd($profiles);
 
     $album = App\Album::withTrashed()->where('id', '=', 1)->get();
     // $collectionType = 'ALBUM';
@@ -171,6 +262,6 @@ Route::get('/test', function () {
     $album = [];
     $var = view('includes.album', compact('album'));
     return $var;
-})->name('test');
+})->name('test')->middleware('verified');
 
 

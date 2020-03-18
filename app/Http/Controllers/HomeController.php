@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Advertisement;
 use App\Album;
+use App\Playlist;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,30 +14,26 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+
+     public function index() {
+        $albums = Album::all()->random()->limit(3)->get();
+        $playlists = Playlist::all()->random()->limit(3)->get();
+        $advertisements = Advertisement::latest()->limit(3)->get();
+        return view('home', compact('albums', 'playlists', 'advertisements'));
+     }
+
+
+    public function home()
     {
         $albums = Album::latest()->limit(10)->get();
         $notificationsCount = auth()->user()->unreadNotifications->count();
         $notifications = auth()->user()->notifications;
-        // ->where('type', '=', 'App\Notifications\FollowNotification')
-        // ->where('type', '=', 'App\Notifications\DedicateSong')
-        // foreach ($notifications as $notification) {
-            // dd($notification->data);
-            // foreach ($notification->data as $key => $value) {
-            //     echo $key ."=" . $value . "<br>";
-            // } 
-        // }
-        // dd($notifications);
         return view('index', compact('albums', 'notificationsCount', 'notifications'));
     }
 

@@ -1,44 +1,66 @@
 @extends('layouts.admin')
 
-@section('content')
-<div class="container m-5">
 
-  <div class="row mt-3 mb-3">
-    <div class="col">
-      <div class="h1 font-weight-bold">Users</div>
-    </div>
-  </div>
+@section('searchBar')
+<div class="kt-subheader  kt-grid__item" id="kt_subheader">
+  <div class="kt-container  kt-container--fluid ">
+    <div class="kt-subheader__main">
+      <h3 class="kt-subheader__title text-white">
+          Users
+      </h3>
+      <span class="kt-subheader__separator kt-subheader__separator--v"></span>
 
-  <div class="row h4 font-weight-bold">
-    <div class="col-1"></div>
-    <div class="col-1">#</div>
-    <div class="col-2">Username</div>
-    <div class="col-2">Name</div>
-    <div class="col-2">Type</div>
-    <div class="col-1 text-center">Playlists</div>
-    <div class="col-2 text-center">Joined</div>
-    <div class="col-1 text-center">Active/Deactive</div>
-  </div>
+      <div class="kt-subheader__toolbar" id="kt_subheader_search">
+        <span class="kt-subheader__desc text-white" id="kt_subheader_total">
+            {{ $totalUser }} Total </span>
 
-  @php($cnt = 1)
-  @forelse ($users as $user)
-    <div class="row mb-4 align-items-center">
-      <div class="col-1"></div>
-      <div class="col-1">{{ $cnt++ }}</div>
-      <div class="col-2">{{ $user->username }}</div>
-      <div class="col-2">{{ $user->profile->name }}</div>
-      <div class="col-2">{{ $user->role->name }}</div>
-      <div class="col-1 text-center">{{ $user->playlist->count() }}</div>
-      <div class="col-2 text-center">{{ $user->created_at->diffForHumans() }}</div>
-      <div class="col-1 text-center">
-        @include('admin.includes.checkBox', ['collection' => $user, 'collectionType' => 'user'])
+          <div class="kt-subheader__search">
+            <div class="input-group">
+              <input type="text" class="form-control search_box" placeholder="Search..." id="user">
+            </div>
+          </div>
+          <div class="kt-nav__foot">
+            <a class="btn btn-label-brand text-white btn-bold btn-sm" href="#enduser">End Users</a>
+          </div>
+          <div class="kt-nav__foot">
+            <a class="btn btn-label-brand text-white btn-bold btn-sm" href="#artists">Artists</a>
+          </div>
       </div>
     </div>
-  @empty
-    <div class="row">
-      <div class="col">No Users Found</div>
-    </div>
-  @endforelse
-
+  </div>
 </div>
+@endsection
+
+@section('content')
+<section>
+<div class="container">
+
+  <div class="row" style="display:none" id="searchTitle">
+    <div class="col h4 font-weight-bold">Searching...</div>
+  </div>
+  <div class="row m-5" id="searchData"></div>
+
+  <div class="row mt-5" id="enduser">
+    <div class="col h4 font-weight-bold">
+      End Users
+    </div>
+  </div>
+  <div class="row" id="users">
+    @foreach ($endUsers as $user)
+      @include('admin.includes.profile-thumbnail', ['user' => $user])
+    @endforeach
+  </div>
+  <div class="row mt-5" id="artists">
+    <div class="col h4 font-weight-bold">
+      Artist
+    </div>
+  </div>
+  <div class="row">
+    @foreach ($artists as $user)
+      @include('admin.includes.profile-thumbnail', ['user' => $user])
+    @endforeach
+  </div>
+</div>
+
+</section>
 @endsection

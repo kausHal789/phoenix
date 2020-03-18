@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.artist')
 
 @section('head-section')
 @endsection

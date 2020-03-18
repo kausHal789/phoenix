@@ -467,15 +467,26 @@ $(document).ready(function () {
       dataType: 'JSON',
       success: function(_data) {
         if(_data.status === 200) {
-          var newText = (text == 'Follow') ? 'Unfollow' : 'Follow' ;
-          $('.followButton').text(newText);
           var followers = Number.parseInt($('.follower').text());
-          if(newText == 'Follow') {
-            $('.follower').text(followers - 1);
-          } else if(_data.data > 0) {
+          if(_data.data == 1) {
+            $('.followButton').text('Unfollow');
+            // console.log('follow notification');
             $('.follower').text(followers + 1);
+              $.ajax({
+                url: "/follownotification/" + user_id,
+                method: "POST",
+                cache: false,
+                data: {
+                  _token: getCSRFToken()
+                }
+              });
+          } else if (_data.data == 0) {
+            $('.followButton').text('Follow');
+            // console.log('decrise follower');
+            $('.follower').text(followers - 1);
           }
         }
+
       },
       error: function (err) {
         if(err.status == 404) {
@@ -523,10 +534,14 @@ $(document).ready(function () {
       },
       dataType: 'JSON',
       success: function(_data) {
-        console.log(_data);
+        // console.log(_data);
+        $('#dadicateModalClose').click();
       },
       error: function (err) {
         console.log(err);
+        if(err.status === 404) {
+          alert('Something went wrong please refresh the page');
+        }
       }
     });
   });
@@ -583,26 +598,29 @@ function getRoutePage(_url) {
     dataType: "JSON",
     cache: false,
     success: function (_data) {
-      console.log(_data);
+      // console.log(_data);
       if(_data.status === 200) {
         $("#mainContent").html(_data.data);
       }
     },
     error: function (err) {
       console.log(err);
+      if(err.status === 404) {
+        alert('This operation blocked by Pheonix');
+      }
     }
   })
 }
 
 function getTrackFromDataBase(song_id) {
   // The ajax call will be here
-  console.log(song_id);
+  // console.log(song_id);
   $.ajax({  
     url: "/songJSON/" + song_id,
     method: "GET",
     cache: false,
     success: function(_data) {
-      console.log(_data);
+      // console.log(_data);
       if(_data.status === 200) {
         $('.trackInfo .trackName').text(_data.data.track.track_title);
         $('.trackInfo .artistName').text(_data.data.track_artist_name);
@@ -617,6 +635,9 @@ function getTrackFromDataBase(song_id) {
     },
     error: function(err) {
       console.log(err);
+      if(err.status === 404) {
+        alert('This Song is blocked by Pheonix');
+      }
     }
   });
 }

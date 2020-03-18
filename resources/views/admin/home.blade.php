@@ -18,20 +18,22 @@
 @section('content')
   <div class="container m-5">
     
-    <div class="row ml-5">
+
+    
+    <div class="row m-5">
       <div class="col-xl-3 col-sm-6 p-2">
         <div class="card card-common">
           <div class="card-body">
             <div class="d-flex justify-content-between">
               <img src="/storage/icons/people.png" class="w-25 h-25" alt="">
               <div class="text-right text-secondary">
-                <h5>Users</h5>
+                <h5>Total Users</h5>
                 <h3>{{ $totleUsers }}</h3>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div>  
       <div class="col-xl-3 col-sm-6 p-2">
         <div class="card card-common">
           <div class="card-body">
@@ -73,14 +75,117 @@
       </div>
     </div>
 
+    <div class="row m-5">
 
+      <div class="col-xl-3 col-sm-6 p-2">
+        <div class="card card-common">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <img src="/storage/icons/block_user.png" class="w-25 h-25" alt="">
+              <div class="text-right text-secondary">
+                <h5>Blocked Users</h5>
+                <h3 class="font-weight-bold">{{ $blockUserCount }}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer font-weight-bold">
+            <div class="row justify-content-between">
+              <span class="pl-3">Artists</span>
+              <span class="pr-3">{{ $blockArtistCount }}</span>
+            </div>
+            <div class="row justify-content-between">
+              <span class="pl-3">End Users</span>
+              <span class="pr-3">{{ $blockEndUserCount }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    {{-- <div class="col-1">
-      <a href="#" data-toggle="tooltip" title="<h6>edit</h6>" data-html="true" data-placement="top"><i class="fas fa-edit fa-lg text-success mr-2"></i></a>
+      <div class="col-xl-3 col-sm-6 p-2">
+        <div class="card card-common">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <img src="/storage/icons/block_song.png" class="w-25 h-25" alt="">
+              <div class="text-right text-secondary">
+                <h5>Blocked Songs</h5>
+                <h3 class="font-weight-bold">{{ $blockSongCount }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+
+      <div class="col-xl-3 col-sm-6 p-2">
+        <div class="card card-common">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <img src="/storage/icons/block_album.png" class="w-25 h-25" alt="">
+              <div class="text-right text-secondary">
+                <h5>Blocked Albums</h5>
+                <h3 class="font-weight-bold">{{ $blockAlbumCount }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+
+      <div class="col-xl-3 col-sm-6 p-2">
+        <div class="card card-common">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <img src="/storage/icons/block_playlist.png" class="w-25 h-25" alt="">
+              <div class="text-right text-secondary">
+                <h5>Blocked Playlists</h5>
+                <h3 class="font-weight-bold">{{ $blockPlaylistCount }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="col-1">
-      <a href="#" data-toggle="tooltip" title="<h6>delete</h6>" data-html="true" data-placement="top"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
-    </div> --}}
+
+    <div class="row m-5 ">
+      <div class="col mb-3">
+        <div class="card card-common text-white bg-primary mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <div class="card-title h1 text-center">Artists</div>
+            <div class="card-text h4 text-center">{{ $artistCount }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col mb-3">
+        <div class="card card-common text-white bg-dark mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <div class="card-title h1 text-center">End Users</div>
+            <div class="card-text h4 text-center">{{ $endUserCount }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col mb-3">
+        <div class="card card-common text-white bg-success mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <div class="card-title h1 text-center">Subscribers</div>
+            <div class="card-text h4 text-center">{{ $subscriberCount }}</div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="col mb-3">
+        <div class="card card-common text-white bg-secondary mb-3" style="max-width: 18rem;">
+          <div class="card-body">
+            <div class="card-title h1 text-center">Feedbacks</div>
+            <div class="card-text h4 text-center">{{ $feedbackCount }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+    
+
 
   </div>
 @endsection

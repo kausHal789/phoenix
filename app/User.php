@@ -6,11 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
-    use SoftDeletes;
+    use Notifiable, SoftDeletes;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +50,9 @@ class User extends Authenticatable
                 'name' => $user->username
             ]);
             
+            //Stripe customer
+            $user->createAsStripeCustomer();
+
             // Send welcome Email from here
             $user->notify(new \App\Notifications\WelcomeNotification($user));;
         });
