@@ -18,6 +18,10 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@home')->name('home')->middleware('auth', 'verified');
 Route::get('/', 'HomeController@index')->name('index');
+// Route::post('/send', 'ChatController@send')->middleware('auth');
+// Route::get('/chat', 'ChatController@chat')->middleware('auth');
+// Route::get('/message/{receiver_id}', 'HomeController@getMessage')->name('message');
+// Route::post('/message', 'HomeController@sendMessage')->name('sendMessage');
 
 
 

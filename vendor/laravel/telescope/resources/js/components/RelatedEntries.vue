@@ -42,8 +42,8 @@
                     this.currentTab = window.location.hash.substring(1);
                 } else if (this.exceptions.length) {
                     this.currentTab = 'exceptions'
-                } else if (this.logs.length) {
-                    this.currentTab = 'logs'
+                // } else if (this.logs.length) {
+                //     this.currentTab = 'logs'
                 } else if (this.views.length) {
                     this.currentTab = 'views'
                 } else if (this.queries.length) {
@@ -56,14 +56,14 @@
                     this.currentTab = 'mails'
                 } else if (this.notifications.length) {
                     this.currentTab = 'notifications'
-                } else if (this.events.length) {
-                    this.currentTab = 'events'
+                // } else if (this.events.length) {
+                //     this.currentTab = 'events'
                 } else if (this.cache.length) {
                     this.currentTab = 'cache'
-                } else if (this.gates.length) {
-                    this.currentTab = 'gates'
-                } else if (this.redis.length) {
-                    this.currentTab = 'redis'
+                // } else if (this.gates.length) {
+                //     this.currentTab = 'gates'
+                // } else if (this.redis.length) {
+                //     this.currentTab = 'redis'
                 }
             },
 
@@ -91,13 +91,13 @@
                 return _.filter(this.batch, {type: 'exception'});
             },
 
-            gates() {
-                return _.filter(this.batch, {type: 'gate'});
-            },
+            // gates() {
+            //     return _.filter(this.batch, {type: 'gate'});
+            // },
 
-            logs() {
-                return _.filter(this.batch, {type: 'log'});
-            },
+            // logs() {
+            //     return _.filter(this.batch, {type: 'log'});
+            // },
 
             queries() {
                 return _.filter(this.batch, {type: 'query'});
@@ -107,9 +107,9 @@
                 return _.filter(this.batch, {type: 'model'});
             },
 
-            jobs() {
-                return _.filter(this.batch, {type: 'job'});
-            },
+            // jobs() {
+            //     return _.filter(this.batch, {type: 'job'});
+            // },
 
             events() {
                 return _.filter(this.batch, {type: 'event'});
@@ -119,9 +119,9 @@
                 return _.filter(this.batch, {type: 'cache'});
             },
 
-            redis() {
-                return _.filter(this.batch, {type: 'redis'});
-            },
+            // redis() {
+            //     return _.filter(this.batch, {type: 'redis'});
+            // },
 
             mails() {
                 return _.filter(this.batch, {type: 'mail'});

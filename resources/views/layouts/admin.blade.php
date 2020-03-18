@@ -24,10 +24,6 @@
   <link href="{{asset('css/light.css')}}" rel="stylesheet" type="text/css" />
   <link href="{{asset('css/aside/light.css')}}" rel="stylesheet" type="text/css" />
 
- 
-  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -328,8 +324,8 @@
   </div>
 
 
-  <script src="{{ asset('js/plugins.bundle.js') }}" type="text/javascript"></script>  
-  <script src="{{ asset('js/scripts.bundle.js') }}" type="text/javascript"></script>  
+	<script src="{{ asset('js/plugins.bundle.js') }}" type="text/javascript"></script>  
+	<script src="{{ asset('js/scripts.bundle.js') }}" type="text/javascript"></script>  
   <div>
     @yield('script-section')
   </div>

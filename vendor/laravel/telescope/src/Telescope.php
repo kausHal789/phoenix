@@ -315,10 +315,10 @@ class Telescope
      * @param  \Laravel\Telescope\IncomingEntry  $entry
      * @return void
      */
-    // public static function recordDump(IncomingEntry $entry)
-    // {
-    //     static::record(EntryType::DUMP, $entry);
-    // }
+    public static function recordDump(IncomingEntry $entry)
+    {
+        static::record(EntryType::DUMP, $entry);
+    }
 
     /**
      * Record the given entry.
@@ -326,10 +326,10 @@ class Telescope
      * @param  \Laravel\Telescope\IncomingEntry  $entry
      * @return void
      */
-    // public static function recordEvent(IncomingEntry $entry)
-    // {
-    //     static::record(EntryType::EVENT, $entry);
-    // }
+    public static function recordEvent(IncomingEntry $entry)
+    {
+        static::record(EntryType::EVENT, $entry);
+    }
 
     /**
      * Record the given entry.
@@ -348,10 +348,10 @@ class Telescope
      * @param  \Laravel\Telescope\IncomingEntry  $entry
      * @return void
      */
-    // public static function recordGate(IncomingEntry $entry)
-    // {
-    //     static::record(EntryType::GATE, $entry);
-    // }
+    public static function recordGate(IncomingEntry $entry)
+    {
+        static::record(EntryType::GATE, $entry);
+    }
 
     /**
      * Record the given entry.
@@ -359,10 +359,10 @@ class Telescope
      * @param  \Laravel\Telescope\IncomingEntry  $entry
      * @return void
      */
-    // public static function recordJob($entry)
-    // {
-    //     static::record(EntryType::JOB, $entry);
-    // }
+    public static function recordJob($entry)
+    {
+        static::record(EntryType::JOB, $entry);
+    }
 
     /**
      * Record the given entry.
@@ -370,10 +370,10 @@ class Telescope
      * @param  \Laravel\Telescope\IncomingEntry  $entry
      * @return void
      */
-    // public static function recordLog(IncomingEntry $entry)
-    // {
-    //     static::record(EntryType::LOG, $entry);
-    // }
+    public static function recordLog(IncomingEntry $entry)
+    {
+        static::record(EntryType::LOG, $entry);
+    }
 
     /**
      * Record the given entry.
@@ -425,10 +425,10 @@ class Telescope
      * @param  \Laravel\Telescope\IncomingEntry  $entry
      * @return void
      */
-    // public static function recordRedis(IncomingEntry $entry)
-    // {
-    //     static::record(EntryType::REDIS, $entry);
-    // }
+    public static function recordRedis(IncomingEntry $entry)
+    {
+        static::record(EntryType::REDIS, $entry);
+    }
 
     /**
      * Record the given entry.
@@ -447,10 +447,10 @@ class Telescope
      * @param  \Laravel\Telescope\IncomingEntry  $entry
      * @return void
      */
-    // public static function recordScheduledCommand(IncomingEntry $entry)
-    // {
-    //     static::record(EntryType::SCHEDULED_TASK, $entry);
-    // }
+    public static function recordScheduledCommand(IncomingEntry $entry)
+    {
+        static::record(EntryType::SCHEDULED_TASK, $entry);
+    }
 
     /**
      * Record the given entry.
@@ -539,12 +539,12 @@ class Telescope
      * @param  \Closure  $callback
      * @return static
      */
-    // public static function tag(Closure $callback)
-    // {
-    //     static::$tagUsing[] = $callback;
+    public static function tag(Closure $callback)
+    {
+        static::$tagUsing[] = $callback;
 
-    //     return new static;
-    // }
+        return new static;
+    }
 
     /**
      * Store the queued entries and flush the queue.

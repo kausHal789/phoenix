@@ -77,7 +77,7 @@ return [
     */
 
     'middleware' => [
-        'web',
+        // 'web',
         // Authorize::class,
         Admin::class
     ],
@@ -115,10 +115,10 @@ return [
     'watchers' => [
         Watchers\CacheWatcher::class => env('TELESCOPE_CACHE_WATCHER', true),
 
-        // Watchers\CommandWatcher::class => [
-        //     'enabled' => env('TELESCOPE_COMMAND_WATCHER', true),
-        //     'ignore' => [],
-        // ],
+        Watchers\CommandWatcher::class => [
+            'enabled' => env('TELESCOPE_COMMAND_WATCHER', true),
+            'ignore' => [],
+        ],
 
         // Watchers\DumpWatcher::class => env('TELESCOPE_DUMP_WATCHER', true),
 

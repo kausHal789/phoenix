@@ -2234,9 +2234,8 @@ __webpack_require__.r(__webpack_exports__);
       if (window.location.hash) {
         this.currentTab = window.location.hash.substring(1);
       } else if (this.exceptions.length) {
-        this.currentTab = 'exceptions';
-      } else if (this.logs.length) {
-        this.currentTab = 'logs';
+        this.currentTab = 'exceptions'; // } else if (this.logs.length) {
+        //     this.currentTab = 'logs'
       } else if (this.views.length) {
         this.currentTab = 'views';
       } else if (this.queries.length) {
@@ -2248,15 +2247,13 @@ __webpack_require__.r(__webpack_exports__);
       } else if (this.mails.length) {
         this.currentTab = 'mails';
       } else if (this.notifications.length) {
-        this.currentTab = 'notifications';
-      } else if (this.events.length) {
-        this.currentTab = 'events';
+        this.currentTab = 'notifications'; // } else if (this.events.length) {
+        //     this.currentTab = 'events'
       } else if (this.cache.length) {
-        this.currentTab = 'cache';
-      } else if (this.gates.length) {
-        this.currentTab = 'gates';
-      } else if (this.redis.length) {
-        this.currentTab = 'redis';
+        this.currentTab = 'cache'; // } else if (this.gates.length) {
+        //     this.currentTab = 'gates'
+        // } else if (this.redis.length) {
+        //     this.currentTab = 'redis'
       }
     },
     activateTab: function activateTab(tab) {
@@ -2281,16 +2278,12 @@ __webpack_require__.r(__webpack_exports__);
         type: 'exception'
       });
     },
-    gates: function gates() {
-      return _.filter(this.batch, {
-        type: 'gate'
-      });
-    },
-    logs: function logs() {
-      return _.filter(this.batch, {
-        type: 'log'
-      });
-    },
+    // gates() {
+    //     return _.filter(this.batch, {type: 'gate'});
+    // },
+    // logs() {
+    //     return _.filter(this.batch, {type: 'log'});
+    // },
     queries: function queries() {
       return _.filter(this.batch, {
         type: 'query'
@@ -2301,11 +2294,9 @@ __webpack_require__.r(__webpack_exports__);
         type: 'model'
       });
     },
-    jobs: function jobs() {
-      return _.filter(this.batch, {
-        type: 'job'
-      });
-    },
+    // jobs() {
+    //     return _.filter(this.batch, {type: 'job'});
+    // },
     events: function events() {
       return _.filter(this.batch, {
         type: 'event'
@@ -2316,11 +2307,9 @@ __webpack_require__.r(__webpack_exports__);
         type: 'cache'
       });
     },
-    redis: function redis() {
-      return _.filter(this.batch, {
-        type: 'redis'
-      });
-    },
+    // redis() {
+    //     return _.filter(this.batch, {type: 'redis'});
+    // },
     mails: function mails() {
       return _.filter(this.batch, {
         type: 'mail'

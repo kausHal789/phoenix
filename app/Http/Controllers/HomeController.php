@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Advertisement;
 use App\Album;
 use App\Playlist;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {

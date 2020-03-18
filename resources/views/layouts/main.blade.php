@@ -37,8 +37,7 @@
           <a href='/home' class="logo pb-3 text-center">
             <img src="/storage/icons/logo.png" alt="" class="">
             {{-- <span class="h2" style="text-decoration:none">{{ env('APP_NAME') }}</span> --}}
-          </a>
-          
+          </a>      
           <div class="group">
             <div class="navItem p-1 font-weight-bold h5 d-block" id="browseNavItem">
               <div class="d-flex align-items-center">
@@ -52,8 +51,7 @@
                 <div class="navItemLink pl-3">Home</div>
               </div>
             </div>
-          </div> 
-          
+          </div>          
           <div class="group" id="profileAccordion">
             <div class="navItem p-1 font-weight-bold d-flex h6 d-block" id="profileItem">
                 <div id="{{ auth()->id() }}-user" class="navItemLink pl-3 artistName" 
@@ -84,8 +82,6 @@
 
             </div>
           </div>
-
-
           <div class="group" id="accordion">
             <div class="navItem p-1 font-weight-bold d-flex h6 d-block" id="notificationItem">
               <div class="navItemLink pl-3" 
@@ -115,7 +111,6 @@
               </div>
             </div>
           </div>
-
           <div class="group">
             <div class="navItem p-1 font-weight-bold d-flex h6 d-block" id="yourPlaylistItem">
               <div class="navItemLink pl-3">Your Playlist</div>
@@ -126,6 +121,7 @@
               <div class="navItemLink pl-3"><a href="{{ route('primium.show') }}" target="_blank" style="color:#a0a0a0">Your Primium</a></div>
             </div>
           </div>
+         
         </nav>
       </div>
       <main id="mainViewContainer">
@@ -224,6 +220,7 @@
       @endauth
     </div>
   </div>
+
   <div>
     @yield('script-section')
   </div>
