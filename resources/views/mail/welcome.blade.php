@@ -51,7 +51,7 @@
       </div>
       <div class="card-footer">
         Regards,<br>
-        Phoenix
+        {{ env('APP_NAME') }}
       </div>
     </div>
   </div>

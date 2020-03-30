@@ -17,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@home')->name('home')->middleware('auth', 'verified');
+
+Route::get('/claim/artist', 'MakeArtistRequestController@claimArtist')->name('claim.artist');
+Route::get('/claim/access', 'MakeArtistRequestController@claimArtistAccess')->name('claim.artist.access');
+Route::get('/claim/access/artist', 'MakeArtistRequestController@claimAccessArtist')->name('claim.access.artist');
+Route::get('/claim/access/artist/search', 'MakeArtistRequestController@claimAccessArtistSearch')->name('claim.access.artist.search');
+Route::get('/claim/profile/{user_id}/artist', 'MakeArtistRequestController@claimArtistProfile')->name('claim.profile.artist');
+Route::post('/claim/profile/request', 'MakeArtistRequestController@store')->name('claim.profile.request');
+
+
 Route::get('/', 'HomeController@index')->name('index');
 // Route::post('/send', 'ChatController@send')->middleware('auth');
 // Route::get('/chat', 'ChatController@chat')->middleware('auth');
@@ -57,10 +66,13 @@ Route::get('/category/{category_id}/admin', 'AdminController@categorydelete')->n
 
 Route::get('/subscription/admin', 'AdminController@subscription')->name('admin.subscription');
 Route::get('/subscription/{subscription_id}/admin', 'AdminController@subscriptiondelete')->name('admin.subscription.delete');
-
 Route::get('/feedback/admin', 'AdminController@feedback')->name('admin.feedback');
-
 Route::get('/payment/admin', 'AdminController@payment')->name('admin.payment');
+Route::get('/request/admin', 'AdminController@request')->name('admin.request');
+Route::get('/request/approve/{id}/admin', 'AdminController@requestApprove')->name('admin.request.approve');
+Route::get('/request/cancel/{id}/admin', 'AdminController@requestCancel')->name('admin.request.cancel');
+
+
 // advertisement
 Route::get('/advertisement', 'AdvertisementController@index')->name('admin.advertisement');
 Route::post('/advertisement', 'AdvertisementController@store')->name('advertisement.store');
@@ -146,126 +158,7 @@ Route::get('/notification/markAsRead', 'HomeController@notificationMarkAsRead')-
 // Unuse 
 
 Route::get('/test', function () {
-
-    dd('ok');
-    dd(Carbon::hasFormat(now(), 'y-m-d h:i:s'));
-    dd(Carbon::today('2020-03-18 02:24:21')->addDay(10)->diffForHumans());
-
-    // dd(auth()->user()->subscribed('download'));
-    // dd(auth()->user()->subscription('download')->stripe_plan);
-    // dd(auth()->user()->subscription('download')->created_at->addMonth(1)->timestamp);
-    dd(auth()->user()->subscriptions()->get());
-
-    $arrayName = ['primary', 'secondary'];
-
-    // dd(random_int(   ))
-
-
-    // App\User::withTrashed()->where('id', '=', 5)->restore();
-    $user = App\User::withTrashed()->where('id', '=', 2)->get();
-    // App\Profile::withTrashed()->where('user_id', '=', $user->id)->restore();
-
-    // // dd($user->id);
-
-    // // attach
-    // App\Album::withTrashed()->where('user_id', '=', $user->id)->restore();
-    // App\Playlist::withTrashed()->where('user_id', '=', $user->id)->restore();
-
-    // foreach ($user->album as $album) {
-    //     App\Song::withTrashed()->where('album_id', '=', $album->id)->restore();
-    // }
-    dd($user->deleted_at);
-
-
-
-    // detach
-    // foreach ($user->song as $song) {
-    //     $song->delete();
-    // }
-    // foreach ($user->album as $album) {
-    //     $album->delete();
-    // }
-    // foreach ($user->playlist as $playlist) {
-    //     $playlist->delete();
-    // }
-    // $user->profile->delete();
-    // $user->delete();
-    dd('okay');
-
-
-    $profiles = App\User::withTrashed()
-            ->join('profiles', 'users.id', '=', 'profiles.user_id')
-            ->where('users.id', '!=', auth()->id())
-            ->where('users.role_id', '!=', 1)
-            ->where('profiles.name', 'like', '%' . 'test' . '%')
-            ->get();
-
-            dd($profiles);
-
-    $album = App\Album::withTrashed()->where('id', '=', 1)->get();
-    // $collectionType = 'ALBUM';
-    // return view('album.show', compact('album', 'collectionType'));
-   dd($album);
-
-    $user = App\User::find($user_id);
-    $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-    // auth()->user()->following()->toggle($user->profile);
-
-    dd($follows);
-    $playlist = App\Playlist::find(12);
-
-    $playlist->songs()->syncWithoutDetaching([3]);
-    // $album = App\Album::find(12);
     
-    
-    dd($playlist->songs);
-
-
-    $songs = App\Song::where('title', 'like', '%a%')->get();
-    foreach ($songs as $song) {
-        echo $song->id;
-    }
-    dd($songs);
-    // $user = App\User::find(2);
-    // dd($user->album->last());
-    $album = App\Album::where('user_id', '2')->get();
-    dd($album);
-
-    // Carbon::parse()->format();
-
-    $song = App\Song::inRandomOrder()->limit(1)->get();
-    dd($song[0]->id);
-
-    dd();
-    return view('includes.album-song');
-    // strtotim
-    $album = \App\Album::findOrFail(16);
-    $song = \App\Song::findOrFail(5);
-    // dd($album->song->album);
-    foreach ($album->song as $song) {
-        echo $song->title;
-        echo $song->album->user->profile->name;
-    }
-    dd($album->song);
-
-    return view('album.index');
-    // dd(User::findOrFail($user_id));
-
-    //     $categories = SongCategory::select('id', 'name')->get();
-
-    
-    
-    return response()->json([
-        'result' => "hello thwew",
-        'request' => request()->album_image
-    ]);
-    // auth()->user()->album()->create([
-    //     'name' => 'name',
-    //     'img_url' => "imagePath"
-    // ]);
-    $album = [];
-    $var = view('includes.album', compact('album'));
-    return $var;
-})->name('test')->middleware('verified');
+})->name('test');
 
 

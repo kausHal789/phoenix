@@ -58,7 +58,6 @@ class LoginController extends Controller
                 }
 
             }
-            // dd('now');
         }
         
         if(Auth::check()) {

@@ -84,4 +84,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Profile::class)->withTimestamps();
     }
 
+    public function makeartistrequest() {
+        return $this->hasMany(MakeArtistRequest::class);
+    }
 }

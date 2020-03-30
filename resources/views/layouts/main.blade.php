@@ -38,6 +38,20 @@
             <img src="/storage/icons/logo.png" alt="" class="">
             {{-- <span class="h2" style="text-decoration:none">{{ env('APP_NAME') }}</span> --}}
           </a>      
+          @if (auth()->user()->role_id === 2)
+          <div class="group">
+            <div class="navItem p-1 font-weight-bold d-flex h6 d-block">
+              <div class="navItemLink pl-3"><a href="{{ route('artist.home') }}" target="_blank" style="color:#a0a0a0">Artist Board</a></div>
+            </div>
+          </div>
+          @endif
+          @if (auth()->user()->role_id === 1)
+          <div class="group">
+            <div class="navItem p-1 font-weight-bold d-flex h6 d-block">
+              <div class="navItemLink pl-3"><a href="{{ route('admin.home') }}" target="_blank" style="color:#a0a0a0">Admin Board</a></div>
+            </div>
+          </div>
+          @endif
           <div class="group">
             <div class="navItem p-1 font-weight-bold h5 d-block" id="browseNavItem">
               <div class="d-flex align-items-center">
@@ -88,7 +102,8 @@
                 data-toggle="collapse" 
                 data-target="#notificationCollapse" 
                 aria-expanded="true"
-                aria-controls="notificationCollapse">                
+                aria-controls="notificationCollapse"
+                >                
                 Notifications @if ($notificationsCount !== 0) <span class="badge badge-pill badge-light notificationCount">{{ $notificationsCount }}</span> @endif
               </div>
             </div>
@@ -121,7 +136,6 @@
               <div class="navItemLink pl-3"><a href="{{ route('primium.show') }}" target="_blank" style="color:#a0a0a0">Your Primium</a></div>
             </div>
           </div>
-         
         </nav>
       </div>
       <main id="mainViewContainer">
@@ -226,3 +240,7 @@
   </div>
 </body>
 </html>
+
+
+
+

@@ -10,7 +10,7 @@
   </div>
   
   <div class="row m-5">
-    <div class="col-6">
+    <div class="col-6 col-sm-12 col-md-4 col-xl-6">
       <div class="tab-pane fade show active" id="listener" role="tabpanel" aria-labelledby="listener-tab">
         <div class="card card-common border-success mb-3" style="max-width: 18rem;">
           <div class="card-body text-success">
@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-6 col-sm-12 col-md-4 col-xl-6">
       <div class="tab-pane fade show active" id="listener" role="tabpanel" aria-labelledby="listener-tab">
         <div class="card card-common border-success mb-3" style="max-width: 18rem;">
           <div class="card-body text-success">

@@ -1,539 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Pheonix</title>
+  <title>{{ env('APP_NAME') }}</title>
 
   <meta name="csrf-token" content="{{ csrf_token() }}" id="_csrf">
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
+<title>{{ config('app.name', 'Laravel') }}</title>
 
-  {{-- Vendor Style --}}
-  <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-  <link rel="stylesheet" href="{{ asset('vendor/themify/themify.css') }}">
-  <link rel="stylesheet" href="{{ asset('vendor/scrollbar/scrollbar.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('vendor/magnific-popup/magnific-popup.css') }}">
-  <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('vendor/cubeportfolio/css/cubeportfolio.min.css') }}">
-  
-  {{-- Style --}}
-  <link rel="stylesheet" href="{{ asset('css/style-2.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/styles/about.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/styles/about_responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/styles/contact.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/styles/contact_responsive.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/styles/bootstrap-4.1.2/bootstrap.min.css')}} ">
+<link href="{{ asset('welcome/plugins/font-awesome-4.7.0/css/font-awesome.min.css')}} " rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/plugins/OwlCarousel2-2.2.1/owl.carousel.css')}} ">
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}} ">
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/plugins/OwlCarousel2-2.2.1/animate.css')}} ">
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/styles/main_styles.css')}} ">
+<link rel="stylesheet" type="text/css" href="{{ asset('welcome/styles/responsive.css')}} ">
 
 
-  {{-- asset('js/app.js') }} --}}
 </head>
 <body>
-  
-  <!-- HEADER -->
-  <header class="navbar-fixed-top s-header js__header-sticky js__header-overlay">
-    <!-- Navbar -->
-    <div class="s-header__navbar">
-      <div class="s-header__container">
-        <div class="s-header__navbar-row">
-          <div class="s-header__navbar-row-col">
-            <!-- Logo -->
-            <div class="s-header__logo">
-              <a href="#home" class="s-header__logo-link">
-                <img class="s-header__logo-img s-header__logo-img-default" src="/storage/icons/logo.png" alt="Logo">
-                <img class="s-header__logo-img s-header__logo-img-shrink" src="/storage/icons/logo.png" alt="Logo">
-              </a>
-            </div>
-            <!-- End Logo -->
-          </div>
-          <div class="s-header__navbar-row-col">
-            <!-- Trigger -->
-            <a href="javascript:void(0);" id="header" class="s-header__trigger js__trigger">
-              <span class="s-header__trigger-icon"></span>
-              <svg x="0rem" y="0rem" width="3.125rem" height="3.125rem" viewbox="0 0 54 54">
-                <circle fill="transparent" stroke="#fff" stroke-width="1" cx="27" cy="27" r="25"
-                  stroke-dasharray="157 157" stroke-dashoffset="157"></circle>
-              </svg>
-            </a>
-            <!-- End Trigger -->
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Navbar -->
 
-    <!-- Overlay -->
-    <div class="s-header-bg-overlay js__bg-overlay">
-      <!-- Nav -->
-      <nav class="s-header__nav js__scrollbar">
-        <div class="container-fluid">
-          <!-- Menu List -->
-          <ul class="list-unstyled s-header__nav-menu">
-            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider -is-active" href="#home">Corporate</a></li>
-            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="#culture">About</a></li>
-            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="#subscribe">Subscribe</a></li>
-            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="#service">Services</a></li>
-            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="#event">Events</a></li>
-            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="#feedback">Leave Your Note</a></li>
-            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="#contant">Contacts</a></li>
-          </ul>
-          <!-- End Menu List -->
+<div class="super_container">
+	
 
-          <!-- Menu List -->
-          <ul class="list-unstyled s-header__nav-menu">
-            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="{{ route('login') }}">Login</a></li>
-            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="{{ route('register') }}">Register</a></li>
-          </ul>
-          <!-- End Menu List -->
-        </div>
-      </nav>
-      <!-- End Nav -->
-    </div>
-    <!-- End Overlay -->
-  </header>
-  <!-- END HEADER -->
+	<header class="header">
+		<div class="header_content d-flex flex-row align-items-center justify-content-center">
+			<div class="logo"><a href="#home">{{ env('APP_NAME') }}</a></div>
+			<div class="log_reg">
+				<ul class="d-flex flex-row align-items-start justify-content-start">
+					<li><a href="/login">Login</a></li>
+					<li><a href="/register">Register</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	
 
-  <!-- SWIPER SLIDER -->
-  <div id="home" class="s-swiper js__swiper-one-item">
-    <!-- Swiper Wrapper -->
-    <div class="swiper-wrapper">
-      <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('storage/img/1920x1080/02.jpg');">
-        <div class="container g-text-center--xs g-ver-center--xs">
-          <div class="g-margin-b-30--xs">
-            <h1 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">A Mobile
-              Experience<br>That Inspires Travel</h1>
-          </div>
-        </div>
-      </div>
-      <div class="g-fullheight--xs g-bg-position--center swiper-slide" style="background: url('storage/img/1920x1080/01.jpg');">
-        <div class="container g-text-center--xs g-ver-center--xs">
-          <div class="g-margin-b-30--xs">
-            <div class="g-margin-b-30--xs">
-              <h2 class="g-font-size-35--xs g-font-size-45--sm g-font-size-55--md g-color--white">We Craft
-                Experience<br>That Help Brands<br>Stand Out</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Swiper Wrapper -->
-    
-    <!-- Arrows -->
-    <a href="javascript:void(0);"
-      class="s-swiper__arrow-v1--right s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-right js__swiper-btn--next"></a>
-    <a href="javascript:void(0);"
-      class="s-swiper__arrow-v1--left s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-left js__swiper-btn--prev"></a>
-    <!-- End Arrows -->
+	<!-- Home -->
 
-    <a href="#culture" class="s-scroll-to-section-v1--bc g-margin-b-15--xs">
-      <span class="g-font-size-18--xs g-color--white ti-angle-double-down"></span>
-      <p class="text-uppercase g-color--white g-letter-spacing--3 g-margin-b-0--xs">Learn More</p>
-    </a>
-  </div>
-  <!-- END SWIPER SLIDER -->
+	<div class="home">
+		<div class="home_slider_container">
+			
+			<!-- Home Slider -->
+			<div class="owl-carousel owl-theme home_slider">
+				
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url(/storage/img/1920x1080/01.jpg)"></div>
+					<div class="home_container">
+						<div class="home_container_inner d-flex flex-column align-items-center justify-content-center">
+							<div class="home_content text-center">
+								<div class="home_subtitle">{{ env('APP_NAME') }}</div>
+								<div class="home_title"><h1>Listen to the songs you love.</h1></div>
+								<div class="home_link"><a href="#jplayer_1">Listen on Soundcloud</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url(/storage/img/1920x1080/02.jpg)"></div>
+					<div class="home_container">
+						<div class="home_container_inner d-flex flex-column align-items-center justify-content-center">
+							<div class="home_content text-center">
+								<div class="home_subtitle">{{ env('APP_NAME') }}</div>
+								<div class="home_title"><h1>Music For Everyone</h1></div>
+								<div class="home_link"><a href="#jplayer_1">Listen on Soundcloud</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-  <!-- Parallax -->
-  <div class="js__parallax-window" style="background: url(storage/img/1920x1080/03.jpg) 50% 0 no-repeat fixed;">
-    <div class="container g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
-      <div class="g-margin-b-80--xs">
-        <h2 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md g-color--white">The Fastest Way To
-          Make mood happier</h2>
-      </div>
-      <!-- <a href="http://keenthemes.com/" class="text-uppercase s-btn s-btn--md s-btn--white-brd g-radius--50">Learn
-        More</a> -->
-    </div>
-  </div>
-  <!-- End Parallax -->
+				<!-- Slide -->
+				<div class="owl-item">
+					<div class="background_image" style="background-image:url(/storage/img/1920x1080/03.jpg)"></div>
+					<div class="home_container">
+						<div class="home_container_inner d-flex flex-column align-items-center justify-content-center">
+							<div class="home_content text-center">
+								<div class="home_subtitle">{{ env('APP_NAME') }}</div>
+								<div class="home_title"><h1>Love is all around</h1></div>
+								<div class="home_link"><a href="#jplayer_1">Listen on Soundcloud</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-  <!-- Culture -->
-  <div class="g-promo-section" id="culture">
-    <div class="container g-padding-y-80--xs g-padding-y-125--sm">
-      <div class="row">
-        <div class="col-md-4 g-margin-t-15--xs g-margin-b-60--xs g-margin-b-0--lg">
-          <p
-            class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">
-            Culture</p>
-          <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".1s">
-            <h2 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md">About</h2>
-          </div>
-          <div class="wow fadeInLeft" data-wow-duration=".3" data-wow-delay=".3s">
-            <h2 class="g-font-size-40--xs g-font-size-50--sm g-font-size-60--md">Pheonix</h2>
-          </div>
-        </div>
-        <div class="col-md-4 col-md-offset-1">
-          <p class="g-font-size-18--xs">We aim high at being focused on building relationships with our
-            clients and community. Using our creative playlist, events. The time has come to
-            bring those ideas and plans to life. This is where we really begin to visualize your songs to make them into beautiful pixels.</p>
-          <!-- <p class="g-font-size-18--xs">Now that your brand is all dressed up and ready to party, it's time to
-            release it to the world. By the way, let's celebrate already.</p> -->
-        </div>
-      </div>
-    </div>
-    <div
-      class="col-sm-3 g-promo-section__img-right--lg g-bg-position--center g-height-100-percent--md js__fullwidth-img">
-      <img class="img-responsive" src="img/970x970/03.jpg" alt="Image">
-    </div>
-  </div>
-  <!-- End Culture -->
+			</div>
+		</div>
+	</div>
 
-  <!-- Subscribe -->
-  <div id="subscribe" class="js__parallax-window" style="background: url(storage/img/1920x1080/07.jpg) 50% 0 no-repeat fixed;">
-    <div class="g-container--sm g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
-      <div class="g-margin-b-80--xs">
-        <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs">
-          Subscribe</p>
-        <h2 class="g-font-size-32--xs g-font-size-36--md g-color--white">Join Over 1000+ People</h2>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-          <form class="input-group" action="/subscription" method="POST">
-            @csrf
-            <input type="email" class="form-control s-form-v1__input g-radius--left-50" name="email"
-              placeholder="Enter your email">
-            <span class="input-group-btn">
-              <button type="submit"
-                class="s-btn s-btn-icon--md s-btn-icon--white-brd s-btn--white-brd g-radius--right-50"><i
-                  class="ti-arrow-right"></i></button>
-            </span>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Subscribe -->
+	<!-- Featured Album -->
 
-  <!-- Portfolio Filter -->
-  <div id="service" class="container g-padding-y-80--xs">
-    <div class="g-text-center--xs g-margin-b-40--xs">
-      <h2 class="g-font-size-32--xs g-font-size-36--md">Creation</h2>
-    </div>
-    <div class="s-portfolio">
-      <div id="js__filters-portfolio-gallery" class="s-portfolio__filter-v1 cbp-l-filters-text cbp-l-filters-center">
-        <div data-filter="*" class="s-portfolio__filter-v1-item cbp-filter-item cbp-filter-item-active">Show All
-        </div>
-        <div data-filter=".graphic" class="s-portfolio__filter-v1-item cbp-filter-item">Album</div>
-        <div data-filter=".logos" class="s-portfolio__filter-v1-item cbp-filter-item">Playlist</div>
-        <!-- <div data-filter=".motion" class="s-portfolio__filter-v1-item cbp-filter-item">Event</div> -->
-      </div>
-    </div>
-  </div>
-  <!-- End Portfolio Filter -->
-   <!-- Portfolio Gallery -->
-  <div class="container g-margin-b-100--xs">
-    <div id="js__grid-portfolio-gallery" class="cbp">
-      <!-- Item -->
-      @foreach ($albums as $album)
-        <div class="s-portfolio__item cbp-item graphic">
-          <div class="s-portfolio__img-effect">
-            <img src="storage/{{ $album->img_url }}" alt="Image">
-          </div>
-          <div class="s-portfolio__caption-hover--cc">
-            <div class="g-margin-b-25--xs">
-              <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">{{ $album->name }}</h4>
-              <p class="g-color--white-opacity">by {{ $album->user->profile->name }}</p>
-            </div>
-            <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-              <li>
-                <a href="storage/{{ $album->img_url }}" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle"
-                  data-title="{{ $album->name }} <br/> by {{ $album->user->profile->name }}">
-                  <i class="ti-fullscreen"></i>
-                </a>
-              </li>
-              
-            </ul>
-          </div>
-        </div>    
-      @endforeach
+	<div class="featured_album">
+		<div class="background_image featured_background" style="background-image:url(/storage/img/featured.png)"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-6">
+					<div class="section_title_container">
+						<div class="section_subtitle">Songs</div>
+						<div class="section_title"><h1>Welcome to {{ env('APP_NAME') }}</h1></div>
+					</div>
+				</div>
+			</div>
+			<div class="row featured_row row-lg-eq-height">
 
-      @foreach ($playlists as $playlist)
-        <div class="s-portfolio__item cbp-item logos">
-          <div class="s-portfolio__img-effect">
-            <img src="storage/{{ $playlist->img_url }}" alt="Image">
-          </div>
-          <div class="s-portfolio__caption-hover--cc">
-            <div class="g-margin-b-25--xs">
-              <h4 class="g-font-size-18--xs g-color--white g-margin-b-5--xs">{{ $playlist->name }}</h4>
-              <p class="g-color--white-opacity">by {{ $playlist->user->profile->name }}</p>
-            </div>
-            <ul class="list-inline g-ul-li-lr-5--xs g-margin-b-0--xs">
-              <li>
-                <a href="storage/{{ $playlist->img_url }}" class="cbp-lightbox s-icon s-icon--sm s-icon--white-bg g-radius--circle"
-                  data-title="{{ $playlist->name }} <br/> by {{ $playlist->user->profile->name }}">
-                  <i class="ti-fullscreen"></i>
-                </a>
-              </li>
-              
-            </ul>
-          </div>
-        </div>    
-      @endforeach
-    </div>
-    <!-- End Portfolio Gallery -->
-  </div>
-  <!-- End Portfolio -->
+				<!-- Featured Album Image -->
+				<div class="col-md-6">
+					<div class="featured_album_image">
+						<div class="image_overlay"></div>
+						
+						<div class="background_image" style="background-image:url(/storage/img/970x970/02.jpg)"></div>
+						<!-- <img src="images/featured_album.jpg" alt=""> -->
+					</div>
+				</div>
 
-  <!-- Testimonials -->
-  <div class="js__parallax-window" style="background: url(storage/img/1920x1080/04.jpg) 50% 0 no-repeat fixed;">
-    <div class="container g-text-center--xs g-padding-y-80--xs g-padding-y-125--sm">
-      <p
-        class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-50--xs">
-        PHOENIX</p>
-      <div class="s-swiper js__swiper-testimonials">
-        <!-- Swiper Wrapper -->
-        <div class="swiper-wrapper g-margin-b-50--xs">
-          <div class="swiper-slide g-padding-x-130--sm g-padding-x-150--lg">
-            <div class="g-padding-x-20--xs g-padding-x-50--lg">
-              <div class="g-margin-b-40--xs">
-                <p class="g-font-size-22--xs g-font-size-28--sm g-color--white"><i>" I have purchased
-                    many great templates over the years but this product and this company have taken
-                    it to the next level. Exceptional customizability. "</i></p>
-              </div>
-              <div class="center-block g-hor-divider__solid--white-opacity-lightest g-width-100--xs g-margin-b-30--xs">
-              </div>
-              <h4 class="g-font-size-15--xs g-font-size-18--sm g-color--white-opacity-light g-margin-b-5--xs">
-                Jake Richardson / Google</h4>
-            </div>
-          </div>
-          <div class="swiper-slide g-padding-x-130--sm g-padding-x-150--lg">
-            <div class="g-padding-x-20--xs g-padding-x-50--lg">
-              <div class="g-margin-b-40--xs">
-                <p class="g-font-size-22--xs g-font-size-28--sm g-color--white"><i>" I have purchased
-                    many great templates over the years but this product and this company have taken
-                    it to the next level. Exceptional customizability. "</i></p>
-              </div>
-              <div class="center-block g-hor-divider__solid--white-opacity-lightest g-width-100--xs g-margin-b-30--xs">
-              </div>
-              <h4 class="g-font-size-15--xs g-font-size-18--sm g-color--white-opacity-light g-margin-b-5--xs">
-                Jake Richardson / Google</h4>
-            </div>
-          </div>
-          <div class="swiper-slide g-padding-x-130--sm g-padding-x-150--lg">
-            <div class="g-padding-x-20--xs g-padding-x-50--lg">
-              <div class="g-margin-b-40--xs">
-                <p class="g-font-size-22--xs g-font-size-28--sm g-color--white"><i>" I have purchased
-                    many great templates over the years but this product and this company have taken
-                    it to the next level. Exceptional customizability. "</i></p>
-              </div>
-              <div class="center-block g-hor-divider__solid--white-opacity-lightest g-width-100--xs g-margin-b-30--xs">
-              </div>
-              <h4 class="g-font-size-15--xs g-font-size-18--sm g-color--white-opacity-light g-margin-b-5--xs">
-                Jake Richardson / Google</h4>
-            </div>
-          </div>
-        </div>
-        <!-- End Swipper Wrapper -->
+				<!-- Featured Album Player -->
+				<div class="col-md-6 featured_album_col">
+					<div class="featured_album_player_container d-flex flex-column align-items-start justify-content-center">
+						<div class="featured_album_player">
+							<div class="featured_album_title_bar d-flex flex-row align-items-center justify-content-start">
+								<div class="featured_album_title_container">
+									<div class="featured_album_artist">{{ env('APP_NAME') }}</div>
+									<div class="featured_album_title">Love is all Around</div>
+								</div>
+								<!-- <div class="featured_album_link ml-auto"><a href="#">buy it on itunes</a></div> -->
+							</div>
+							<div id="jplayer_1" class="jp-jplayer"></div>
+							<div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+								<div class="jp-type-playlist">
+									<div class="jp-playlist">
+										<ul>
+											<li></li>
+										</ul>
+									</div>
+									<div class="player_details d-flex flex-row align-items-center justify-content-start">
+										<div class="jp-details">
+											<div>playing</div>
+											<div class="jp-title" aria-label="title">&nbsp;</div>
+										</div>
+										<div class="jp-controls-holder ml-auto">
+											<button class="jp-play" tabindex="0"></button>
+										</div>
+									</div>
+									<div class="player_controls">
+										<div class="jp-gui jp-interface d-flex flex-row align-items-center justify-content-start">
+											<div class="jp-controls-holder time_controls d-flex flex-row align-items-center justify-content-start">
+												<div><div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div></div>
+												<div class="jp-progress">
+													<div class="jp-seek-bar">
+														<div class="jp-play-bar"></div>
+													</div>
+												</div>
+												<div><div class="jp-duration ml-auto" role="timer" aria-label="duration">&nbsp;</div></div>
+											</div>
+											<div class="jp-volume-controls d-flex flex-row align-items-center justify-content-start ml-auto">
+												<button class="jp-mute" tabindex="0"></button>
+												<div class="jp-volume-bar">
+													<div class="jp-volume-bar-value"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="jp-no-solution">
+										<span>Update Required</span>
+										To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>
+									</div>
+								</div>
+							</div>
 
-        <!-- Arrows -->
-        <div class="g-font-size-22--xs g-color--white-opacity js__swiper-fraction"></div>
-        <a href="javascript:void(0);"
-          class="g-display-none--xs g-display-inline-block--sm s-swiper__arrow-v1--right s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-right js__swiper-btn--next"></a>
-        <a href="javascript:void(0);"
-          class="g-display-none--xs g-display-inline-block--sm s-swiper__arrow-v1--left s-icon s-icon--md s-icon--white-brd g-radius--circle ti-angle-left js__swiper-btn--prev"></a>
-        <!-- End Arrows -->
-      </div>
-    </div>
-  </div>
-  <!-- End Testimonials -->
+						</div>
+					</div>
+				</div>
 
-  <!-- News -->
-  <div id="event" class="container g-padding-y-80--xs g-padding-y-125--sm">
-    <div class="g-text-center--xs g-margin-b-80--xs">
-      <p
-        class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">
-        Blog</p>
-      <h2 class="g-font-size-32--xs g-font-size-36--md">Latest News</h2>
-    </div>
-    <div class="row">
-      @foreach ($advertisements as $advertisement)
-          
-      <div class="col-sm-4 g-margin-b-30--xs g-margin-b-0--md">
-        <!-- News -->
-        <article>
-          <img class="img-responsive" src="storage/img/970x970/01.jpg" alt="Image">
-          <div
-            class="g-bg-color--white g-box-shadow__dark-lightest-v2 g-text-center--xs g-padding-x-40--xs g-padding-y-40--xs">
-            <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2">
-              advertisement</p>
-            <h3 class="g-font-size-22--xs g-letter-spacing--1"><a href="{{ $advertisement->url }}">{{ $advertisement->title }}</a></h3>
-          </div>
-        </article>
-        <!-- End News -->
-      </div>
+			</div>
+		</div>
+	</div>
 
-      @endforeach
-    </div>
-  </div>
-  <!-- End News -->
+	<!-- Artist -->
 
+	<div class="artist">
+		<div class="container">
+			<div class="row">
 
-  <!-- Counter -->
-  <div class="js__parallax-window" style="background: url(storage/img/1920x1080/06.jpg) 50% 0 no-repeat fixed;">
-    <div class="container g-padding-y-80--xs g-padding-y-125--sm">
-      <div class="row justify-content-between">
-        <div class="col-md-3 col-xs-6 g-full-width--xs g-margin-b-70--xs g-margin-b-0--lg">
-          <div class="g-text-center--xs">
-            <div class="g-margin-b-10--xs">
-              <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">6
-              </figure>
-              <span class="g-font-size-40--xs g-color--white">k</span>
-            </div>
-            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
-            <h4 class="g-font-size-18--xs g-color--white">Happy listeners</h4>
-          </div>
-        </div>
-        
-       
-        <div class="col-md-3 col-xs-6 g-full-width--xs">
-          <div class="g-text-center--xs">
-            <div class="g-margin-b-10--xs">
-              <figure class="g-display-inline-block--xs g-font-size-70--xs g-color--white js__counter">2
-              </figure>
-              <span class="g-font-size-40--xs g-color--white">x</span>
-            </div>
-            <div class="center-block g-hor-divider__solid--white g-width-40--xs g-margin-b-25--xs"></div>
-            <h4 class="g-font-size-18--xs g-color--white">Faster Support</h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End Counter -->
+				<!-- Artist Image -->
+				<div class="col-lg-4 artist_image_col">
+					<div class="artist_image">
+						<img src="storage\img\artist.png" alt="">
+					</div>
+				</div>
 
-  <!-- Feedback Form -->
-  <div id="feedback" class="g-bg-color--sky-light">
-    <div class="container g-padding-y-80--xs g-padding-y-125--sm">
-      <div class="g-text-center--xs g-margin-b-80--xs">
-        <p
-          class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--primary g-letter-spacing--2 g-margin-b-25--xs">
-          Feedback</p>
-        <h2 class="g-font-size-32--xs g-font-size-36--md">Send us a note</h2>
-      </div>
-      <form id="feedbackForm" method="POST" action="/feedback">
-        @csrf
-        <div class="row g-margin-b-40--xs">
-          <div class="col-sm-6 g-margin-b-20--xs g-margin-b-0--md">
-            <div class="g-margin-b-20--xs">
-              <input type="text" name="name" value="{{ old('name') }}" required class="form-control s-form-v2__input g-radius--10 @error('name') is-invalid @enderror" placeholder="* Name">
-              @error('name')
+				<!-- Artist Content -->
+				<div class="col-lg-7 offset-lg-1">
+					<div class="artist_content">
+						<div class="section_title_container">
+							<div class="section_subtitle"></div>
+							<div class="section_title"><h1>The Artists</h1></div>
+						</div>
+						<div class="artist_text">
+							<p> A musician is a person who plays a musical instrument or is musically talented.[1] Anyone who composes, conducts, or performs music is referred to as a musician.[2] A musician who plays a musical instrument is also known as an instrumentalist.
+								Musicians can specialize in any musical style, and some musicians play in a variety of different styles depending on cultures and background. Examples of a musician's possible skills include performing, conducting, singing, rapping, producing, composing, arranging, and the orchestration of music.</p>
+							<p>
+								In the Middle Ages, instrumental musicians performed with soft ensembles inside and loud instruments outdoors. Many European musicians of this time catered to the Roman Catholic Church, and they provided arrangements structured around Gregorian chant structure and Masses from church texts.
+							</p>
+						</div>
+						{{-- <div class="artist_sig"><img src="images/sig.png" alt=""></div> --}}
+						{{-- <div class="single_player_container d-flex flex-column align-items-start justify-content-center">
+							<div class="single_player">
+								<div id="jplayer_2" class="jp-jplayer"></div>
+								<div id="jp_container_2" class="jp-audio" role="application" aria-label="media player">
+									<div class="jp-type-single">
+										<div class="player_details d-flex flex-row align-items-center justify-content-start">
+											<div class="jp-details">
+												<div>playing</div>
+												<div class="jp-title" aria-label="title">&nbsp;</div>
+											</div>
+											<div class="jp-controls-holder ml-auto">
+												<button class="jp-play" tabindex="0"></button>
+											</div>
+										</div>
+										<div class="player_controls">
+											<div class="jp-gui jp-interface d-flex flex-row align-items-center justify-content-start">
+												<div class="jp-controls-holder time_controls d-flex flex-row align-items-center justify-content-start">
+													<div><div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div></div>
+													<div class="jp-progress">
+														<div class="jp-seek-bar">
+															<div class="jp-play-bar"></div>
+														</div>
+													</div>
+													<div><div class="jp-duration ml-auto" role="timer" aria-label="duration">&nbsp;</div></div>
+												</div>
+												<div class="jp-volume-controls d-flex flex-row align-items-center justify-content-start ml-auto">
+													<button class="jp-mute" tabindex="0"></button>
+													<div class="jp-volume-bar">
+														<div class="jp-volume-bar-value"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="jp-no-solution">
+											<span>Update Required</span>
+											To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div> --}}
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="milestones">
+		<div class="milestones_container">
+			<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="\storage\img\milestones.jpg" data-speed="0.8"></div>
+			<div class="container">
+				<div class="row milestones_row justify-content-between">
+					
+					<!-- Milestone -->
+					<div class="col-xl-3 col-md-6 milestone_col">
+						<div class="milestone d-flex flex-row align-items-center justify-content-start">
+							<div class="milestone_icon"><img src="\storage\icons\icon_1.svg" ></div>
+							<div class="milestone_content">
+								<div class="milestone_counter" data-end-value="{{ $albumCount }}">0</div>
+								<div class="milestone_text">Albums</div>
+							</div>
+						</div>
+					</div>
+
+				
+					<!-- Milestone -->
+					<div class="col-xl-3 col-md-6 milestone_col">
+						<div class="milestone d-flex flex-row align-items-center justify-content-start">
+							<div class="milestone_icon"><img src="\storage\icons\icon_3.svg" alt="https://www.flaticon.com/authors/smashicons"></div>
+							<div class="milestone_content">
+								<div class="milestone_counter" data-end-value="{{ $userCount }}">0</div>
+								<div class="milestone_text">Happy Listeners</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Milestone -->
+					<div class="col-xl-3 col-md-6 milestone_col">
+						<div class="milestone d-flex flex-row align-items-center justify-content-start">
+							<div class="milestone_icon"><img src="\storage\icons\icon_4.svg" alt="https://www.flaticon.com/authors/smashicons"></div>
+							<div class="milestone_content">
+								<div class="milestone_counter" data-end-value="{{ rand(0, 50) }}">0</div>
+								<div class="milestone_text">New Playlist</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="contact" id="feedback">
+		<div class="container">
+			<div class="row">
+				
+				<!-- Contact Form -->
+				<div class="col-lg-6">
+					<div class="contact_form_container">
+						<div class="contact_title">Send us a message</div>
+						<form action="/feedback" class="contact_form" method="POST">
+							@csrf
+							<input type="text" name="name" value="{{ old('name') }}" class="contact_input @error('name') is-invalid @enderror" placeholder="Name" required="required">
+							@error('name')
                 <span class="invalid-feedback text-danger" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
               @enderror
-            </div>
-            <div class="g-margin-b-20--xs">
-              <input type="text" name="email" class="form-control s-form-v2__input g-radius--10 @error('email') is-invalid @enderror" placeholder="* Email" value="{{ old('email') }}" required>
-              @error('email')
-                <span class="invalid-feedback text-danger" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
-            </div>
-            <div class="g-margin-b-20--xs">
-              <input type="text" name="phone" class="form-control s-form-v2__input g-radius--10 @error('phone') is-invalid @enderror" placeholder="* Phone" value="{{ old('phone') }}" required>
-              @error('phone')
-                <span class="invalid-feedback text-danger" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <textarea class="form-control s-form-v2__input g-radius--10 g-padding-y-20--xs @error('description') is-invalid @enderror" rows="8"
-              placeholder="* Your message" name="description" required>{{ old('description') }}</textarea>
-              @error('description')
-                <span class="invalid-feedback text-danger" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
-          </div>
-        </div>
-        <div class="g-text-center--xs">
-          <button type="submit"
-            class="text-uppercase s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-80--xs">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <!-- End Feedback Form -->
+							<input type="email" name="email" value="{{ old('email') }}" class="contact_input @error('email') is-invalid @enderror" placeholder="E-mail" required="required">
+							@error('email')
+								<span class="invalid-feedback text-danger" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+							@enderror
+							<input type="text" name="phone" value="{{ old('phone') }}" class="contact_input @error('phone') is-invalid @enderror" placeholder="Phone no">
+							@error('phone')
+								<span class="invalid-feedback text-danger" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+							@enderror
+							<textarea name="description" class="contact_input contact_textarea @error('description') is-invalid @enderror" placeholder="Message" required="required">{{ old('description') }}</textarea>
+							@error('description')
+								<span class="invalid-feedback text-danger" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+							@enderror
+							<button class="contact_button">Send Message</button>
+						</form>
+					</div>
+				</div>
 
+				<!-- Contact Info -->
+				<div class="col-lg-6 contact_col">
+					<div class="contact_info">
+						<div class="contact_title">Where to find us</div>
+						<div class="contact_text">
+							<p>In vitae nisi aliquam, scelerisque leo a, volutpat sem. Vivamus rutrum dui fermentum eros hendrerit, id lobortis leo volutpat. Maecenas sollicitudin est in libero pretium interdum. Nullam volutpat dui sem, ac congue purus luctus nec. Curabitur luctus luctus erat, sit amet facilisis quam congue quis. Quisque ornare luctus erat id dignissim. Nullam ac nunc quis ex porttitor luctus.</p>
+						</div>
+						<div class="contact_info_list">
+							<ul>
+								<li class="d-flex flex-row align-items-start justify-content-start">
+									<div><div>Address</div></div>
+									<div>1481 Creekside Lane Avila Beach, CA 931</div>
+								</li>
+								<li class="d-flex flex-row align-items-start justify-content-start">
+									<div><div>Phone</div></div>
+									<div>+53 345 7953 32453</div>
+								</li>
+								<li class="d-flex flex-row align-items-start justify-content-start">
+									<div><div>E-mail</div></div>
+									<div>{{ env('MAIL_FROM_ADDRESS') }}</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
+	<!-- Footer -->
 
-  <footer class="g-bg-color--dark">
-    <!-- Links -->
-    <div class="g-hor-divider__dashed--white-opacity-lightest">
-      <div class="container g-padding-y-80--xs">
-        <div class="row">
-          <div class="col-sm-2 g-margin-b-20--xs g-margin-b-0--md">
-            <ul class="list-unstyled g-ul-li-tb-5--xs g-margin-b-0--xs">
-              <li><a class="g-font-size-15--xs g-color--white-opacity"
-                  href="#home">Home</a>
-              </li>
-              <li><a class="g-font-size-15--xs g-color--white-opacity"
-                  href="#culture">About</a>
-              </li>
-              <li><a class="g-font-size-15--xs g-color--white-opacity"
-                  href="#contact">Contact</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-4 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
-            <h3 class="g-font-size-18--xs g-color--white">Phoenix</h3>
-            <p class="g-color--white-opacity">We are a creative studio focusing on culture, luxury,
-              musician &amp; artists. Somewhere between sophistication and simplicity.</p>
-          </div>
-          <div id="contant" class="col-md-4 col-sm-5 col-sm-offset-1 s-footer__logo g-padding-y-50--xs g-padding-y-0--md">
-            <h3 class="g-font-size-18--xs g-color--white">Content US</h3>
-            <p class="g-color--white-opacity">+(1) 2341245 <br> pheonix@pheonix.com</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Links -->
-  
-    <!-- Copyright -->
-    <div class="container g-padding-y-50--xs">
-      <div class="row">
-        <div class="col-xs-6">
-          <a href="/">
-            {{-- <img class="g-width-100--xs g-height-auto--xs" src="/storage/icons/logo.png" alt="Logo"> --}}
-            Pheonix
-          </a>
-        </div>
-        <div class="col-xs-6 g-text-right--xs">
-          <p class="g-font-size-14--xs g-margin-b-0--xs g-color--white-opacity-light"><a
-              href="#home">Phoenix</a> Powered by: <a
-              href="#home">Team PHOENIX</a></p>
-        </div>
-      </div>
-    </div>
-    <!-- End Copyright -->
-  </footer>
+	<footer class="footer">
+		<div class="footer_container d-flex flex-xl-row flex-column align-items-start justify-content-start">
+			<div class="newsletter_container">
+				<div class="newsletter_title"><h2>Subscribe to our newsletter</h2></div>
+				<form action="/subscription" method="POST" id="newsletter_form" class="newsletter_form">
+					@csrf
+					<input type="email" name="email" class="newsletter_input" placeholder="Your E-mail" required="required">
+					<button class="newsletter_button">Subscribe</button>
+				</form>
+			</div>
+			<div class="footer_lists d-flex flex-sm-row  flex-column align-items-start justify-content-start ml-xl-auto">
 
-  {{-- Scroll to top --}}
-  <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
+				<!-- Useful Links -->
+				<div class="footer_list">
+					<div class="footer_list_title">Links</div>
+					<ul>
+						<li><a href="{{ route('claim.artist') }}">For Artist</a></li>
+						<li><a href="#home">Home</a></li>
+						<li><a href="#about">About us</a></li>
+						<li><a href="#artist">Top Artist</a></li>
+						<li><a href="#event">Events</a></li>
+					</ul>
+				</div>			
 
-  {{-- vendor --}}
-  <script type="text/javascript" src="{{ asset('vendor/jquery.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/jquery.migrate.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/jquery.smooth-scroll.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/jquery.back-to-top.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/scrollbar/jquery.scrollbar.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/swiper/swiper.jquery.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/waypoint.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/counterup.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/cubeportfolio/js/jquery.cubeportfolio.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/jquery.parallax.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/jquery.wow.min.js') }}"></script>
+				<!-- Connect -->
+				<div class="footer_list">
+					<div class="footer_list_title">Connect</div>
+					<ul>
+						<li><a href="#feedback">Feedback</a></li>
+						<li><a href="#contact">Contact</a></li>
+					</ul>
+				</div>
 
-  {{-- General --}}
-  <script type="text/javascript" src="{{ asset('js/global.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/components/header-sticky.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/components/scrollbar.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/components/magnific-popup.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/components/swiper.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/components/counter.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/components/portfolio-3-col.min.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('js/components/parallax.min.js') }}"></script>
+			</div>
+		</div>
+		<div class="copyright_bar">
+			<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#home">{{ env('APP_NAME') }}</a>
+			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			</span>
+		</div>
+	</footer>
+</div>
+
+<script src="{{ asset('welcome/js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('welcome/styles/bootstrap-4.1.2/popper.js') }}"></script>
+<script src="{{ asset('welcome/styles/bootstrap-4.1.2/bootstrap.min.js') }}"></script>
+<script src="{{ asset('welcome/plugins/greensock/TweenMax.min.js') }}"></script>
+<script src="{{ asset('welcome/plugins/greensock/TimelineMax.min.js') }}"></script>
+<script src="{{ asset('welcome/plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
+<script src="{{ asset('welcome/plugins/greensock/animation.gsap.min.js') }}"></script>
+<script src="{{ asset('welcome/plugins/greensock/ScrollToPlugin.min.js') }}"></script>
+<script src="{{ asset('welcome/plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
+{{-- <script src="{{ asset('welcome/plugins/easing/easing.js') }}"></script> --}}
+<script src="{{ asset('welcome/plugins/progressbar/progressbar.min.js') }}"></script>
+<script src="{{ asset('welcome/plugins/parallax-js-master/parallax.min.js') }}"></script>
+<script src="{{ asset('welcome/plugins/jPlayer/jquery.jplayer.min.js') }}"></script>
+<script src="{{ asset('welcome/plugins/jPlayer/jplayer.playlist.min.js') }}"></script>
+<script src="{{ asset('welcome/js/custom.js') }}"></script>
+<script src="{{ asset('welcome/js/about.js') }}"></script>
+{{-- <script src="{{ asset('welcome/js/blog.js') }}"></script> --}}
+{{-- <script src="{{ asset('welcome/js/contact.js') }}"></script> --}}
+{{-- <script src="{{ asset('welcome/js/element.js') }}"></script> --}}
+{{-- <script src="{{ asset('welcome/js/single.js') }}"></script> --}}
 </body>
 </html>

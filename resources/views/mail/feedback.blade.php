@@ -36,7 +36,7 @@
 
     <div class="card m-5 ">
       <div class="card-header">
-        <h1>Thank you for your extensive Feedback</h1>
+        <h1>Thank you for your expansive Feedback</h1>
       </div>
       <div class="card-body">
         <div class="row ml-2">
@@ -48,7 +48,7 @@
       </div>
       <div class="card-footer">
         Regards,<br>
-        Phoenix
+        {{ env('APP_NAME') }}
       </div>
     </div>
   </div>

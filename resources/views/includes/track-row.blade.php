@@ -7,7 +7,7 @@
   <div class="col-1">
     <img src="/storage/icons/more.png"  class="w-25 optionMenuButton" alt="more" id="{{ $song->id }}-track">
     @if (auth()->user()->subscribed('download'))
-      <a href="/storage/{{ $song->song_url }}" download="pheonix"><img src="/storage/icons/download.png" class="w-25" alt="download"></a>
+      <a href="/storage/{{ $song->song_url }}" download="pheonix-music.mp3"><img src="/storage/icons/download.png" class="w-25" alt="download"></a>
     @endif
   </div>
   <div class="col-1">{{ $song->duration }}</div>

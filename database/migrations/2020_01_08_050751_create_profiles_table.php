@@ -19,6 +19,7 @@ class CreateProfilesTable extends Migration
             $table->string('name')->nullable();
             $table->string('image')->nullable();
             $table->string('cover_image')->nullable();
+            $table->text('about')->nullable();
             
             $table->timestamps();
             $table->softDeletes();

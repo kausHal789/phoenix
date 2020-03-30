@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('head-section')
+<link rel="stylesheet" href="{{ asset('css/style.bundle.css') }}">
+<link rel="stylesheet" href="{{ asset('css/pricing-v1.css') }}">
+<link href="{{asset('css/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content')
   <div class="container">
     <div class="row text-center ml-5 mr-5 mb-5">

@@ -17,6 +17,7 @@ class CreateAdvertisementsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('url');
+            $table->string('image');
             $table->timestamps();
             $table->softDeletes();
         });

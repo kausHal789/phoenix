@@ -1,9 +1,9 @@
 <div class="row align-items-center mb-3">
   <div class="col-1">#</div>
-  <div class="col-4 text-ellipsis">Title</div>
-  <div class="col-4 text-ellipsis">Artist</div>
+  <div class="col-4 col-xl-4 col-sm-4 text-ellipsis">Title</div>
+  <div class="col-4 col-xl-4 col-sm-2 text-ellipsis">Artist</div>
   <div class="col-1"></div>
-  <div class="col-1"><img src="/storage/icons/clock.png" class="w-25" alt="play"></div>
+  <div class="col-1 col-xl-1 col-sm-2"><img src="/storage/icons/clock.png" class="w-25" alt="play"></div>
   <div class="col-1">Listener</div>
 </div>
 

@@ -166,6 +166,7 @@
             <div class="mt-1 mb-1"><a href="{{ route('artist.audience') }}" class="navItem">Audience</a></div>
             <div class="mt-1 mb-1"><a href="{{ route('artist.albums') }}" class="navItem">Albums</a></div>
             <div class="mt-1 mb-1"><a href="{{ route('artist.songs') }}" class="navItem">Songs</a></div>
+            <div class="mt-1 mb-1"><a href="{{ route('home') }}" class="navItem">Pheonix Home</a></div>
             <div class="mt-1 mt-5 border-top">
               <a class="navItem p-5 align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">

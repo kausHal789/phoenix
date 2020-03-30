@@ -52,7 +52,7 @@ class PlaylistController extends Controller
         }
 
         $imagePath = $request['playlist_image']->store('image', 'public');
-        $image = Image::make(public_path("storage/$imagePath"))->resize(200, 200);
+        $image = Image::make(public_path("storage/$imagePath"))->resize(800, 800);
         $image->save();
 
         // Store in Playlist table
@@ -121,7 +121,7 @@ class PlaylistController extends Controller
 
         if($request->playlist_image) {
             $imagePath = $request['playlist_image']->store('image', 'public');
-            $image = Image::make(public_path("storage/$imagePath"))->resize(200, 200);
+            $image = Image::make(public_path("storage/$imagePath"))->resize(800, 800);
             $image->save();
             $playlist->img_url = $imagePath;
         }

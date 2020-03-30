@@ -68,7 +68,7 @@ class AlbumController extends Controller
         }
 
         $imagePath = $request['album_image']->store('image', 'public');
-        $image = Image::make(public_path("storage/$imagePath"))->resize(200, 200);
+        $image = Image::make(public_path("storage/$imagePath"))->resize(800, 800);
         $image->save();
 
         // Store in Album table
@@ -162,7 +162,7 @@ class AlbumController extends Controller
 
         if($request->album_image) {
             $imagePath = $request['album_image']->store('image', 'public');
-            $image = Image::make(public_path("storage/$imagePath"))->resize(200, 200);
+            $image = Image::make(public_path("storage/$imagePath"))->resize(800, 800);
             $image->save();
             $album->img_url = $imagePath;
         }

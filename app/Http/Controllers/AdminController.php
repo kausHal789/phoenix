@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Advertisement;
 use App\Album;
 use App\Feedback;
+use App\Mail\ClaimProfileFailMail;
+use App\Mail\ClaimProfileSuccessMail;
+use App\MakeArtistRequest;
 use App\Playlist;
 use App\Profile;
 use App\Song;
@@ -14,6 +17,7 @@ use App\Subscription;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -332,19 +336,43 @@ class AdminController extends Controller
     }
 
     public function feedback() {
+        $isAdminFeedback = true;
         $feedbacks = Feedback::all();
         $latestFeedbacks = Feedback::limit(2)->get();
         $singalFeedbacks = Feedback::latest()->limit(1)->get();
-        return view('admin.feedback', compact('feedbacks', 'latestFeedbacks', 'singalFeedbacks'));
+        return view('admin.feedback', compact('feedbacks', 'latestFeedbacks', 'singalFeedbacks', 'isAdminFeedback'));
     }
 
     public function payment() {
+        $isAdminPayment = true;
         $subscriptions = Subscription::all();
         $daysubscriptions = Subscription::all()->where('stripe_plan', '=', 'Day')->count();
         $monthsubscriptions = Subscription::all()->where('stripe_plan', '=', 'Month')->count();
         $yearsubscriptions = Subscription::all()->where('stripe_plan', '=', 'Year')->count();
         // dd($subscriptions);
-        return view('admin.payment', compact('subscriptions', 'yearsubscriptions', 'monthsubscriptions', 'daysubscriptions'));
+        return view('admin.payment', compact('subscriptions', 'yearsubscriptions', 'monthsubscriptions', 'daysubscriptions', 'isAdminPayment'));
+    }
+
+    public function request() {
+        $isAdminRequest = true;
+        $requests = MakeArtistRequest::all();
+        return view('admin.request', compact('requests', 'isAdminRequest'));
+    }
+
+    public function requestApprove($id) {
+        $request = MakeArtistRequest::findOrFail($id);
+        $request->user->role_id = 2;
+        $request->user->save();
+        Mail::to($request->user->email)->send(new ClaimProfileSuccessMail());
+        $request->delete();
+        return redirect()->route('admin.request');
+    }
+
+    public function requestCancel($id) {
+        $request = MakeArtistRequest::findOrFail($id);
+        Mail::to($request->user->email)->send(new ClaimProfileFailMail());
+        $request->delete();
+        return redirect()->route('admin.request');
     }
 
 

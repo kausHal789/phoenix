@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Pheonix</title>
+    <title>{{ env('APP_NAME') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,17 +19,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"> </script>
-    <link rel="stylesheet" href="{{ asset('css/style.bundle.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/pricing-v1.css') }}">
-    <link href="{{asset('css/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+   
+    @yield('head-section')
 
-    <script>
-       
-    </script>
+    
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -77,19 +74,62 @@
                 </ul>
             </div>
         </div>
+    </nav> --}}
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+          <a href="{{ route('home') }}" class="navbar-brand">{{ env('APP_NAME') }}</a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+                @auth
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="nav-link">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->username }} <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        
+
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+
+                    @else
+
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="nav-link">Register</a>
+                        @endif
+                    </li>
+
+                @endauth
+            </ul>
+          </div>
+        </div>
     </nav>
 
     <main class="py-4">
         @yield('content')
     </main>
 </div>
-
-
-
-
-
-
-
 
 @yield('script')
 

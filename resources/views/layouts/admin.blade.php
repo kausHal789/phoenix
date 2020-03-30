@@ -56,9 +56,9 @@
 				<!-- begin::Logo -->
 				<div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
 					<div class="kt-aside__brand-logo">
-						{{-- <a href="#"> --}}
+						<a href="/home">
 							<img alt="Logo" src="/storage/icons/logo.png" />
-						{{-- </a> --}}
+						</a>
 					</div>
 
 					<div class="kt-aside__brand-tools">
@@ -79,12 +79,12 @@
 								<i class="kt-menu__section-icon flaticon-more-v2"></i>
 							</li>
 
-							<li class="kt-menu__item  kt-menu__item--submenu mt-3 mb-3 @if (isset($isAdminHome)) kt-menu__item--active @endif">
+							<li class="kt-menu__item  kt-menu__item--submenu mt-3 mb-3">
 								<a href="/telescope" target="_blank" class="kt-menu__link kt-menu__toggle">
 									<img src="/storage/icons/telescope.png" class="mr-2" width="25" alt=""> 
 									<span class="kt-menu__link-text">Telescope</span>
 								</a>
-						</li>
+							</li>
               
 							<li class="kt-menu__section">
 								<h4 class="kt-menu__section-text">Basic</h4>
@@ -148,7 +148,7 @@
                     <span class="kt-menu__link-text">Feedback</span>
                   </a>
 							</li>
-							<li class="kt-menu__item  kt-menu__item--submenu mt-3 mb-3 @if (isset($isAdminFeedback)) kt-menu__item--active @endif">
+							<li class="kt-menu__item  kt-menu__item--submenu mt-3 mb-3 @if (isset($isAdminPayment)) kt-menu__item--active @endif">
                   <a href="{{ route('admin.payment') }}" class="kt-menu__link kt-menu__toggle">
                     <img src="/storage/icons/payment.png" class="mr-2" width="25" alt=""> 
                     <span class="kt-menu__link-text">Payment</span>
@@ -159,6 +159,21 @@
                     <img src="/storage/icons/advertisement.png" class="mr-2" width="25" alt=""> 
                     <span class="kt-menu__link-text">Advertisement</span>
                   </a>
+							</li>
+							<li class="kt-menu__item  kt-menu__item--submenu mt-3 mb-3 @if (isset($isAdminRequest)) kt-menu__item--active @endif">
+                  <a href="{{ route('admin.request') }}" class="kt-menu__link kt-menu__toggle">
+                    <img src="/storage/icons/request.png" class="mr-2" width="25" alt=""> 
+                    <span class="kt-menu__link-text">Claim Requests</span>
+                  </a>
+							</li>
+							<li class="kt-menu__item  kt-menu__item--submenu mt-3 mb-3">
+                  <a href="{{ route('logout') }}" class="kt-menu__link kt-menu__toggle" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <img src="/storage/icons/logout.png" class="mr-2" width="25" alt=""> 
+                    <span class="kt-menu__link-text">Log Out</span>
+									</a>
+									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+											@csrf
+									</form>
 							</li>
 		
 						</ul>
@@ -251,13 +266,26 @@
 							</div>
 							
 							<div class="kt-aside-secondary__content-body kt-scroll">
-								<form class="kt-form" action="@if (isset($editadvertisement)) /advertisement/{{ $editadvertisement->id }} @else /advertisement @endif" method="POST">
+								<form class="kt-form" action="@if (isset($editadvertisement)) /advertisement/{{ $editadvertisement->id }} @else /advertisement @endif" method="POST" enctype="multipart/form-data">
 								{{-- <form class="kt-form" action="/advertisement" method="POST"> --}}
 									@csrf
 									@if (isset($editadvertisement)) 
 										@method('PATCH')
 									@endif
 									<div class="kt-section kt-section--first">
+										<div class="form-group">
+											<label for="image">Image:</label>
+											<input type="file" id="image" name="image" class="">
+											<span class="form-text text-muted">Please select your Advertisement image</span>
+											@error('image')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+											@enderror
+										</div>
+										<div class="form-group">
+											<img id="image_preview" @if (isset($editadvertisement))src="/storage/{{ $editadvertisement->image }}"@endif class="w-100 h-100 img-fluid" alt="">
+										</div>
 										<div class="form-group">
 											<label for="title">Title:</label>
 											<input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter title" 

@@ -24,7 +24,7 @@
     <div class="row">
       <div class="col">
         <input type="text" name="name" id="name"
-        class="updateProfileInput d-block @error('audio') is-invalid @enderror" 
+        class="updateProfileInput d-block @error('name') is-invalid @enderror" 
             placeholder="Your Name" 
             value="{{ $user->profile->name ??  old('name') }}" 
             required

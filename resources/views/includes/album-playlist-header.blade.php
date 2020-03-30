@@ -1,11 +1,11 @@
 <div class="row align-items-end mt-5 ml-0 mr-0 mb-0 p-0 collectionHeader">
-  <div class="col-4">
+  <div class="col-4 col-sm-6 col-xl-4 col-md-4">
     <img src="/storage/{{ $collection->img_url }}" class="w-75 h-75 img-fluid float-right" alt="">
   </div>
-  <div class="col-8">
+  <div class="col-8 col-sm-6 col-xl-8 col-md-8">
     <div class="row mb-0 pb-0"><div class="col text-uppercase text-white-50">{{ $collectionType }}</div></div>
-    <div class="row">
-      <div class="col" style="font-size: 60px;">
+    <div class="row display-4">
+      <div class="col" style="">
         {{ $collection->name }} 
         @if($collectionType == 'PLAYLIST')
         <span>
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="row mt-3">
-      <div class="col-3">
+      <div class="col-3 col-xl-3 col-md-6 col-sm-12">
         <div class="btn btn-block rounded-pill btn-success @if ($collectionType == 'PLAYLIST') playlistPlaybutton @else albumPlayButton @endif " id="{{ $collection->id }}-album">PLAY</div>
       </div>
     </div>

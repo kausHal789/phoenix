@@ -5,9 +5,9 @@
 
 @section('content')
   <div class="container">
-    <div class="row">
+    <div class="row align-items-center justify-content-between">
       <div class="col-8">
-        <div class="h1 ml-3">ALBUMS</div>
+        <div class="display-3 ml-3">ALBUMS</div>
       </div>
       <div class="col-4">
         <button class="btn btn-outline-primary btn-block rounded-pill font-weight-bold" 

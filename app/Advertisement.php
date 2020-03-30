@@ -9,5 +9,5 @@ class Advertisement extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'url'];
+    protected $fillable = ['title', 'url', 'image'];
 }

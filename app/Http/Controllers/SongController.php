@@ -24,8 +24,8 @@ class SongController extends Controller
 
   public function __construct()
   {
-    $this->ffmpegPath = realpath('C:/FFmpeg/bin/ffmpeg.exe');
-    $this->ffprobePath = realpath("C:/FFmpeg/bin/ffprobe.exe");
+    $this->ffmpegPath = base_path('FFmpeg/bin/ffmpeg.exe');
+    $this->ffprobePath = base_path('FFmpeg/bin/ffprobe.exe');
   }
 
   public function index()
@@ -92,8 +92,8 @@ class SongController extends Controller
     $audioFinalPath = $data[3] . '/' . $data[4];
 
     $FFMpeg = FFMpeg::create([
-      'ffmpeg.binaries'  => 'C:/FFmpeg/bin/ffmpeg.exe',
-      'ffprobe.binaries' => 'C:/FFmpeg/bin/ffprobe.exe'
+      'ffmpeg.binaries'  => $this->ffmpegPath,
+      'ffprobe.binaries' => $this->ffprobePath
     ]);
     $ffprobe = $FFMpeg->getFFProbe();
 

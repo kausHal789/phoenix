@@ -16,7 +16,7 @@
           
       <div class="col-lg-6 col-xl-4 order-lg-1 order-xl-1">
         <div class="kt-portlet kt-portlet--height-fluid kt-widget-12">
-          <div class="kt-portlet__body">
+          <div class="kt-portlet__body" style="background-image: url(/storage/{{ $advertisement->image }})">
             <div class="kt-widget-12__body">
               <div class="kt-widget-12__head">
                 <div class="kt-widget-12__date kt-widget-12__date--success">
@@ -24,8 +24,8 @@
                   <span class="kt-widget-12__month">{{ date('M', strtotime($advertisement->created_at)) }}</span>
                 </div>
                 <div class="kt-widget-12__label">
-                  <h3 class="kt-widget-12__title">{{ $advertisement->title }}</h3>
-                  <span class="kt-widget-12__desc"><a href="{{ $advertisement->url }}" target="_blank">{{ $advertisement->url }}</a></span>
+                  <h3 class="kt-widget-12__title text-white font-weight-bold">{{ $advertisement->title }}</h3>
+                  <span class="kt-widget-12__desc text-link"><a href="{{ $advertisement->url }}" target="_blank">{{ $advertisement->url }}</a></span>
                 </div>
               </div>
               

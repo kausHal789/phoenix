@@ -8,7 +8,7 @@
 <div class="container">
 
   @if (isset($isEditSong) == false)
-    <div class="row m-5 h1">Add a song in {{ $album->name }}</div>
+    <div class="row m-5 display-4 h1">Add a song in&nbsp;<span class="text-info">{{ $album->name }}</span></div>
     @includeIf('includes.album', ['album' => $album])
   @endif 
 
@@ -119,7 +119,7 @@
       @if (isset($isEditSong))
 
       <div class="row">
-        <div class="col-4 alert alert-warning">
+        <div class="col-4 col-sm-12 alert alert-warning">
           <span class="font-weight-bold mr-3">Note:</span> You can not change audio file.
         </div>
       </div>
@@ -169,13 +169,13 @@
         @endif
       </div>
 
-  </form>
-  @if (isset($isEditSong))
-  <form id="song-delete-form" action="{{ route('song.delete', $song->id) }}" method="post">
-    @csrf
-    @method('DELETE')
-  </form>
-  @endif
+    </form>
+    @if (isset($isEditSong))
+    <form id="song-delete-form" action="{{ route('song.delete', $song->id) }}" method="post">
+      @csrf
+      @method('DELETE')
+    </form>
+    @endif
   </div>
   </div>
 </div>
