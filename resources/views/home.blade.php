@@ -43,7 +43,6 @@
 	</header>
 	
 
-	<!-- Home -->
 
 	<div class="home">
 		<div class="home_slider_container">
@@ -97,86 +96,16 @@
 		</div>
 	</div>
 
-	<!-- Featured Album -->
 
 	<div class="featured_album">
 		<div class="background_image featured_background" style="background-image:url(/storage/img/featured.png)"></div>
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-6 offset-lg-6">
-					<div class="section_title_container">
-						<div class="section_subtitle">Songs</div>
-						<div class="section_title"><h1>Welcome to {{ env('APP_NAME') }}</h1></div>
-					</div>
-				</div>
-			</div>
 			<div class="row featured_row row-lg-eq-height">
 
-				<!-- Featured Album Image -->
 				<div class="col-md-6">
 					<div class="featured_album_image">
 						<div class="image_overlay"></div>
-						
 						<div class="background_image" style="background-image:url(/storage/img/970x970/02.jpg)"></div>
-						<!-- <img src="images/featured_album.jpg" alt=""> -->
-					</div>
-				</div>
-
-				<!-- Featured Album Player -->
-				<div class="col-md-6 featured_album_col">
-					<div class="featured_album_player_container d-flex flex-column align-items-start justify-content-center">
-						<div class="featured_album_player">
-							<div class="featured_album_title_bar d-flex flex-row align-items-center justify-content-start">
-								<div class="featured_album_title_container">
-									<div class="featured_album_artist">{{ env('APP_NAME') }}</div>
-									<div class="featured_album_title">Love is all Around</div>
-								</div>
-								<!-- <div class="featured_album_link ml-auto"><a href="#">buy it on itunes</a></div> -->
-							</div>
-							<div id="jplayer_1" class="jp-jplayer"></div>
-							<div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
-								<div class="jp-type-playlist">
-									<div class="jp-playlist">
-										<ul>
-											<li></li>
-										</ul>
-									</div>
-									<div class="player_details d-flex flex-row align-items-center justify-content-start">
-										<div class="jp-details">
-											<div>playing</div>
-											<div class="jp-title" aria-label="title">&nbsp;</div>
-										</div>
-										<div class="jp-controls-holder ml-auto">
-											<button class="jp-play" tabindex="0"></button>
-										</div>
-									</div>
-									<div class="player_controls">
-										<div class="jp-gui jp-interface d-flex flex-row align-items-center justify-content-start">
-											<div class="jp-controls-holder time_controls d-flex flex-row align-items-center justify-content-start">
-												<div><div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div></div>
-												<div class="jp-progress">
-													<div class="jp-seek-bar">
-														<div class="jp-play-bar"></div>
-													</div>
-												</div>
-												<div><div class="jp-duration ml-auto" role="timer" aria-label="duration">&nbsp;</div></div>
-											</div>
-											<div class="jp-volume-controls d-flex flex-row align-items-center justify-content-start ml-auto">
-												<button class="jp-mute" tabindex="0"></button>
-												<div class="jp-volume-bar">
-													<div class="jp-volume-bar-value"></div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="jp-no-solution">
-										<span>Update Required</span>
-										To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>
-									</div>
-								</div>
-							</div>
-
-						</div>
 					</div>
 				</div>
 
@@ -184,20 +113,17 @@
 		</div>
 	</div>
 
-	<!-- Artist -->
 
 	<div class="artist">
 		<div class="container">
 			<div class="row">
 
-				<!-- Artist Image -->
 				<div class="col-lg-4 artist_image_col">
 					<div class="artist_image">
 						<img src="storage\img\artist.png" alt="">
 					</div>
 				</div>
 
-				<!-- Artist Content -->
 				<div class="col-lg-7 offset-lg-1">
 					<div class="artist_content">
 						<div class="section_title_container">
@@ -267,7 +193,6 @@
 			<div class="container">
 				<div class="row milestones_row justify-content-between">
 					
-					<!-- Milestone -->
 					<div class="col-xl-3 col-md-6 milestone_col">
 						<div class="milestone d-flex flex-row align-items-center justify-content-start">
 							<div class="milestone_icon"><img src="\storage\icons\icon_1.svg" ></div>
@@ -430,10 +355,10 @@
 <script src="{{ asset('welcome/plugins/greensock/ScrollToPlugin.min.js') }}"></script>
 <script src="{{ asset('welcome/plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
 {{-- <script src="{{ asset('welcome/plugins/easing/easing.js') }}"></script> --}}
-<script src="{{ asset('welcome/plugins/progressbar/progressbar.min.js') }}"></script>
+{{-- <script src="{{ asset('welcome/plugins/progressbar/progressbar.min.js') }}"></script> --}}
 <script src="{{ asset('welcome/plugins/parallax-js-master/parallax.min.js') }}"></script>
-<script src="{{ asset('welcome/plugins/jPlayer/jquery.jplayer.min.js') }}"></script>
-<script src="{{ asset('welcome/plugins/jPlayer/jplayer.playlist.min.js') }}"></script>
+{{-- <script src="{{ asset('welcome/plugins/jPlayer/jquery.jplayer.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('welcome/plugins/jPlayer/jplayer.playlist.min.js') }}"></script> --}}
 <script src="{{ asset('welcome/js/custom.js') }}"></script>
 <script src="{{ asset('welcome/js/about.js') }}"></script>
 {{-- <script src="{{ asset('welcome/js/blog.js') }}"></script> --}}
