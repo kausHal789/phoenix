@@ -50,8 +50,8 @@
                     this.currentTab = 'queries'
                 } else if (this.models.length) {
                     this.currentTab = 'models'
-                } else if (this.jobs.length) {
-                    this.currentTab = 'jobs'
+                // } else if (this.jobs.length) {
+                //     this.currentTab = 'jobs'
                 } else if (this.mails.length) {
                     this.currentTab = 'mails'
                 } else if (this.notifications.length) {
@@ -111,9 +111,9 @@
             //     return _.filter(this.batch, {type: 'job'});
             // },
 
-            events() {
-                return _.filter(this.batch, {type: 'event'});
-            },
+            // events() {
+            //     return _.filter(this.batch, {type: 'event'});
+            // },
 
             cache() {
                 return _.filter(this.batch, {type: 'cache'});

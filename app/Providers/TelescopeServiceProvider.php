@@ -24,6 +24,9 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             if ($this->app->environment('local')) {
                 return true;
             }
+            if ($this->app->environment('production')) {
+                return true;
+            }
 
             return $entry->isReportableException() ||
                    $entry->isFailedRequest() ||
@@ -64,7 +67,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     {
         Gate::define('viewTelescope', function ($user) {
             return in_array($user->email, [
-                // 'admin@test.com'
+                'admin@test.com'
             ]);
         });
     }

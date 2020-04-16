@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
     <div class="row mt-5">
-      <div class="col h1 font-weight-bold">
+      <div class="col display-3 font-weight-bold">
         Songs
       </div>
     </div>

@@ -2241,9 +2241,8 @@ __webpack_require__.r(__webpack_exports__);
       } else if (this.queries.length) {
         this.currentTab = 'queries';
       } else if (this.models.length) {
-        this.currentTab = 'models';
-      } else if (this.jobs.length) {
-        this.currentTab = 'jobs';
+        this.currentTab = 'models'; // } else if (this.jobs.length) {
+        //     this.currentTab = 'jobs'
       } else if (this.mails.length) {
         this.currentTab = 'mails';
       } else if (this.notifications.length) {
@@ -2297,11 +2296,9 @@ __webpack_require__.r(__webpack_exports__);
     // jobs() {
     //     return _.filter(this.batch, {type: 'job'});
     // },
-    events: function events() {
-      return _.filter(this.batch, {
-        type: 'event'
-      });
-    },
+    // events() {
+    //     return _.filter(this.batch, {type: 'event'});
+    // },
     cache: function cache() {
       return _.filter(this.batch, {
         type: 'cache'
@@ -49614,7 +49611,43 @@ var render = function() {
         staticClass:
           "card-header d-flex align-items-center justify-content-between"
       },
-      [_c("h5", [_vm._v(_vm._s(this.title))])]
+      [
+        _c("h5", [_vm._v(_vm._s(this.title))]),
+        _vm._v(" "),
+        _vm.tag || _vm.entries.length > 0
+          ? _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.tag,
+                  expression: "tag"
+                }
+              ],
+              staticClass: "form-control w-25",
+              attrs: {
+                type: "text",
+                id: "searchInput",
+                placeholder: "Search Tag"
+              },
+              domProps: { value: _vm.tag },
+              on: {
+                input: [
+                  function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.tag = $event.target.value
+                  },
+                  function($event) {
+                    $event.stopPropagation()
+                    return _vm.search($event)
+                  }
+                ]
+              }
+            })
+          : _vm._e()
+      ]
     ),
     _vm._v(" "),
     _vm.recordingStatus !== "enabled"

@@ -68,9 +68,9 @@ class CreateTelescopeEntriesTable extends Migration
                   ->onDelete('cascade');
         });
 
-        // $this->schema->create('telescope_monitoring', function (Blueprint $table) {
-        //     $table->string('tag');
-        // });
+        $this->schema->create('telescope_monitoring', function (Blueprint $table) {
+            $table->string('tag');
+        });
     }
 
     /**

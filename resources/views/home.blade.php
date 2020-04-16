@@ -35,8 +35,26 @@
 			<div class="logo"><a href="#home">{{ env('APP_NAME') }}</a></div>
 			<div class="log_reg">
 				<ul class="d-flex flex-row align-items-start justify-content-start">
-					<li><a href="/login">Login</a></li>
-					<li><a href="/register">Register</a></li>
+					@auth
+						<li><a href="{{ route('home') }}">Home</a></li>
+						<li>
+							<a href="{{ route('logout') }}"
+							onclick="event.preventDefault();
+																	document.getElementById('logout-form').submit();">
+									{{ __('Logout') }}
+							</a>
+							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+								@csrf
+							</form>
+						</li>
+
+					
+					@else
+						<li><a href="{{ route('login') }}">Login</a></li>
+						@if (Route::has('register'))
+							<li><a href="{{ route('register') }}">Register</a></li>
+						@endif
+					@endauth
 				</ul>
 			</div>
 		</div>

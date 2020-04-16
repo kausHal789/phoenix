@@ -8,6 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'Sabberworm\\CSS' => array($vendorDir . '/sabberworm/php-css-parser/lib'),
     'Neutron' => array($vendorDir . '/neutron/temporary-filesystem/src'),
+    'Mockery' => array($vendorDir . '/mockery/mockery/library'),
+    'Highlight\\' => array($vendorDir . '/scrivo/highlight.php'),
+    'HighlightUtilities\\' => array($vendorDir . '/scrivo/highlight.php'),
     'FFMpeg' => array($vendorDir . '/pbmedia/php-ffmpeg/src'),
     'Evenement' => array($vendorDir . '/evenement/evenement/src'),
     'Alchemy' => array($vendorDir . '/pbmedia/binary-driver/src'),

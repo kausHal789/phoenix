@@ -16,17 +16,24 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@home')->name('home')->middleware('auth', 'verified');
-
-Route::get('/claim/artist', 'MakeArtistRequestController@claimArtist')->name('claim.artist');
-Route::get('/claim/access', 'MakeArtistRequestController@claimArtistAccess')->name('claim.artist.access');
-Route::get('/claim/access/artist', 'MakeArtistRequestController@claimAccessArtist')->name('claim.access.artist');
-Route::get('/claim/access/artist/search', 'MakeArtistRequestController@claimAccessArtistSearch')->name('claim.access.artist.search');
-Route::get('/claim/profile/{user_id}/artist', 'MakeArtistRequestController@claimArtistProfile')->name('claim.profile.artist');
-Route::post('/claim/profile/request', 'MakeArtistRequestController@store')->name('claim.profile.request');
-
-
+Route::get('/home', 'HomeController@home')->name('home')->middleware('auth');
 Route::get('/', 'HomeController@index')->name('index');
+Route::post('/feedback', 'FeedbackController@store')->name('feedback');
+Route::post('/subscription', 'SubscribeController@store')->name('subscription');
+
+
+
+Route::group(['prefix' => 'claim'], function () {
+  Route::get('/artist', 'MakeArtistRequestController@claimArtist')->name('claim.artist');
+  Route::get('/access', 'MakeArtistRequestController@claimArtistAccess')->name('claim.artist.access');
+  Route::get('/access/artist', 'MakeArtistRequestController@claimAccessArtist')->name('claim.access.artist');
+  Route::get('/access/artist/search', 'MakeArtistRequestController@claimAccessArtistSearch')->name('claim.access.artist.search');
+  Route::get('/profile/{user_id}/artist', 'MakeArtistRequestController@claimArtistProfile')->name('claim.profile.artist');
+  Route::post('/profile/request', 'MakeArtistRequestController@store')->name('claim.profile.request');
+});
+
+
+
 // Route::post('/send', 'ChatController@send')->middleware('auth');
 // Route::get('/chat', 'ChatController@chat')->middleware('auth');
 // Route::get('/message/{receiver_id}', 'HomeController@getMessage')->name('message');
@@ -34,8 +41,6 @@ Route::get('/', 'HomeController@index')->name('index');
 
 
 
-Route::post('/feedback', 'FeedbackController@store')->name('feedback');
-Route::post('/subscription', 'SubscribeController@store')->name('subscription');
 
 // Admin (admin)
 Route::get('/home/admin', 'AdminController@home')->name('admin.home');
@@ -74,17 +79,21 @@ Route::get('/request/cancel/{id}/admin', 'AdminController@requestCancel')->name(
 
 
 // advertisement
-Route::get('/advertisement', 'AdvertisementController@index')->name('admin.advertisement');
-Route::post('/advertisement', 'AdvertisementController@store')->name('advertisement.store');
-Route::get('/advertisement/{id}', 'AdvertisementController@edit')->name('advertisement.edit');
-Route::patch('/advertisement/{id}', 'AdvertisementController@update')->name('advertisement.update');
-Route::delete('/advertisement/{id}', 'AdvertisementController@destroy')->name('advertisement.delete');
+Route::group(['prefix' => 'advertisement'], function () {
+  Route::get('/', 'AdvertisementController@index')->name('admin.advertisement');
+  Route::post('/', 'AdvertisementController@store')->name('advertisement.store');
+  Route::get('/{id}', 'AdvertisementController@edit')->name('advertisement.edit');
+  Route::patch('/{id}', 'AdvertisementController@update')->name('advertisement.update');
+  Route::delete('/{id}', 'AdvertisementController@destroy')->name('advertisement.delete');
+});
 
 
 // Primium (auth)
-Route::get('/primium', 'PrimiumController@show')->name('primium.show')->middleware('verified');
-Route::get('/primium/create', 'PrimiumController@create')->name('primium.create');
-Route::post('/primium/payment', 'PrimiumController@payment')->name('primium.payment');
+Route::group(['prefix' => 'primium'], function () {
+  Route::get('/', 'PrimiumController@show')->name('primium.show')->middleware('verified');
+  Route::get('/create', 'PrimiumController@create')->name('primium.create');
+  Route::post('/payment', 'PrimiumController@payment')->name('primium.payment');
+});
 
 
 // Song (artist)
@@ -99,38 +108,46 @@ Route::get('/songJSON/{song_id}', 'SongController@showJSON')->middleware('auth')
 
 
 // Artist (artist)
-Route::get('/artist/home', 'ArtistController@home')->name('artist.home');
-Route::get('/artist/audience', 'ArtistController@audience')->name('artist.audience');
-Route::get('/artist/albums', 'ArtistController@albums')->name('artist.albums');
-Route::get('/artist/songs', 'ArtistController@songs')->name('artist.songs');
+
+Route::group(['prefix' => 'artist'], function () {
+  Route::get('/home', 'ArtistController@home')->name('artist.home')->middleware('verified');
+  Route::get('/audience', 'ArtistController@audience')->name('artist.audience');
+  Route::get('/albums', 'ArtistController@albums')->name('artist.albums');
+  Route::get('/songs', 'ArtistController@songs')->name('artist.songs');
+});
+
 
 
 // Album (artist)
-Route::get('/album', 'AlbumController@index')->name('album.index');
-Route::get('/album/create', 'AlbumController@create')->name('album.create');
-Route::post('/album', 'AlbumController@store')->name('album.store');
-Route::get('/album/{album_id}', 'AlbumController@show')->name('album.show');
-Route::get('/album/{album_id}/edit', 'AlbumController@edit')->name('album.edit');
-Route::patch('/album/{album_id}', 'AlbumController@update')->name('album.update');
-Route::delete('/album/{album_id}', 'AlbumController@destroy')->name('album.delete');
+Route::group(['prefix' => 'album'], function () {
+  Route::get('/', 'AlbumController@index')->name('album.index');
+  Route::get('/create', 'AlbumController@create')->name('album.create');
+  Route::post('/', 'AlbumController@store')->name('album.store');
+  Route::get('/{album_id}', 'AlbumController@show')->name('album.show');
+  Route::get('/{album_id}/edit', 'AlbumController@edit')->name('album.edit');
+  Route::patch('/{album_id}', 'AlbumController@update')->name('album.update');
+  Route::delete('/{album_id}', 'AlbumController@destroy')->name('album.delete');
+});
 // JSON
 Route::get('/albumJSON/{album_id}', 'AlbumController@albumJSON')->middleware('auth')->name('albumJSON.show');
 
 
 // Playlist (auth)
-Route::get('/playlist', 'PlaylistController@index')->name('playlist.index');
-Route::get('/playlist/create', 'PlaylistController@create')->name('playlist.create');
-Route::post('/playlist', 'PlaylistController@store')->name('playlist.store');
-Route::get('/playlist/{playlist_id}', 'PlaylistController@show')->name('playlist.show');
-Route::get('/playlist/{playlist_id}/edit', 'PlaylistController@edit')->name('playlist.edit');
-Route::patch('/playlist/{playlist_id}', 'PlaylistController@update')->name('playlist.update');
-Route::delete('/playlist/{playlist_id}', 'PlaylistController@destroy')->name('playlist.delete');
+Route::group(['prefix' => 'playlist'], function () {
+  Route::get('/', 'PlaylistController@index')->name('playlist.index');
+  Route::get('/create', 'PlaylistController@create')->name('playlist.create');
+  Route::post('/', 'PlaylistController@store')->name('playlist.store');
+  Route::get('/{playlist_id}', 'PlaylistController@show')->name('playlist.show');
+  Route::get('/{playlist_id}/edit', 'PlaylistController@edit')->name('playlist.edit');
+  Route::patch('/{playlist_id}', 'PlaylistController@update')->name('playlist.update');
+  Route::delete('/{playlist_id}', 'PlaylistController@destroy')->name('playlist.delete');
+  Route::get('/{playlist_id}/song/{song_id}/attach', 'PlaylistController@playlistAttach')->name('playlistSYNCsong.attach');
+  Route::get('/{playlist_id}/song/{song_id}/detach', 'PlaylistController@playlistDetach')->name('playlistSYNCsong.detach');
+});
 // JSON
 Route::get('/playlistJSON/{playlist_id}', 'PlaylistController@playlistJSON')->name('playlistJSON.show');
 Route::get('/playlistListJSON', 'PlaylistController@playlistListJSON')->name('playlistJSON.index');
 // Playlist sync with song
-Route::get('/playlist/{playlist_id}/song/{song_id}/attach', 'PlaylistController@playlistAttach')->name('playlistSYNCsong.attach');
-Route::get('/playlist/{playlist_id}/song/{song_id}/detach', 'PlaylistController@playlistDetach')->name('playlistSYNCsong.detach');
 
 
 // Follow the user
@@ -139,26 +156,23 @@ Route::post('/follow/{user}', 'FollowsController@store')->name('follow-unfollow'
 Route::post('/follownotification/{user}', 'FollowsController@notification')->name('follow.notification');
 
 // Profile
-Route::get('/profile/{user_id}', 'ProfileController@show')->name('profile.show');
-Route::get('/profile/{user_id}/edit', 'ProfileController@edit')->name('profile.edit');
-Route::patch('/profile/{user_id}', 'ProfileController@update')->name('profile.update');
+Route::group(['prefix' => 'profile'], function () {
+  Route::get('/{user_id}', 'ProfileController@show')->name('profile.show');
+  Route::get('/{user_id}/edit', 'ProfileController@edit')->name('profile.edit');
+  Route::patch('/{user_id}', 'ProfileController@update')->name('profile.update');
+});
 
 // Search (Auth)
-Route::get('/search', 'SearchController@getSeachPage');
-Route::get('/search/result', 'SearchController@seachResult');
+Route::group(['prefix' => 'search'], function () {
+  Route::get('/search', 'SearchController@getSeachPage');
+  Route::get('/search/result', 'SearchController@seachResult');
+});
 
 // Dadicate (Auth)
-Route::get('/dadicate/search', 'DedicateController@dedicateSearch')->name('dadicate.search');
-Route::post('/dadicate', 'DedicateController@dedicate')->name('dedicate.dadicate');
+Route::group(['prefix' => 'dadicate'], function () {
+  Route::get('/dadicate/search', 'DedicateController@dedicateSearch')->name('dadicate.search');
+  Route::post('/dadicate', 'DedicateController@dedicate')->name('dedicate.dadicate');
+});
 
 // Mark Notification as read
 Route::get('/notification/markAsRead', 'HomeController@notificationMarkAsRead')->name('notification.read');
-
-
-// Unuse 
-
-Route::get('/test', function () {
-    
-})->name('test');
-
-
