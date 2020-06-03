@@ -17,7 +17,12 @@
 @endforeach
 
 @elseif(isset($songSearch))
-    
+@php($cnt = 1)
+@foreach ($songs as $song)
+  {{-- collectionType is not used variavble it'ds just for surety --}}
+  @include('admin.includes.song-row', ['song' => $song, 'collectionType' => 'song', 'cnt'=>$cnt++])
+@endforeach
+
 @endif
 
 

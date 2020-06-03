@@ -13,7 +13,7 @@
           @can('view', App\Artist::class)
           @if (!isset($isSongUploadPage))
             <div class="row">
-              <a href="/artist/song/{{ $album->id }}">
+              <a href="/song/album/{{ $album->id }}">
               <button class="btn btn-sm btn-outline-secondary rounded add-song-btn font-weight-bold" 
                 type="button" id="addSongBtn" title="ADD SONG" data-toggle="modal" data-target="#addSongModal">
                 ADD SONG INTO THIS ALBUM

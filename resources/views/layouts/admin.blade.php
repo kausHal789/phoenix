@@ -139,7 +139,7 @@
 							<li class="kt-menu__item  kt-menu__item--submenu mt-3 mb-3 @if (isset($isAdminSubscription)) kt-menu__item--active @endif">
                   <a href="{{ route('admin.subscription') }}" class="kt-menu__link kt-menu__toggle">
                     <img src="/storage/icons/subscription.png" class="mr-2" width="25" alt=""> 
-                    <span class="kt-menu__link-text">Subscription</span>
+                    <span class="kt-menu__link-text">Subscribers</span>
                   </a>
 							</li>
 							<li class="kt-menu__item  kt-menu__item--submenu mt-3 mb-3 @if (isset($isAdminFeedback)) kt-menu__item--active @endif">
@@ -360,28 +360,28 @@
   <script>
 
     $(document).ready(function () {
-      $('.switch').click(function () {
-
-        var data = $(this).attr('id').split('-', 2);
+			$(document).on('click', '.switch', function() {
+				var data = $(this).attr('id').split('-', 2);
         var id = data[0];
         var type = data[1];
+				
         if ($(this).is(":checked")) { 
             // make deactivate
-            var url = "/" + type + "/activate/" + id + "/admin";
+            var url = "/admin/" + type + "/activate/" + id;
             activate_deactivate(url);
         } else { 
           // make activate
-            var url = "/" + type + "/deactivate/" + id + "/admin";
+            var url = "/admin/" + type + "/deactivate/" + id;
             activate_deactivate(url);
         } 
-			});
+			})
 
 			$(document).on('keyup', '.search_box', function() {
 				var type = $(this).attr('id');
 				var term = $(this).val();
 				console.log(term);
 				$.ajax({
-					url: "/" + type + "/search/admin",
+					url: "/admin/" + type + "/search",
 					method: "GET",
 					data: {
 						term: term
@@ -390,7 +390,7 @@
 					success: function (_data) {
 						$('#searchTitle').show();
 						$('#searchData').html(_data.data);
-						console.log(_data);
+						// console.log(_data);
 					}, 
 					error: function (err) {
 						console.log(err);
@@ -407,12 +407,12 @@
         url: _url,
         method: "GET",
         cache: false,
-        // success: function (_data) {
-        //   console.log(_data);
-        // }, 
-        // error: function (err) {
-        //   console.log(err);
-        // }
+        success: function (_data) {
+          console.log(_data);
+        }, 
+        error: function (err) {
+          console.log(err);
+        }
       })
     }
   </script>

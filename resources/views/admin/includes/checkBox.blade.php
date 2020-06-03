@@ -8,7 +8,7 @@
  --}}
 
 
- <label class="col-8 col-form-label">Status</label>
+<label class="col-8 col-form-label">Status</label>
 <div class="col-4 kt-align-right">
   <span class="kt-switch kt-switch--sm kt-switch--outline">
     <label title="status">

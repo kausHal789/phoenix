@@ -11,7 +11,7 @@
 
 @section('content')
   <div class="container m-5">
-    <form action="/category/store/admin" id="addCategory" method="POST">
+    <form action="{{ route('admin.song.categories.store') }}" id="addCategory" method="POST">
       @csrf
       <div class="row m-3 text-center">
         <div class="col-8">
@@ -60,7 +60,7 @@
       var id = $(this).attr('id');
       console.log(id);
       $.ajax({
-        url: "/category/" + id + "/admin", 
+        url: "/admin/category/" + id, 
         method: 'GET',
         cache: false,
         success: function(_data) {
