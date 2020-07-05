@@ -15,7 +15,8 @@ class SearchController extends Controller
         $this->middleware('auth');
     }
 
-    public function getSeachPage() {
+    public function getSeachPage()
+    {
         return response()->json([
             'result' => true,
             'status' => 200,
@@ -23,21 +24,37 @@ class SearchController extends Controller
         ]);
     }
 
-    public function seachResult() {
+    public function seachResult()
+    {
         $term = request()->term;
-        if($term == null) {
+        if ($term == null) {
             return response()->json([
                 'result' => true,
                 'status' => 200,
                 'data' => '<div class=\'h1 m-5\'>You want to search empty data</div>'
-            ]);    
+            ]);
         }
         // Auth
-        $songs = Song::where('title', 'like', '%' . $term .'%')->get();
-        $albums =Album::where('name', 'like', '%' . $term .'%')->get();
-        // $artists = User::->except(Auth::id())->where('role_id', 2)->where('username', 'like', '%' . $term .'%')->get();
-        $artists = User::where('role_id', 2)->where('id', '!=', auth()->id())->where('username', 'like', '%' . $term .'%')->get();
-        $peoples = User::where('role_id', 3)->where('id', '!=', auth()->id())->where('username', 'like', '%' . $term .'%')->get();
+        $songs = Song::where('title', 'like', '%' . $term . '%')->get();
+        $albums = Album::where('name', 'like', '%' . $term . '%')->get();
+
+        $artists = User::join('profiles', 'users.id', '=', 'profiles.user_id')
+            ->where('users.id', '!=', auth()->id())
+            ->where('users.role_id', '!=', 1)
+            ->where('users.role_id', '=', 2)
+            ->where('profiles.name', 'like', '%' . $term . '%')
+            ->get();
+
+        $peoples = User::join('profiles', 'users.id', '=', 'profiles.user_id')
+            ->where('users.id', '!=', auth()->id())
+            ->where('users.role_id', '!=', 1)
+            ->where('users.role_id', '=', 3)
+            ->where('profiles.name', 'like', '%' . $term . '%')
+            ->get();
+
+
+        // $artists = User::where('role_id', 2)->where('id', '!=', auth()->id())->where('username', 'like', '%' . $term . '%')->get();
+        // $peoples = User::where('role_id', 3)->where('id', '!=', auth()->id())->where('username', 'like', '%' . $term . '%')->get();
         $collectionType = 'SEARCHDATA';
         return response()->json([
             'result' => true,
@@ -45,5 +62,4 @@ class SearchController extends Controller
             'data' => '' . view('includes.search-result', compact('songs', 'albums', 'artists', 'peoples', 'collectionType')) . ''
         ]);
     }
-
 }

@@ -32,4 +32,17 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(Subscribe::class, function (Faker $faker) {
+    return [
+        'email' => $faker->unique()->safeEmail,
+    ];
+});
 
+$factory->define(Feedback::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'phone' => $faker->phoneNumber,
+        'description' => $faker->text
+    ];
+});

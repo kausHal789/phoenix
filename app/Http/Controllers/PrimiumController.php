@@ -27,6 +27,7 @@ class PrimiumController extends Controller
         $payment_method = request()->payment_method;
         $subscriptionBuilder = auth()->user()->newSubscription('download', $plan);
         $subscription = $subscriptionBuilder->create($payment_method);
+        // dd($subscription);
 
         return redirect('/primium');
     }

@@ -62,7 +62,7 @@
 	
 
 
-	<div class="home">
+	<div id="home" class="home">
 		<div class="home_slider_container">
 			
 			<!-- Home Slider -->
@@ -76,7 +76,7 @@
 							<div class="home_content text-center">
 								<div class="home_subtitle">{{ env('APP_NAME') }}</div>
 								<div class="home_title"><h1>Listen to the songs you love.</h1></div>
-								<div class="home_link"><a href="#jplayer_1">Listen on Soundcloud</a></div>
+								<div class="home_link"><a>Listen on {{env('APP_NAME')}}</a></div>
 							</div>
 						</div>
 					</div>
@@ -90,7 +90,7 @@
 							<div class="home_content text-center">
 								<div class="home_subtitle">{{ env('APP_NAME') }}</div>
 								<div class="home_title"><h1>Music For Everyone</h1></div>
-								<div class="home_link"><a href="#jplayer_1">Listen on Soundcloud</a></div>
+								<div class="home_link"><a>Listen on {{env('APP_NAME')}}</a></div>
 							</div>
 						</div>
 					</div>
@@ -104,7 +104,7 @@
 							<div class="home_content text-center">
 								<div class="home_subtitle">{{ env('APP_NAME') }}</div>
 								<div class="home_title"><h1>Love is all around</h1></div>
-								<div class="home_link"><a href="#jplayer_1">Listen on Soundcloud</a></div>
+								<div class="home_link"><a>Listen on {{env('APP_NAME')}}</a></div>
 							</div>
 						</div>
 					</div>
@@ -254,14 +254,7 @@
 						</div>
 						<div class="contact_info_list">
 							<ul>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div><div>Address</div></div>
-									<div>1481 Creekside Lane Avila Beach, CA 931</div>
-								</li>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div><div>Phone</div></div>
-									<div>+53 345 7953 32453</div>
-								</li>
+							
 								<li class="d-flex flex-row align-items-start justify-content-start">
 									<div><div>E-mail</div></div>
 									<div>{{ env('MAIL_FROM_ADDRESS') }}</div>
@@ -292,9 +285,6 @@
 					<ul>
 						<li><a href="{{ route('claim.artist') }}">For Artist</a></li>
 						<li><a href="#home">Home</a></li>
-						<li><a href="#about">About us</a></li>
-						<li><a href="#artist">Top Artist</a></li>
-						<li><a href="#event">Events</a></li>
 					</ul>
 				</div>			
 
@@ -310,9 +300,7 @@
 			</div>
 		</div>
 		<div class="copyright_bar">
-			<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#home">{{ env('APP_NAME') }}</a>
-			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa fa-heart-o" aria-hidden="true"></i> {{ env('APP_NAME') }}
 			</span>
 		</div>
 	</footer>
@@ -324,19 +312,10 @@
 <script src="{{ asset('welcome/plugins/greensock/TweenMax.min.js') }}"></script>
 <script src="{{ asset('welcome/plugins/greensock/TimelineMax.min.js') }}"></script>
 <script src="{{ asset('welcome/plugins/scrollmagic/ScrollMagic.min.js') }}"></script>
-{{-- <script src="{{ asset('welcome/plugins/greensock/animation.gsap.min.js') }}"></script> --}}
 <script src="{{ asset('welcome/plugins/greensock/ScrollToPlugin.min.js') }}"></script>
 <script src="{{ asset('welcome/plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
-{{-- <script src="{{ asset('welcome/plugins/easing/easing.js') }}"></script> --}}
-{{-- <script src="{{ asset('welcome/plugins/progressbar/progressbar.min.js') }}"></script> --}}
 <script src="{{ asset('welcome/plugins/parallax-js-master/parallax.min.js') }}"></script>
-{{-- <script src="{{ asset('welcome/plugins/jPlayer/jquery.jplayer.min.js') }}"></script> --}}
-{{-- <script src="{{ asset('welcome/plugins/jPlayer/jplayer.playlist.min.js') }}"></script> --}}
 <script src="{{ asset('welcome/js/custom.js') }}"></script>
 <script src="{{ asset('welcome/js/about.js') }}"></script>
-{{-- <script src="{{ asset('welcome/js/blog.js') }}"></script> --}}
-{{-- <script src="{{ asset('welcome/js/contact.js') }}"></script> --}}
-{{-- <script src="{{ asset('welcome/js/element.js') }}"></script> --}}
-{{-- <script src="{{ asset('welcome/js/single.js') }}"></script> --}}
 </body>
 </html>

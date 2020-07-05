@@ -6,17 +6,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- CSRF Token -->
-
   <title>{{ env('APP_NAME') }} - Claim an artist profile</title>
 
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
   <link href="{{ asset('css/grayscale.min.css') }}" rel="stylesheet">
-  {{-- <link href="{{ asset('js/grayscale.min.js') }}" rel="stylesheet"> --}}
-
-  {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
   
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -60,12 +54,12 @@
                       <input type="text" name="name" id="searchInput"
                         class="updateProfileInput" 
                             placeholder="Search for an artist name" 
-                            {{-- value="{{ $user->profile->name ??  old('name') }}"  --}}
+                            
                             required
                             autocomplete="name" 
                             autofocus>
                     </div>
-                    {{-- <input type="text" name="name" id="name" placeholder=""> --}}
+                    
                   </div>
                   <div class="row mt-4 text-center" id="searchResult">
                     
@@ -110,9 +104,9 @@
         cache: false,
         dataType: "JSON",
         success: function(_data) {
-          // console.log(_data);
+          
           if(_data.status === 200) {
-            // console.log('success');
+            
             $('#searchResult').html(_data.data);
           }
         },

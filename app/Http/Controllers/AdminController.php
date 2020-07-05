@@ -349,7 +349,6 @@ class AdminController extends Controller
         $daysubscriptions = Subscription::all()->where('stripe_plan', '=', 'Day')->count();
         $monthsubscriptions = Subscription::all()->where('stripe_plan', '=', 'Month')->count();
         $yearsubscriptions = Subscription::all()->where('stripe_plan', '=', 'Year')->count();
-        // dd($subscriptions);
         return view('admin.payment', compact('subscriptions', 'yearsubscriptions', 'monthsubscriptions', 'daysubscriptions', 'isAdminPayment'));
     }
 

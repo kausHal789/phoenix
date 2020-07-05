@@ -116,7 +116,7 @@ class SongController extends Controller
     ]);
 
     // redirect
-    return redirect("/artist/song/$album_id");
+    return redirect("/song/album/$album_id");
   }
 
   /**
@@ -172,7 +172,7 @@ class SongController extends Controller
       'category' => request()->category,
     ]);
 
-    return redirect('/artist/dashboard');
+    return redirect()->route('artist.home');
   }
 
   /**
@@ -182,15 +182,16 @@ class SongController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function destroy($song_id)
-  { 
+  {
     $result = Song::findOrFail($song_id)->delete();
-    return redirect('/artist/dashboard');
+    return redirect()->route('artist.home');
   }
 
-  public function showJSON($song_id) {
+  public function showJSON($song_id)
+  {
     $song = Song::findOrFail($song_id);
 
-    if($song->album->user->id !== Auth()->id()) {
+    if ($song->album->user->id !== Auth()->id()) {
       $song->listener += 1;
       $song->save();
     }

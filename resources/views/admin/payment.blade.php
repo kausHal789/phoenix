@@ -68,10 +68,12 @@
                 // $endAt = date('M d, Y', strtotime($subscription->created_at->addDay(1)->diffForHumans()));
               }
               else if($subscription->stripe_plan == 'Month') {
-                $endAt = date('M d, Y', strtotime($subscription->created_at->addMonth(1)->diffForHumans()));
+                $endAt = $subscription->created_at->addDay(1)->diffForHumans();
+                // $endAt = date('M d, Y', strtotime($subscription->created_at->addMonth(1)->diffForHumans()));
               }
               else if($subscription->stripe_plan == 'Year') {
-                $endAt = date('M d, Y', strtotime($subscription->created_at->addYear(1)->diffForHumans()));
+                $endAt = $subscription->created_at->addDay(1)->diffForHumans();
+                // $endAt = date('M d, Y', strtotime($subscription->created_at->addYear(1)->diffForHumans()));
               }
             @endphp
             <p class="card-text"><small class="text-muted">Start at: <span class="font-weight-bold mr-3">{{ date('M d, Y', strtotime($subscription->created_at)) }}</span> End at: <span class="font-weight-bold">{{ $endAt }}</span></small></p>

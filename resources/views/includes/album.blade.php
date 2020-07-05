@@ -53,8 +53,8 @@
     @includeIf('includes.songs-header')
     @php($cnt = 0)
     @foreach ($album->songs as $song)
-      {{-- @php($cnt++) --}}
-      @includeIf('includes.song', ['song' => $song, 'cnt' => $cnt++])
+      @php($cnt++)
+      @includeIf('includes.song', ['song' => $song, 'cnt' => $cnt])
     @endforeach
   @endif
 </div>

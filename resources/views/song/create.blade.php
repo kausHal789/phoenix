@@ -8,7 +8,7 @@
 <div class="container">
 
   @if (isset($isEditSong) == false)
-    <div class="row m-5 display-4 h1">Add a song in&nbsp;<span class="text-info">{{ $album->name }}</span></div>
+    <div class="row m-5 display-4 h1">Add a song into&nbsp;<span class="text-info">{{ $album->name }}</span></div>
     @includeIf('includes.album', ['album' => $album])
   @endif 
 
