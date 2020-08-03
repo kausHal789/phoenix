@@ -7,7 +7,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <input type="text" class="searchInput" name="search" id="searchInput" placeholder="Strat typing..."> 
+          <input type="text" class="searchInput" name="search" id="searchInput" placeholder="Start typing..."> 
         </div>
       </div>
     </div>
