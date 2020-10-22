@@ -23,7 +23,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        
+
         $albums = Album::latest()->limit(10)->get();
         return response()->json([
             'result' => true,
@@ -80,10 +80,10 @@ class AlbumController extends Controller
         if($data) {
             $album = $data;
             $ele = "".view('includes.album', compact('album'))."";
-            
+
             return response()->json([
                 'result' => 'success',
-                'status' => 202, 
+                'status' => 202,
                 'ele' => $ele
             ]);
         } else {
@@ -91,7 +91,7 @@ class AlbumController extends Controller
                 'message' => 'Server Problem',
                 'result' => 'fail',
                 'status' => 500
-            ]);    
+            ]);
         }
 
     }
@@ -103,7 +103,7 @@ class AlbumController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($album_id)
-    {   
+    {
         $album = Album::findOrFail($album_id);
         // return response()->json([
         //     'result' => true,
@@ -148,7 +148,7 @@ class AlbumController extends Controller
             'album_image' => [new ImageFileFormat, 'max:2048' ], // Make image optional
             'album_name' => 'required|string'
         ]);
-        
+
         if(!$validatedData->passes()) {
             return response()->json([
                 'result' => false,
@@ -184,12 +184,12 @@ class AlbumController extends Controller
     public function destroy($album_id) {
         $album = Album::findOrFail($album_id);
         $album->songs()->delete();
-        
+
         if($result = $album->delete()) {
             if(!request()->isDashboard) {
                 return redirect('/artist/dashboard', 202);
             }
-            
+
             return response()->json([
                 'result' => 'success',
                 'data' => $result,
